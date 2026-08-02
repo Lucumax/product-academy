@@ -1,102 +1,235 @@
 ---
 name: audit-decision-evidence
 description: >-
-  Audits whether a product decision is adequately supported by evidence, claim by claim.
-  Use this when a decision is being made, defended, or post-launch reviewed, and you need a
-  reproducible verdict on whether the evidence behind each of its claims meets the Academy's
-  evidence bar.
+  Verdict on whether a product decision is adequately supported by evidence, claim by claim,
+  using a shared evidence taxonomy that ranks internal product evidence (experiments, cohorts,
+  analytics, interviews, support, win/loss) alongside published sources. Run before committing
+  to a decision, when a leader defends a call with "the data", at post-launch review, or when
+  two stakeholders disagree on whether a decision is evidence-backed. Supersedes the former
+  run-source-tier-check skill: source credibility is now a sub-mode of this audit.
 type: assess
-version: 0.1.0
+version: 0.2.0
 best_for:
-  - "A product decision is about to be made and you want the evidence checked before committing"
-  - "A decision memo or PRD cites sources and you need each claim's support graded"
+  - "A product decision is about to be made and its evidence has not been checked claim by claim"
+  - "A decision memo or PRD cites evidence and you need each claim's support graded"
   - "A leader is defending a call with 'the data' and you want to test whether the data actually supports it"
   - "A post-launch review asks whether the evidence that justified the decision held up"
   - "Two stakeholders disagree on whether a decision is evidence-backed and you need a reproducible verdict"
+  - "Sub-mode: a source's credibility (influencer post, vendor report, unverified claim) is in question"
 doctrine:
-  - "PRN-0014"
-  - "PRN-0003"
-  - "PRN-0007"
-  - "SOURCE_POLICY.md"
-  - "sources/registry.yaml"
+  - "PRN-0014 (same data, opposite conclusions)"
+  - "PRN-0003 (cost of delay exceeds cost of imperfection)"
+  - "PRN-0007 (reversible by design)"
+  - "PRN-0008 (discovery beats requests)"
+  - "SOURCE_POLICY.md (tier criteria, popularity is not evidence)"
   - "evidence/final/CLAIMS_LEDGER.md"
   - "evidence/final/CORROBORATION_MATRIX.md"
+  - "08_contradictions/register.yaml"
 license: CC BY 4.0
 ---
 
 ## Purpose
 
-The Academy's evidence discipline holds that every claim must be traceable to a documented source with a defensible tier. This skill turns that discipline into a decision: given a product decision, it decomposes the decision into the claims it rests on, grades the evidence for each claim against the tier policy, and returns a verdict per claim plus an overall decision verdict.
+This skill answers one question: **does the evidence a decision rests on actually support it?**
+It decomposes the decision into the claims it needs to be true, grades the evidence for each
+claim against a shared evidence taxonomy that treats internal product evidence (experiments,
+cohorts, analytics, interviews, support, win/loss) as first-class evidence, and returns a
+verdict per claim plus an overall decision verdict.
 
-Invoke it when a decision is imminent and its evidentiary basis has not been systematically checked, or when someone is defending a call by pointing at "the data." Do NOT invoke it to produce a documentation artifact — if the goal is a written evidence review for a file, say so and offer the adjacent skill; this skill outputs a verdict, not a memo. Do NOT use it to settle whether a source's tier is correct (that is `run-source-tier-check`) or whether a causal relationship actually holds (that is `conduct-causal-confidence-review`); this skill assumes the tier is correct and asks whether the claim is adequately supported by whatever tier it has.
+Invoke it when a decision is imminent and its evidentiary basis has not been systematically
+checked, or when someone is defending a call by pointing at "the data." Do NOT invoke it to
+produce a documentation artifact — if the goal is a written evidence review for a file, render
+the verdict first and then write the memo. Do NOT use it to grade whether a causal relationship
+actually holds (that is `conduct-causal-confidence-review`); this skill asks whether the claim
+is supported, not whether it is proven.
 
-## Input
+## Use when
 
-Bring the decision stated as one sentence, the claims it rests on (or let the skill extract them), and the evidence/sources cited for each claim. If the claim is a canonical Academy claim, bring its claim ID (CLM-xxxx) or cite it. If you arrive empty-handed, the skill will ask you to state the decision and then extract the claims with you — you cannot audit claims that have not been stated.
+- A commitment is imminent (budget, headcount, release slot) and the evidence has not been audited.
+- A decision memo cites evidence and you need each claim graded.
+- A leader defends a call with "the data" and you want to test whether the data supports it.
+- A post-launch review asks whether the justification held up.
+- Two stakeholders disagree on whether a decision is evidence-backed.
+- A single source is carrying a load-bearing claim and its credibility is in question (sub-mode).
+
+## Do not use when
+
+- The user wants a written evidence review file, not a verdict — render the verdict, then point at the memo template.
+- The question is causal ("did X cause Y") — use `conduct-causal-confidence-review`.
+- The decision is pre-PMF exploration where the strategy is deliberately "try things and learn" (PRN-0003 non-applicability) — the audit will still run, but expect `LEARN`-shaped verdicts, not `GO`/`NO-GO`.
+- The decision is reversible and low-stakes (a button copy change) — use Fast mode or skip; auditing a two-way door the same way as a Type-1 launch is process theater.
+
+## Inputs
+
+Required inputs (minimum for a useful provisional verdict):
+
+- The decision as one sentence: the action and the expected outcome.
+- The claims it rests on — every distinct "this must be true" statement. If not stated, the skill will extract them with you.
+- For each load-bearing claim, the evidence: what it is, what type it is (see Evidence classification), where it came from (collection method, sample, date).
+
+Optional inputs (upgrade the verdict to full):
+
+- The source identity for any published/practitioner evidence (author, organization, publication, date, commercial incentive).
+- Counter-evidence already known to the team.
+- The decision's reversibility class (TYPE-1/TYPE-2) — speeds context classification.
+
+## Missing-data behavior
+
+- A claim with **no recorded evidence** is `NO-EVIDENCE` — that is a finding, not a gap to pad. Record it.
+- A claim whose evidence cannot be traced (no collection method, sample, or date for internal evidence; no verifiable identity for published evidence) is `INSUFFICIENT-INFO`.
+- An "unknown" on a load-bearing claim downgrades confidence to at most Medium and is recorded as an assumption with its effect. Never silently assume the evidence exists because the claim feels true.
+
+## Context classification
+
+- **TYPE-1 decision** (irreversible): Full mode mandatory. An `UNDER-SUPPORTED` load-bearing claim on a one-way door is `NO-GO`, not `CONDITIONAL` (PRN-0003 non-applicability, PRN-0007).
+- **TYPE-2 decision** (reversible): Fast mode is the default; `CONDITIONAL` is an acceptable verdict while the reversible mechanism exists (feature flag, pilot, phased rollout).
+- **Post-launch**: the audit runs in `LEARN` shape — grade what the decision rested on so reversal conditions can be checked.
+
+## Fast mode
+
+Run for reversible, ordinary decisions. Ask three questions, get a provisional verdict.
+
+1. **What is the decision?** One sentence.
+2. **What are the load-bearing claims?** (Usually 1–3.)
+3. **What evidence exists for each?** Name the evidence type and one line of provenance.
+
+Provisional verdict: per claim, `SUPPORTED` / `UNDER-SUPPORTED` / `NO-EVIDENCE`; overall,
+`GO` (all claims supported) / `CONDITIONAL` (at least one under-supported, decision is
+reversible with bounded downside) / `NO-GO` (a load-bearing claim has no evidence and the
+decision is not reversible). Confidence is capped at Medium in fast mode. Next action: name
+the single weakest claim and the cheapest evidence that would firm it up. No research
+ceremony, no counter-evidence sweep.
+
+## Full mode
+
+Mandatory for TYPE-1 decisions and for any decision where fast-mode confidence would be Low
+on a load-bearing claim. Adds to fast mode:
+
+1. Extract claims from decision logic (not from the memo's citations).
+2. For each claim, classify the evidence using the shared taxonomy (E1–E15 in the shared contract).
+3. Grade adequacy per claim: is the evidence type a good match for the claim type? A claim
+   about user behavior graded on an interview (E5) is weaker than one graded on behavioral
+   analytics (E3) or a controlled experiment (E1) — but an interview is still evidence.
+4. **Counter-evidence search**: search for evidence that contradicts the claim, including
+   internal evidence (lost deals, churned cohorts, support tickets, incidents). Ignored
+   counter-evidence is itself a finding.
+5. **Corroboration check**: is the claim corroborated by 2+ independent evidence items of
+   adequate type? *(Rule of thumb — the point is "not single-source", not a magic count; two
+   evidence items from the same team's same dataset are one item.)* Single-source support is
+   explicitly weaker. (The Academy's
+   `evidence/final/CORROBORATION_MATRIX.md` is a reference for published sources when
+   available; it is not required — the corroboration rule applies to internal evidence too.)
+6. **Source credibility** (the former `run-source-tier-check` sub-mode): for any published or
+   practitioner evidence (E9, E12, E13) and any internal evidence carrying a claim, apply the
+   credibility tests — is it firsthand with concrete outcomes? Does it carry a commercial or
+   promotional incentive? Is it verifiable? If a source is credited beyond what it earned,
+   that is a finding. Popularity is not evidence (SOURCE_POLICY).
+7. **Contested-claim check**: is the claim contested, and is the counter-position addressed
+   with evidence rather than dismissal?
+8. Record every "unknown" as an assumption. Render the verdict.
 
 ## Method
 
-Work one question at a time. If the user answers "unknown" at any step, record it as an explicit assumption and continue. Never silently assume.
+Work one question at a time. "Unknown" answers become stated assumptions, never silent defaults.
 
-1. What is the decision? State it as a single sentence that names the action and the expected outcome.
-2. What must be true for this decision to be correct? Every distinct "must be true" statement is a claim. Write each down. A decision that rests on three claims has three audits.
-3. For each claim: what evidence is cited? Look up the source in `sources/registry.yaml`. If the source's tier is itself in doubt, defer that claim to `run-source-tier-check` and record it.
-4. Is a single Tier A source sufficient, or does this claim need corroboration? Apply the tier rules from `SOURCE_POLICY.md` (Tier A single source sufficient; Tier B requires corroboration; Tier C may not anchor; Tier E may not support claims).
-5. Is the claim contested? Check `evidence/final/CLAIMS_LEDGER.md` (`contested` field) and the counter-claim sources. A contested claim with unaddressed Tier A counter-evidence is not adequately supported.
-6. Is there counter-evidence in the register that the decision ignores? Search the registry for the claim topic and note opposing sources, with their tiers.
-7. Corroboration check: is the claim corroborated by 2+ independent supporting sources per `evidence/final/CORROBORATION_MATRIX.md`? If single-source, that fact is itself a finding.
-8. Record every "unknown" as an assumption. Then produce the verdict.
+1. What is the decision? State it as a single sentence naming the action and the expected outcome.
+2. What must be true for this decision to be correct? Each distinct "must be true" is a claim.
+3. For each claim: what evidence exists, and what type is it? Name collection method, sample, and date for internal evidence; author/organization/date for published evidence.
+4. Is the evidence type a good match for the claim? (A behavioral claim wants behavioral evidence; a business-model claim wants financial evidence.)
+5. Is there counter-evidence the decision ignores? Name it.
+6. Is the claim corroborated by 2+ independent evidence items?
+7. Is any load-bearing evidence of doubtful credibility? Run the sub-mode credibility tests.
+8. Record assumptions. Render per-claim and overall verdicts.
+
+## Evidence classification
+
+Uses the shared 15-type taxonomy from `_shared/SKILL_CONTRACT.md` (§2). There is no default
+ranking: a claim is graded by the match between claim and evidence type. In particular,
+internal product evidence (E1–E4, E6–E8, E10–E11) is *not* automatically below published
+research (E13) or practitioner doctrine (E12). For a claim about this product's users,
+behavioral analytics and cohort retention usually outrank an expert's book.
+
+## Output schema
+
+```json
+{
+  "skill": "audit-decision-evidence",
+  "version": "0.2.0",
+  "mode": "fast | full",
+  "verdict": "GO | CONDITIONAL | NO-GO | LEARN",
+  "per_claim": [
+    {"claim": "...", "verdict": "SUPPORTED | UNDER-SUPPORTED | INSUFFICIENT-INFO | NO-EVIDENCE",
+     "evidence_types": ["E3", "E4"], "weakness": "..."}
+  ],
+  "confidence": "high | medium | low",
+  "evidence_basis": ["E3", "E5"],
+  "assumptions": [{"statement": "...", "effect_on_verdict": "..."}],
+  "what_would_change_the_verdict": "...",
+  "next_action": {"what": "...", "who": "...", "by_when": "..."},
+  "reversal_conditions": ["..."]
+}
+```
 
 ## Verdict Contract
 
-Return a decision artifact, not a memo:
-
-- **Verdict (per claim):** one of `ADEQUATELY-SUPPORTED` / `UNDER-SUPPORTED` / `INSUFFICIENT-INFO`.
-- **Verdict (decision):** one of `GO` / `CONDITIONAL` / `NO-GO` / `LEARN`.
-- **Confidence:** High/Medium/Low with reasoning. Confidence is low when any load-bearing assumption is an "unknown."
-- **Citations:** for each claim, the source IDs (e.g. `SRC-BOOK-0001`, tier) and the ledger entries (`CLM-xxxx`) used. Cite, don't quote.
-- **Stated assumptions:** every "unknown" recorded as an explicit assumption, with the claim it weakens.
-- **What would change the verdict:** name the specific evidence that would flip each claim (e.g. "a second independent Tier B source" or "resolution of the contested status of CLM-0022").
+- **Verdict (per claim):** `ADEQUATELY-SUPPORTED` / `UNDER-SUPPORTED` / `INSUFFICIENT-INFO` / `NO-EVIDENCE`.
+- **Verdict (decision):** `GO` (every load-bearing claim adequately supported) /
+  `CONDITIONAL` (at least one under-supported or no-evidence claim, but the decision is
+  reversible with bounded downside per PRN-0007) / `NO-GO` (a load-bearing claim is
+  under-supported or has no evidence AND the decision is one-way-door with catastrophic
+  failure mode) / `LEARN` (already shipped; grades what the decision rested on).
+- **Confidence:** High/Medium/Low. High only when every load-bearing claim has adequate-type
+  evidence with traceable provenance; Medium when one load-bearing claim rests on an
+  assumption; Low when a load-bearing claim is `INSUFFICIENT-INFO`.
+- **Evidence basis:** the taxonomy types used per claim.
+- **Assumptions:** every "unknown", with the claim it weakens and the effect on the verdict.
+- **What would change the verdict:** named evidence that flips each claim (e.g. "a 90-day
+  cohort of the self-serve tier showing net expansion would move claim 2 to SUPPORTED").
+- **Next action:** the single cheapest step that would firm up the weakest claim, with an owner.
 
 ### Worked example
 
-Decision: "Launch a self-serve tier for the fintech data product this quarter." Claims extracted: (1) demand exists, (2) self-serve does not cannibalize enterprise deals, (3) we can support the tier at current headcount. Audit result: claim 1 supported by SRC-BOOK-0004 and CLM-0008 (Tier A, corroborated) — `ADEQUATELY-SUPPORTED`; claim 2 rests on a single Tier B practitioner post, corroboration status "no" — `UNDER-SUPPORTED`; claim 3 cites no source — `INSUFFICIENT-INFO`, recorded as an assumption. Decision verdict: `CONDITIONAL` (one under-supported claim, one insufficient-claim, but the launch is reversible via feature flag per PRN-0007). What would flip it: a second independent Tier B source or a documented Tier A case on self-serve cannibalization would move claim 2 to `ADEQUATELY-SUPPORTED`; headcount analysis (Tier A internal, documented) would resolve claim 3. Confidence: Medium — two of three claims are gated on recorded assumptions.
+Decision: "Launch a self-serve tier for the fintech data product this quarter." Claims:
+(1) demand exists, (2) self-serve does not cannibalize enterprise deals, (3) we can support
+the tier at current headcount. Evidence: (1) 140 waitlist signups (E9 market evidence, sample
+and date recorded) + 22 interviews of which 18 described the exact workflow (E5) →
+`ADEQUATELY-SUPPORTED`. (2) a practitioner post claiming "self-serve never cannibalizes
+enterprise" (E12, single source, author funnels to a coaching program) → credibility check
+fails the commercial-incentive test; no internal loss/deal data → `UNDER-SUPPORTED`.
+(3) headcount plan asserted with no staffing model → `NO-EVIDENCE`. Decision verdict:
+`CONDITIONAL` (one under-supported claim, one no-evidence claim, but the launch is reversible
+via feature flag per PRN-0007). Confidence: Medium. Next action: pull the last 12 enterprise
+loss/expansion reviews for self-serve cross-sell signal (E8) and produce a one-page staffing
+model (E11). What would change it: cohort or loss evidence showing cannibalization is
+bounded, plus a staffing model.
 
-## Thresholds
+## Failure modes
 
-A second reviewer must be able to reproduce the verdict from the same inputs.
+- **Data as a weapon (PRN-0014):** the requester brings only evidence that supports their position. Correction: the audit requires the counter-evidence search (full-mode step 4) before any verdict.
+- **Published-over-internal bias:** a peer-reviewed paper is treated as automatically stronger than the product's own cohort data. Correction: grade by claim-evidence match; a 90-day retention cohort for this product usually beats an external study about another product.
+- **Popularity as evidence:** a best-selling book cited as firsthand. Correction: apply the credibility sub-mode — content and outcomes, not reach (SOURCE_POLICY).
+- **Single-source anchor:** one famous source treated as settled. Correction: corroboration check; single-source claims are explicitly weaker.
+- **Discovery theater (PRN-0008):** "we talked to customers" with no method, sample, or quotes. Correction: an untraceable anecdote is `INSUFFICIENT-INFO`, not evidence.
+- **Auditing the memo, not the decision:** grading citations someone wrote down rather than the claims the decision actually needs. Correction: extract claims from decision logic first; citations are only relevant where they support a claim.
+- **Absence padding:** treating "no evidence found" as "probably fine." Correction: `NO-EVIDENCE` is a verdict, not an invitation to assume.
 
-Claim-level:
+## Reversal conditions
 
-- `ADEQUATELY-SUPPORTED` — one of: (a) at least one Tier A source supports the claim and no Tier A counter-evidence exists in the register, or (b) 2+ independent Tier B sources agree and no Tier A counter-evidence exists, or (c) the claim is corroborated per the CORROBORATION_MATRIX and its contested status is False or the contest is addressed.
-- `UNDER-SUPPORTED` — one of: only a single Tier B source, or Tier C source(s), or a contested claim whose Tier A counter-evidence is unaddressed, or corroboration status is "no."
-- `INSUFFICIENT-INFO` — no source recorded for the claim, or the only sources are Tier E (pending verification), or Tier D without disclosed and considered commercial incentive.
+- New counter-evidence for a claim the verdict marked `ADEQUATELY-SUPPORTED` — re-audit that claim.
+- An assumption marked "unknown" resolves the wrong way — re-render the affected claim and overall verdict.
+- A credibility sub-mode finding is appealed with primary evidence (e.g. a verifiable operator transcript for a source judged promotional) — re-run the sub-mode.
+- A post-launch metric contradicts the launch-time evidence — the `LEARN` verdict's reversal conditions are the trigger.
 
-Decision-level:
+## Composition hooks
 
-- `GO` — every claim is `ADEQUATELY-SUPPORTED`.
-- `CONDITIONAL` — at least one claim is `UNDER-SUPPORTED` or `INSUFFICIENT-INFO`, AND the decision is reversible with bounded downside per PRN-0007, AND no catastrophic failure mode is present.
-- `NO-GO` — an `UNDER-SUPPORTED` or `INSUFFICIENT-INFO` claim is load-bearing AND the decision is one-way-door with catastrophic failure mode (PRN-0003 non-applicability conditions apply).
-- `LEARN` — the decision has already shipped; the audit grades what the decision rested on so the reversal_conditions of PRN-0003/PRN-0007 can be checked.
-
-## Evidence & Doctrine
-
-- `SOURCE_POLICY.md` — tier definitions. Tier A: "firsthand operator account with concrete decisions and outcomes." Tier B: "Experienced practitioner or educator with transparent reasoning." Tier C: "Useful but weakly verified experiential evidence." Tier E: "pending verification." Registry counts (verified): A=65, B=44, C=73, E=2.
-- `evidence/final/CLAIMS_LEDGER.md` — 35 claims, each with evidence level, contested status, supporting and counter-claim sources. Cite `CLM-xxxx`, don't reproduce the ledger.
-- `evidence/final/CORROBORATION_MATRIX.md` — which claims have 2+ independent supporting sources.
-- `PRN-0014` — the same data can support opposite conclusions; the audit exists because data rarely resolves an argument on its own.
-- `PRN-0003` / `PRN-0007` — set the reversibility gates that separate `CONDITIONAL` from `NO-GO`.
-
-## Common Pitfalls
-
-- **Data as a weapon (PRN-0014):** the requester brings only the data that supports their position. Correction: the audit is per claim, and every claim requires the counter-evidence search in step 6 before a verdict.
-- **Popularity as evidence:** a best-selling book is cited as if it were firsthand. Correction: tier by content per `SOURCE_POLICY.md`, not by reach.
-- **Single-source anchor:** a claim rests on one famous Tier A source and is treated as settled. Correction: check the CORROBORATION_MATRIX; single-source claims are explicitly weaker doctrine.
-- **Discovery theater (PRN-0008):** "we talked to customers" is offered as evidence without a documented method or claims. Correction: an anecdote with no source record is `INSUFFICIENT-INFO`, not evidence.
-- **Auditing the memo, not the decision:** grading citations someone wrote down rather than the claims the decision actually needs. Correction: extract claims from the decision logic first (step 2); the cited sources are only relevant where they support a claim.
+- **before:** `classify-decision-reversibility` (decides whether to run fast or full); `frame-product-problem` (defines the claims to audit when a problem statement exists).
+- **after:** `conduct-causal-confidence-review` (grades the central claim's causality, not just support); `scan-contradictions-assumptions` (surfaces the assumptions under the audited claims); `make-go-no-go-call` (consumes this verdict as its evidence-gate input).
+- **workflow:** product-bet (step 5), experiment-decision (step 4), launch-gate (step 2).
 
 ## Related Skills
 
-- `run-source-tier-check` — the "before" half; if a source's tier is in question, resolve it first, then audit.
-- `scan-contradictions-assumptions` — the "after" half; this skill grades the evidence, that one exposes the silent assumptions and live contradictions underneath the same claims.
+- `scan-contradictions-assumptions` — the "after" half: this skill grades the evidence; that one exposes the silent assumptions underneath the same claims.
 - `conduct-causal-confidence-review` — for the decision's central claim, replaces "adequately supported" with "causally established."
+- `make-go-no-go-call` — consumes the decision verdict as its evidence-gate input.
+- `classify-decision-reversibility` — sets the audit's mode (fast vs full) and the CONDITIONAL/NO-GO boundary.
+- `_shared/SKILL_CONTRACT.md` — the evidence taxonomy and output schema this skill uses.
