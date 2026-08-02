@@ -66,7 +66,7 @@ skills/
 
 ## Authoring or editing a skill
 
-1. Copy an existing production skill's structure (or `_template/SKILL.md`) into
+1. Copy an existing production skill's structure (or `_template/SKILL.template.md`) into
    `skills/<kebab-name>/SKILL.md`.
 2. Fill the frontmatter (name, description, type, version, best_for, doctrine, license) and
    the required sections (see `_shared/SKILL_CONTRACT.md` §1).

@@ -320,6 +320,6 @@ class TestEvaluationSuite:
 
 class TestTemplate:
     def test_template_has_required_sections(self, skills_root):
-        text = (skills_root / "_template" / "SKILL.md").read_text(encoding="utf-8")
+        text = (skills_root / "_template" / "SKILL.template.md").read_text(encoding="utf-8")
         for section in REQUIRED_SECTIONS:
             assert f"## {section}" in text, f"_template missing {section}"
