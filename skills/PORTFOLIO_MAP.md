@@ -70,6 +70,21 @@ Maturity levels: `stable` (verified across multiple eval scenarios),
    `check-ai-evaluation-contract` when AI is involved; a generic
    launch-readiness checklist (support, docs, pricing, legal) is deliberately
    left to `09_tools/POST_LAUNCH_REVIEW_TEMPLATE.md` rather than duplicated.
+6. **Strategy-statement production.** Several scenarios (S06, S11) hit the
+   "no written strategy" wall; the portfolio can flag the gap but no skill
+   produces a strategy statement. Documented, not yet built.
+7. **Build-vs-buy.** Only touched as a tension example in
+   `scan-contradictions-assumptions`; no decision skill exists.
+8. **Metrics design.** `09_tools/METRICS_TREE_TEMPLATE.md` is cited as a tool,
+   but no skill produces the metric tree that experiment and health skills
+   assume as input.
+9. **Sunsetting.** Appears only as an irreversible dimension in
+   `classify-decision-reversibility`; no product-sunset decision skill.
+10. **Roadmap communication.** The decision memo template is a handoff, but no
+    skill frames the roadmap story for stakeholders.
+11. **Drafting artifacts.** Evaluation contracts, grandfathering/reversibility
+    designs, and corrective pilot specs are produced as pointers to templates
+    rather than first-class skill artifacts.
 
 ## Workflows (see `workflows/`)
 

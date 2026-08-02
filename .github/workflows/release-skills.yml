@@ -37,11 +37,16 @@ jobs:
           body: |
             Evidence-backed product decision skills from the Product Academy.
 
-            - **product-academy-skills-all.zip** — all active skills + shared contract + workflows
+            **Supersedes skills-v0.1.0** (the previous ten-skill pack). This release ships
+            the hardened portfolio: 14 active skills (5 new high-frequency PM skills +
+            the evidence/judgment layer), the shared contract, and 4 end-to-end workflows.
+
+            - **product-academy-skills-all.zip** — all 14 active skills + shared contract + workflows
             - **product-academy-skills-core.zip** — the 8 highest-frequency PM skills (starter set)
             - **INSTALL.md** — per-platform install instructions
 
-            See https://github.com/Lucumax/product-academy/tree/main/skills for the source of truth.
+            Source of truth: https://github.com/Lucumax/product-academy/tree/${{ github.ref_name }}/skills
+            (note: `main`/skills is not yet updated until the hardening branch is merged).
           files: |
             dist/skills/product-academy-skills-all.zip
             dist/skills/product-academy-skills-core.zip

@@ -4,6 +4,22 @@ An evidence-backed education system for product leaders from Senior PM through C
 
 This is a monorepo. The **content** (doctrine, cases, sources, curriculum) lives at the root. The **web app** — a guided learning journey with progress tracking, an interactive simulator, and full-text search — lives in [`webapp/`](webapp/).
 
+## Agent Skills (AI decision pack)
+
+Evidence-backed product management **skills for AI agents** — frame product problems,
+synthesize customer discovery, prioritize opportunities, design experiments, align
+stakeholders, and make defensible product decisions (GO/NO-GO, PMF health, AI evaluation
+contracts, causal review, premortem). Every skill returns a verdict or decision artifact with
+a next action, in fast mode (reversible calls) or full mode (one-way doors).
+
+- **Install:** Claude Code `/plugin marketplace add Lucumax/product-academy` → `/plugin install evidence-pack`; or download a release ZIP for Claude.ai, Codex, Cursor, and generic agents.
+- **Find your skill:** [`skills/INDEX.md`](skills/INDEX.md) (finder by PM job + copy-paste invocations)
+- **Workflows:** [`skills/workflows/`](skills/workflows/) (product bet, experiment decision, launch gate, product health review)
+
+> Note: `main`/skills is currently the pre-hardening ten-skill pack. The hardened 14-skill
+> portfolio ships on the `skill-hardening-product-manager-v1` branch and as release
+> `skills-v0.2.0`.
+
 ## Quick Start
 
 **Read the content** — start with [00_orientation/](00_orientation/), the [Curriculum Map](CURRICULUM_MAP.md), and [Core Doctrine](01_core_doctrine/PRINCIPLES.md).
