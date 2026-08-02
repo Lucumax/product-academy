@@ -39,13 +39,13 @@ The webapp reads content directly from this repo (monorepo layout) — no separa
 | `13_career_transitions/` | Landing product roles, credibility building, emerging roles |
 | `webapp/` | The Astro web app (guided journey, simulator, search) |
 | `handbook/`, `docs/` | Generated handbooks and integration docs |
-| `sources/` | The evidence registry (180 sources, ranked by tier) |
+| `sources/` | The evidence registry (184 sources, ranked by tier) |
 | `evidence/final/` | Processed evidence artifacts (claims ledger, corroboration matrix) |
 
 ## Validation
 
 ```bash
-python scripts/validate_academy.py   # 657 quality-gate checks
+python scripts/validate_academy.py   # 658 quality-gate checks
 python -m pytest -q                  # 57 tests
 ```
 
