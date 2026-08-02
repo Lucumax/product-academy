@@ -16,9 +16,8 @@ a next action, in fast mode (reversible calls) or full mode (one-way doors).
 - **Find your skill:** [`skills/INDEX.md`](skills/INDEX.md) (finder by PM job + copy-paste invocations)
 - **Workflows:** [`skills/workflows/`](skills/workflows/) (product bet, experiment decision, launch gate, product health review)
 
-> Note: `main`/skills is currently the pre-hardening ten-skill pack. The hardened 14-skill
-> portfolio ships on the `skill-hardening-product-manager-v1` branch and as release
-> `skills-v0.2.0`.
+> The hardened 14-skill portfolio is merged into `main` and shipped as release
+> `skills-v0.2.0` (supersedes the pre-hardening ten-skill `skills-v0.1.0`).
 
 ## Quick Start
 
