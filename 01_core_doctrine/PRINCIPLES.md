@@ -20,7 +20,7 @@
 | **confidence** | medium |
 | **practical_tool** | "Team Empowerment Assessment" — a 20-question diagnostic that evaluates whether a team has the conditions for successful autonomy (bounded context clarity, strategic context, team capability, alignment mechanisms). Score below 14 indicates the team is not ready for full empowerment. |
 | **practice_exercise** | Take a team you currently lead or work with. For each of the 4 conditions (bounded context, strategic context, team capability, alignment mechanisms), rate the team on a 1-5 scale. Identify the lowest-scoring condition and design a 30-day intervention to improve it. |
-| **walter_application** | "Apply the Team Empowerment Assessment to each product team in Walter's portfolio. Teams scoring above 14 should operate with full decision autonomy within their bounded context. Teams scoring below 14 should receive targeted investment in their lowest-scoring condition before transitioning to full empowerment. Use this framework to decide which teams need more structure vs more autonomy." |
+| **walter_application** | _See personal applications file._ |
 | **last_reviewed** | 2026-08-01 |
 | **related_contradictions** | [CON-0001] |
 | **related_cases** | [CASE-0001, CASE-0008, CASE-0013] |
@@ -47,7 +47,7 @@
 | **confidence** | high |
 | **practical_tool** | "Strategy Exclusion Test" — for any proposed strategy, list 5 specific things the organization will NOT do as a result of this strategy. If you cannot list 5, the strategy is not specific enough. Follow up by asking: "If a PM proposed doing one of these 5 things next quarter, would the strategy prevent it? How?" |
 | **practice_exercise** | Take your current product strategy document. Circle every sentence that explicitly says what you will NOT do. If there are fewer than 5 such sentences, add them. Then identify the most attractive thing on the exclusion list and write a one-paragraph argument for why a PM might want to do it anyway and why the strategy should stop them. |
-| **walter_application** | "Apply the Strategy Exclusion Test to Walter's current portfolio strategy. For each initiative, identify what is being explicitly excluded. For any initiative without clear exclusions, facilitate a strategy session to define what NOT doing. Use the exclusion list as a guardrail in quarterly planning: any proposed work that falls into the exclusion zone requires an explicit strategy exception." |
+| **walter_application** | _See personal applications file._ |
 | **last_reviewed** | 2026-08-01 |
 | **related_contradictions** | [CON-0009] |
 | **related_cases** | [CASE-0004, CASE-0008] |
@@ -74,7 +74,7 @@
 | **confidence** | medium |
 | **practical_tool** | "One-Way vs Two-Way Door Classification" — for every product decision, classify it as Type 1 (one-way door: hard to reverse) or Type 2 (two-way door: easy to reverse). Type 2 decisions should be made by the person closest to the information, with minimal process. Type 1 decisions require more analysis, broader input, and explicit reversibility planning. |
 | **practice_exercise** | Review the last 10 product decisions your team made. Classify each as Type 1 or Type 2. For each Type 2 decision, estimate the time between when the decision could have been made and when it was actually made. Calculate the cost of that delay. For each Type 1 decision, assess whether the decision process was proportional to the irreversibility. |
-| **walter_application** | "Apply the One-Way vs Two-Way Door classification to Walter's product portfolio. Identify which decisions should be pushed down to teams (Type 2) and which require broader input (Type 1). Measure decision latency for Type 2 decisions and set a target (e.g., Type 2 decisions should be made within 48 hours of the information being available)." |
+| **walter_application** | _See personal applications file._ |
 | **last_reviewed** | 2026-08-01 |
 | **related_contradictions** | [CON-0006] |
 | **related_cases** | [CASE-0005, CASE-0015, CASE-0018] |
@@ -92,7 +92,7 @@
 | **product_archetypes** | [all] |
 | **organizational_stages** | [all] |
 | **industries** | [all] |
-| **evidence** | [{source_id: SRC-BOOK-0014, claim_summary: "Product-market fit is the defining condition for startup success but it can be lost as markets and competition evolve", strength: moderate}, {source_id: SRC-BOOK-0021, claim_summary: "Incumbents lose product-market fit when they stop understanding why customers choose them", strength: moderate}, {source_id: SRC-POST-0003, claim_summary: "The Innovator's Dilemma: successful companies lose their markets because they optimize for existing customers and miss emerging needs", strength: strong}] |
+| **evidence** | [{source_id: SRC-BOOK-0014, claim_summary: "Product-market fit is the defining condition for startup success but it can be lost as markets and competition evolve", strength: moderate}, {source_id: SRC-BOOK-0021, claim_summary: "Incumbents lose product-market fit when they stop understanding why customers choose them", strength: moderate}, {source_id: SRC-BOOK-0010, claim_summary: "The Innovator's Dilemma: successful companies lose their markets because they optimize for existing customers and miss emerging needs", strength: strong}] |
 | **counterevidence** | [{source_id: SRC-POST-0017, claim_summary: "Some products maintain PMF for decades through continuous incremental improvement without major strategic pivots (e.g., Microsoft Office, Oracle Database)", strength: weak}] |
 | **applicability_conditions** | ["All products with existing customers — PMF decay is a universal risk", "Markets undergoing technology shifts, regulatory changes, or new competitor entry", "Products that achieved PMF more than 2 years ago without a systematic reassessment"] |
 | **non_applicability_conditions** | ["Pre-PMF products — focus on achieving initial PMF first", "Products in markets with zero competitive dynamics (rare but possible in regulated monopolies)", "Products where the customer need is so fundamental and stable that PMF decay is measured in decades"] |
@@ -101,7 +101,7 @@
 | **confidence** | high |
 | **practical_tool** | "PMF Health Dashboard" — a set of leading indicators (not lagging) that should be monitored quarterly: (1) Sean Ellis "very disappointed" score if product were unavailable, (2) organic growth rate from word-of-mouth, (3) usage depth (daily/weekly active vs registered), (4) competitive win/loss rate in evaluated deals, (5) qualitative: "what would you use instead if our product disappeared?" |
 | **practice_exercise** | For a product you currently manage or work with, calculate the Sean Ellis "very disappointed" score: survey a sample of active users with the question "How would you feel if you could no longer use [product]?" (Very disappointed / Somewhat disappointed / Not disappointed). If fewer than 40% say "very disappointed," you may not have PMF — or you may have lost it. |
-| **walter_application** | "Implement the PMF Health Dashboard for Walter's key products. Establish quarterly PMF health reviews. For any product scoring below threshold on 2+ indicators, trigger a PMF deep-dive investigation. Track PMF health alongside revenue and retention metrics — do not let lagging indicators mask PMF decay." |
+| **walter_application** | _See personal applications file._ |
 | **last_reviewed** | 2026-08-01 |
 | **related_contradictions** | [CON-0002] |
 | **related_cases** | [CASE-0011, CASE-0014] |
@@ -128,7 +128,7 @@
 | **confidence** | medium |
 | **practical_tool** | "Problem Statement Template" — a structured format for defining problems that enforces rigor: (1) Who has this problem? (2) What is the current state and why is it painful? (3) What is the desired state? (4) What is the measurable success criterion? (5) What are the constraints (technical, business, timeline)? (6) What assumptions are we making about the customer, the market, and the feasibility? |
 | **practice_exercise** | Take the last 3 features your team shipped. For each, write the problem statement as it should have been defined BEFORE any solution work began. Compare it to what was actually communicated. Identify where solution-push replaced problem-definition and where the problem definition was insufficient. |
-| **walter_application** | "Implement the Problem Statement Template as a required artifact for any initiative above a defined size threshold in Walter's portfolio. Review problem statements in planning sessions before any solution work begins. Train PMs to distinguish between problem definition and solution prescription, and to catch themselves when they are prescribing solutions under the guise of problem statements." |
+| **walter_application** | _See personal applications file._ |
 | **last_reviewed** | 2026-08-01 |
 | **related_contradictions** | [CON-0013] |
 | **related_cases** | [CASE-0006, CASE-0014] |
@@ -155,7 +155,7 @@
 | **confidence** | high |
 | **practical_tool** | "Value-Based Pricing Canvas" — a structured framework for setting prices based on value delivered: (1) Identify the customer's current alternative (what do they do today?), (2) Quantify the cost of that alternative (money, time, risk), (3) Quantify the value of your product relative to the alternative, (4) Set price as a fraction of the value gap (typically 10-30% for SaaS), (5) Validate with willingness-to-pay research (Van Westendorp, Gabor-Granger, or conjoint). |
 | **practice_exercise** | Take one product or feature in your portfolio. Do the Value-Based Pricing Canvas from scratch, without looking at your current pricing. Compare the output to your actual pricing. Where is the gap? Is the gap justified by strategic considerations (market capture, competitive dynamics) or is it historical accident? |
-| **walter_application** | "Conduct a pricing teardown of Walter's portfolio products using the Value-Based Pricing Canvas. Identify products where pricing has not been reviewed in 18+ months and prioritize them for pricing research. Establish a semi-annual pricing review cadence. Treat packaging (how features are bundled into plans) as a product design decision, not a sales enablement decision." |
+| **walter_application** | _See personal applications file._ |
 | **last_reviewed** | 2026-08-01 |
 | **related_contradictions** | [CON-0010] |
 | **related_cases** | [CASE-0016] |
@@ -182,7 +182,7 @@
 | **confidence** | high |
 | **practical_tool** | "Reversibility Assessment" — for any proposed decision, answer: (1) What is the expected cost if we are wrong? (2) What is the probability we are wrong? (3) What would it cost to make this decision reversible? (4) How quickly could we detect that we are wrong? (5) How quickly could we reverse if we are wrong? (6) Is the cost of reversibility less than (cost of wrong * probability of wrong)? |
 | **practice_exercise** | Take the last 5 product decisions your team made. For each, classify as Type 1 (irreversible) or Type 2 (reversible). For each Type 1, assess: could this decision have been made more reversible with better design? For each Type 2, assess: did we have a tested reversal mechanism? Has it been tested? |
-| **walter_application** | "For every major product decision in Walter's portfolio, require a Reversibility Assessment as part of the decision process. Invest in the infrastructure that makes reversibility cheap (feature flags, versioned APIs, incremental migration paths). Test reversals in non-critical contexts to ensure the mechanisms work when they are needed." |
+| **walter_application** | _See personal applications file._ |
 | **last_reviewed** | 2026-08-01 |
 | **related_contradictions** | [CON-0006] |
 | **related_cases** | [CASE-0001, CASE-0005, CASE-0011] |
@@ -200,7 +200,7 @@
 | **product_archetypes** | [all] |
 | **organizational_stages** | [seed_startup, growth_stage, mature_tech] |
 | **industries** | [all] |
-| **evidence** | [{source_id: SRC-BOOK-0004, claim_summary: "Continuous discovery — weekly customer touchpoints, structured problem exploration — produces better outcomes than periodic requirements gathering", strength: strong}, {source_id: SRC-BOOK-0001, claim_summary: "Customers know their problems; product teams should discover the solution. Building what customers ask for produces bloated, incoherent products", strength: strong}, {source_id: SRC-POST-0003, claim_summary: "Listening to existing customers can lead incumbents to miss disruptive innovations — customers cannot tell you what they do not know they need", strength: moderate}] |
+| **evidence** | [{source_id: SRC-BOOK-0004, claim_summary: "Continuous discovery — weekly customer touchpoints, structured problem exploration — produces better outcomes than periodic requirements gathering", strength: strong}, {source_id: SRC-BOOK-0001, claim_summary: "Customers know their problems; product teams should discover the solution. Building what customers ask for produces bloated, incoherent products", strength: strong}, {source_id: SRC-BOOK-0010, claim_summary: "Listening to existing customers can lead incumbents to miss disruptive innovations — customers cannot tell you what they do not know they need", strength: moderate}] |
 | **counterevidence** | [{source_id: SRC-POST-0017, claim_summary: "Salesforce's IdeaExchange and other customer request systems have produced major product improvements that discovery might have missed", strength: weak}, {source_id: SRC-BOOK-0021, claim_summary: "Some breakthrough products were not discoverable through customer research — customers could not have articulated the iPhone, the automobile, or the web browser", strength: moderate}] |
 | **applicability_conditions** | ["You have access to customers who are willing to participate in discovery (interviews, observation, usage analysis)", "The problem space is one where customers can articulate their problems even if they cannot design solutions", "The product has an established user base or target market that can be studied", "The team has discovery skills (interviewing, observation, Jobs-to-be-Done analysis) and is not just doing requirements gathering under a different name"] |
 | **non_applicability_conditions** | ["Truly novel product category with no existing user behavior to study (discovery is 'build and see if anyone uses it')", "Deep technology bet where customer input on feasibility or desirability is not meaningful", "Product in a regulated domain where compliance requirements drive more decisions than customer needs", "The team lacks discovery skills and would produce 'discovery theater' — interviews that confirm existing beliefs"] |
@@ -209,7 +209,7 @@
 | **confidence** | medium |
 | **practical_tool** | "Discovery Interview Protocol" — a structured interview guide: (1) Tell me about the last time you [did the relevant activity]. (2) What made that experience good or bad? (3) What did you do before using [current solution]? (4) What have you tried that did not work? (5) If you could wave a magic wand, what would the ideal experience be? (6) Why is that important to you? — The protocol emphasizes open-ended questions, specific past experiences (not hypotheticals), and understanding why, not what. |
 | **practice_exercise** | Conduct 3 discovery interviews this week using the protocol. For each interview, write down: (a) one thing you learned that you did not know before, (b) one assumption you held that was challenged, (c) one product decision you would change based on what you heard. If you cannot fill all three for all interviews, your discovery is not deep enough. |
-| **walter_application** | "Train Walter's PMs on the Discovery Interview Protocol. Establish a minimum discovery cadence (e.g., 2 customer touchpoints per PM per week). Review discovery outputs in team meetings — not just 'what did customers say?' but 'what did we learn that we did not know before, and what decision does it change?' Prohibit feature requests from being added to the backlog without discovery context — the problem the customer is trying to solve." |
+| **walter_application** | _See personal applications file._ |
 | **last_reviewed** | 2026-08-01 |
 | **related_contradictions** | [CON-0002, CON-0009] |
 | **related_cases** | [CASE-0007, CASE-0011] |
@@ -236,7 +236,7 @@
 | **confidence** | medium |
 | **practical_tool** | "Platform Decision Framework" — a structured approach to platform decisions: (1) What is the platform paradigm? (API-first, marketplace, bot-first, etc.), (2) Who are the platform's users? (developers, partners, internal teams), (3) What can they build that we should not/cannot build?, (4) What are the platform constraints? (rate limits, governance, monetization), (5) How does the platform make the product harder to leave? (6) What is our investment in developer success? (documentation, SDKs, community, support) |
 | **practice_exercise** | For a product in your portfolio that has platform potential, complete the Platform Decision Framework. Identify the one thing you would need to change about the current platform strategy to make it more compelling for the most valuable type of developer. |
-| **walter_application** | "Apply the Platform Decision Framework to Walter's products that have platform characteristics. For each, assess whether the current platform strategy is coherent or accidental. If a product has an API but no platform strategy, decide: should we invest in the platform or deprecate the API? The worst state is an API without a strategy — it creates maintenance burden without ecosystem value." |
+| **walter_application** | _See personal applications file._ |
 | **last_reviewed** | 2026-08-01 |
 | **related_contradictions** | [CON-0005, CON-0008] |
 | **related_cases** | [CASE-0006, CASE-0008, CASE-0016] |
@@ -263,7 +263,7 @@
 | **confidence** | high |
 | **practical_tool** | "Conway's Law Design Canvas" — for any product strategy: (1) What are the key components of the desired product architecture? (2) How do they depend on each other? (3) What teams would own each component? (4) Where do the team boundaries differ from the dependency boundaries? (5) What coordination mechanisms exist across dependency boundaries? (6) What would you change about the org structure to reduce coordination friction? |
 | **practice_exercise** | Map your current product architecture and your current organizational structure side by side. Identify the places where the org chart boundaries do not match the product architecture boundaries. For each mismatch, assess whether it is productive (cross-functional teams working together intentionally) or unproductive (coordination overhead, duplicated effort, integration failures). |
-| **walter_application** | "Use the Conway's Law Design Canvas to map Walter's product architecture against the organizational structure. Identify the top 3 misalignments and propose structural changes to address them. Before any major product strategy change, assess whether the current organizational structure can support it. If not, the organizational change should precede or coincide with the product change, not follow it." |
+| **walter_application** | _See personal applications file._ |
 | **last_reviewed** | 2026-08-01 |
 | **related_contradictions** | [CON-0001, CON-0008] |
 | **related_cases** | [CASE-0004, CASE-0008, CASE-0013] |
@@ -290,7 +290,7 @@
 | **confidence** | high |
 | **practical_tool** | "Leading Indicator Map" — for each key product outcome: (1) What is the lagging indicator? (revenue, retention, market share), (2) What behaviors must precede that outcome? (adoption, activation, engagement depth), (3) What metrics measure those behaviors? (time-to-value, WAU/DAU ratio, feature adoption velocity), (4) What is the leading indicator's correlation with the lagging indicator? (validated or assumed?), (5) What is the leading indicator's noise floor? (how much movement is real vs random?) |
 | **practice_exercise** | Take your top 3 product KPIs. For each, trace backward: what must users do for those KPIs to move? Identify the behavioral precursor. Then check: do you measure that precursor today? If not, design the measurement. If you do, validate the correlation between the precursor and the KPI. |
-| **walter_application** | "Build a Leading Indicator Map for Walter's key product outcomes. For each product, identify the 3-5 leading indicators that best predict long-term product health. Shift product review meetings from 'how is revenue doing?' to 'how are the leading indicators trending, and what does that tell us about future revenue?' Invest in the instrumentation to measure leading indicators at the granularity needed for decision-making." |
+| **walter_application** | _See personal applications file._ |
 | **last_reviewed** | 2026-08-01 |
 | **related_contradictions** | [CON-0007] |
 | **related_cases** | [CASE-0011] |
@@ -317,7 +317,7 @@
 | **confidence** | medium |
 | **practical_tool** | "Decision Velocity Assessment" — for a given period: (1) List all significant decisions that were pending at the start of the period. (2) How many were made? (3) For each unmade decision, what is the cost of the delay? (4) For each made decision, was the decision speed appropriate to the decision's reversibility? (5) What is the organization's average decision latency for Type 2 (reversible) decisions? |
 | **practice_exercise** | Audit the last quarter: identify every significant product decision that was pending for more than 2 weeks. For each, calculate the cost of the delay (team capacity, market opportunity, coordination costs). Identify the bottleneck — was it information, authority, courage, or analysis overload? |
-| **walter_application** | "Implement a Decision Velocity Assessment for Walter's portfolio. Track decision latency for Type 2 (reversible) decisions. Set targets: Type 2 decisions should be made within a defined timeframe of the information being available. Escalate decisions that exceed the latency target. In product reviews, ask not just 'what did we decide?' but 'what decisions are pending and what is the cost of the delay?'" |
+| **walter_application** | _See personal applications file._ |
 | **last_reviewed** | 2026-08-01 |
 | **related_contradictions** | [CON-0006] |
 | **related_cases** | [CASE-0012, CASE-0013] |
@@ -344,7 +344,7 @@
 | **confidence** | medium |
 | **practical_tool** | "Team Decision Quality Audit" — for a product leader's team: (1) For the last 10 significant decisions made by the team (without the leader's direct involvement), evaluate each on decision quality (process, not outcome — good process can produce bad outcomes), (2) What pattern of errors appears? (insufficient customer context? strategic misalignment? analytical gaps? courage to decide?), (3) What capability investment would address the most common error pattern? (4) How will you measure whether the investment is working? |
 | **practice_exercise** | For one month, track every product decision you (as the product leader) made that could have been made by someone on your team. At the end of the month, review the list. For each decision: why did you make it instead of them? (They were not capable? You did not trust them? You did not realize they could? It was faster to do it yourself?) The pattern of answers IS your capability-building agenda. |
-| **walter_application** | "Conduct a Team Decision Quality Audit for Walter's PM team. Identify the most common decision quality gap and design a targeted capability-building program. Track the ratio of 'decisions Walter makes' to 'decisions the team makes independently' as a key metric — the target is for that ratio to decline over time." |
+| **walter_application** | _See personal applications file._ |
 | **last_reviewed** | 2026-08-01 |
 | **related_contradictions** | [CON-0001, CON-0013] |
 | **related_cases** | [CASE-0004] |
@@ -371,7 +371,7 @@
 | **confidence** | high |
 | **practical_tool** | "Interpretation Audit" — when data supports competing conclusions: (1) What does each side claim the data means? (2) What assumptions is each interpretation making? (3) What metric would discriminate between the interpretations if we could measure it? (4) Can we design an experiment that measures that discriminating metric? (5) If not, what decision would we make if Interpretation A is correct vs Interpretation B? Can we make a decision that is robust to both? |
 | **practice_exercise** | Find a current argument in your organization where both sides have data. Apply the Interpretation Audit. Identify the discriminating metric that would resolve the disagreement. Assess whether you can measure it without a new experiment. If not, design the minimum experiment that would discriminate. |
-| **walter_application** | "When Walter encounters a disagreement where both sides cite data, apply the Interpretation Audit before making a decision. The goal is not to determine who is right but to understand why reasonable people disagree and what would discriminate between the interpretations. Train the PM team to identify the assumptions in their own data interpretations." |
+| **walter_application** | _See personal applications file._ |
 | **last_reviewed** | 2026-08-01 |
 | **related_contradictions** | [CON-0007] |
 | **related_cases** | [CASE-0009, CASE-0011] |
@@ -398,7 +398,7 @@
 | **confidence** | high |
 | **practical_tool** | "Graceful Sunset Checklist" — (1) Announce the sunset with at least 60 days notice (ideally 90+), (2) Provide a clear strategic rationale — 'why are we doing this?', (3) Provide complete data export in standard formats, (4) Recommend migration paths or alternatives, (5) Offer a transition period where the old product still works while users migrate, (6) Communicate personally with most-affected users, (7) After sunset, publish a retrospective explaining what was learned. |
 | **practice_exercise** | Take a product or feature that was sunset in your organization. Rate the sunset against the Graceful Sunset Checklist. Identify the gap between what was done and what should have been done. Estimate the trust cost of that gap — how did it affect adoption of subsequent products? |
-| **walter_application** | "Apply the Graceful Sunset Checklist to any product or feature retirement in Walter's portfolio. Sunset plans should be reviewed with the same rigor as launch plans. The sunset is not complete until the data export is verified, the migration paths are documented, and affected users have been communicated with personally." |
+| **walter_application** | _See personal applications file._ |
 | **last_reviewed** | 2026-08-01 |
 | **related_contradictions** | [CON-0010] |
 | **related_cases** | [CASE-0003, CASE-0004] |
@@ -425,7 +425,7 @@
 | **confidence** | medium |
 | **practical_tool** | "Founder-CPO Partnership Canvas" — (1) What product decisions does the founder want to be involved in? What is the decision type and level? (2) What product decisions is the founder comfortable delegating? (3) What information does the founder need to trust delegated decisions? (4) What are the founder's 'red line' product principles that should never be violated? (5) How will disagreements be resolved? (6) How often and in what format will product strategy be reviewed? |
 | **practice_exercise** | If you work in a founder-led company, explicitly map the decision rights between the founder and the product leader. Identify any areas of ambiguity or unspoken expectations. Have the conversation to resolve them. If you ARE the founder, do the same exercise with your product leader. |
-| **walter_application** | "If Walter operates in a founder-led context, use the Founder-CPO Partnership Canvas to explicitly define the product decision-making relationship. Review quarterly. The goal is clarity: everyone should know who decides what. Ambiguity in founder-product-leader decision rights is the most common source of organizational dysfunction in founder-led companies." |
+| **walter_application** | _See personal applications file._ |
 | **last_reviewed** | 2026-08-01 |
 | **related_contradictions** | [CON-0003] |
 | **related_cases** | [CASE-0001, CASE-0002, CASE-0008] |

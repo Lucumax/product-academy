@@ -1,5 +1,25 @@
 # Changelog
 
+## v0.3.0 (2026-08-02)
+
+### Added
+- Evidence chain repaired: 107 missing source records added (registry now 180 sources); every cited source ID in doctrine/handbook/case resolves
+- Cross-reference test (G2) enforcing that all cited IDs resolve and canonical claims use qualifying sources
+- `evidence/final/` populated: Claims Ledger, Source Evidence Strength, Corroboration Matrix (35 claims from real claims inventory)
+- Theranos case (CASE-0019) — the canonical non-falsifiable-thesis failure
+- CC BY 4.0 LICENSE; Academy's own content licensed, distinct from third-party source material
+- Curriculum map now has an honest Status column (COMPLETE/COVERED/PARTIAL/PLANNED) per module
+
+### Fixed
+- Source tier inflation: Doshi (SRC-POST-0001), Cutler (SRC-POST-0003), Zhuo (SRC-BOOK-0002) reclassified to Tier B with `canonical_claims_supported: false`
+- Innovator's Dilemma citations corrected from the colliding SRC-POST-0003 to SRC-BOOK-0010 (Christensen)
+- Weak test thresholds: AI module stub test raised from 300 to 3000 chars + structural check
+- Walter-specific application notes extracted from canonical doctrine into a gitignored personal file
+
+### Known Limitations
+- Several curriculum modules remain PLANNED (marked honestly in the Status column)
+- Walter-specific application files are gitignored; personal-lab README remains public
+
 ## v0.2.0 (2026-08-02)
 
 ### Added

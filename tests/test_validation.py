@@ -170,9 +170,68 @@ class TestContentQuality:
         ai_dir = academy_root / "05_ai_product_management"
         for md_file in ai_dir.glob("*.md"):
             content = md_file.read_text(encoding="utf-8")
-            assert len(content) > 300, (
+            assert len(content) > 3000, (
                 f"AI module {md_file.name} appears to be a stub ({len(content)} chars)"
             )
+            # Substantive content: at least one H2 section and one practice/exercise
+            assert content.count("## ") >= 2, (
+                f"AI module {md_file.name} has no structured sections"
+            )
+
+    def test_evidence_artifacts_exist(self, academy_root):
+        """Gate 5: evidence/final/ must contain processed evidence (finding A2)."""
+        evidence_dir = academy_root / "evidence" / "final"
+        assert evidence_dir.is_dir(), "evidence/final/ directory missing"
+        required = {
+            "CLAIMS_LEDGER.md",
+            "SOURCE_EVIDENCE_STRENGTH.md",
+            "CORROBORATION_MATRIX.md",
+        }
+        present = {f.name for f in evidence_dir.glob("*.md")}
+        missing = required - present
+        assert not missing, f"Missing evidence artifacts: {missing}"
+        for name in required:
+            content = (evidence_dir / name).read_text(encoding="utf-8")
+            assert len(content) > 500, f"Evidence artifact {name} appears to be a stub"
+
+    def test_curriculum_map_has_status(self, academy_root):
+        """Gate 5: curriculum map must mark module status honestly (finding A3)."""
+        map_file = academy_root / "CURRICULUM_MAP.md"
+        content = map_file.read_text(encoding="utf-8")
+        assert "Module Status Legend" in content
+        for status in ("COMPLETE", "COVERED", "PARTIAL", "PLANNED"):
+            assert status in content, f"Curriculum map missing status {status}"
+        # Every module row must carry a status value.
+        rows = [l for l in content.splitlines() if l.startswith("| ") and l.count("|") >= 5]
+        for row in rows:
+            if row.split("|")[1].strip() in ("", "ID", "Level", "---", "Your"):
+                continue
+            cells = [c.strip() for c in row.split("|")[1:-1]]
+            if cells and cells[0] and cells[0][0].isdigit():
+                assert any(s in row for s in ("COMPLETE", "COVERED", "PARTIAL", "PLANNED")), (
+                    f"Curriculum row without status: {row.strip()}"
+                )
+
+    def test_theranos_case_exists(self, academy_root):
+        """Gate 5: the canonical failure case must exist (finding E1)."""
+        case_path = academy_root / "07_cases" / "case_catalog.md"
+        content = case_path.read_text(encoding="utf-8")
+        assert "CASE-0019" in content, "Theranos case (CASE-0019) missing"
+        assert "Theranos" in content
+
+    def test_no_performative_evidence(self, academy_root):
+        """Gate 3: downgraded tier sources must not support canonical claims."""
+        import yaml
+        registry_path = academy_root / "sources" / "registry.yaml"
+        doc = yaml.safe_load(registry_path.read_text(encoding="utf-8"))
+        for s in doc["sources"]:
+            if s["source_id"] in ("SRC-POST-0001", "SRC-POST-0003", "SRC-BOOK-0002"):
+                assert s["evidence_tier"] == "B", (
+                    f"{s['source_id']} should be Tier B (practitioner), not Tier A"
+                )
+                assert s.get("canonical_claims_supported") is False, (
+                    f"{s['source_id']} must not support canonical claims"
+                )
 
     def test_career_modules_exist(self, academy_root):
         career_dir = academy_root / "13_career_transitions"
@@ -247,6 +306,7 @@ class TestRepositoryInfrastructure:
         "CURRICULUM_MAP.md",
         "CHANGELOG.md",
         "COPYRIGHT_AND_ACCESS_POLICY.md",
+        "LICENSE",
         "pyproject.toml",
         ".gitignore",
     ]

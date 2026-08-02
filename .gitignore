@@ -23,3 +23,11 @@ htmlcov/
 .runs/
 tmp/
 scratch/
+
+# Walter-specific application content (personal to the Academy maintainer)
+12_personal_lab/FRONT_OFFICE_APPLICATION.md
+12_personal_lab/INFRAPREP_APPLICATION.md
+12_personal_lab/PORTFOLIO_OVERVIEW.md
+12_personal_lab/PRODUCT_FORGE_APPLICATION.md
+12_personal_lab/TIAA_APPLICATION.md
+12_personal_lab/walter_applications.md

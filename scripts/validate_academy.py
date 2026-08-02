@@ -73,6 +73,7 @@ REQUIRED_ROOT_FILES = [
     "CURRICULUM_MAP.md",
     "CHANGELOG.md",
     "COPYRIGHT_AND_ACCESS_POLICY.md",
+    "LICENSE",
     "pyproject.toml",
     ".gitignore",
 ]

@@ -68,7 +68,7 @@ At the **Founder** level, problem discovery is existential. The Founder is disco
 
 - **SRC-BOOK-0004** (Torres, Continuous Discovery Habits): The most effective discovery is continuous, not periodic. Teams that have weekly customer touchpoints discover problems that quarterly research misses entirely.
 - **SRC-BOOK-0015** (Rumelt, Good Strategy Bad Strategy): Strategic problems are discovered through diagnosis — a structured process of identifying the critical challenge, not just listing symptoms.
-- **SRC-POST-0003** (Christensen, The Innovator's Dilemma): Incumbents systematically fail to discover disruptive problems because their discovery processes are optimized for their existing customers, who do not have those problems yet.
+- **SRC-BOOK-0010** (Christensen, The Innovator's Dilemma): Incumbents systematically fail to discover disruptive problems because their discovery processes are optimized for their existing customers, who do not have those problems yet.
 - **SRC-BOOK-0014** (Ries, The Lean Startup): Problem discovery in startups is hypothesis-driven — you discover the problem by testing whether customers actually have it, not by asking them to describe it.
 - **SRC-BOOK-0001** (Cagan, Inspired): Product discovery is a distinct discipline from product delivery. The skills, cadence, and mindset are different.
 
@@ -726,7 +726,7 @@ The tension is not resolvable by formula. It is a judgment that must be exercise
 
 ### Evidence
 
-- **SRC-POST-0003** (Christensen, The Innovator's Dilemma): The canonical work on why successful companies over-invest in short-term revenue (serving existing customers) and under-invest in disruptive innovation that creates long-term defensibility.
+- **SRC-BOOK-0010** (Christensen, The Innovator's Dilemma): The canonical work on why successful companies over-invest in short-term revenue (serving existing customers) and under-invest in disruptive innovation that creates long-term defensibility.
 - **SRC-BOOK-0015** (Rumelt): Strategy requires balancing exploitation (getting value from current position) and exploration (creating future position).
 - **SRC-POST-0041** (Microsoft transformation, CASE-0004): Nadella's reallocation from Windows (short-term revenue protection) to Cloud (long-term defensibility) is the archetypal example of a mature enterprise making this trade-off correctly.
 - **SRC-BOOK-0021** (Thiel, Zero to One): The argument that the most valuable companies create durable monopolies through technology differentiation — an argument for prioritizing long-term defensibility.

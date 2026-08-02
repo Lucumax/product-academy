@@ -198,7 +198,7 @@ When a Bible claim cites a source, follow the reference to understand the eviden
 **The claim:** PMF is not an event you achieve and move past. It's a condition you must maintain as markets, competitors, and customer needs evolve.
 
 **[E]** Evidence strength: **High**
-- Supporting: Ries (SRC-BOOK-0014), Christensen's Innovator's Dilemma (SRC-POST-0003), Christensen's "Competing Against Luck" (SRC-BOOK-0021)
+- Supporting: Ries (SRC-BOOK-0014), Christensen's Innovator's Dilemma (SRC-BOOK-0010), Christensen's "Competing Against Luck" (SRC-BOOK-0021)
 - Counter: Some products maintain PMF for decades through incremental improvement (SRC-POST-0017) — but this is weak counterevidence as it doesn't challenge the "condition not milestone" framing
 
 **[P]** The Sean Ellis test remains the most practical PMF diagnostic: survey active users with "How would you feel if you could no longer use [product]?" If fewer than 40% say "very disappointed," PMF is either not achieved or has decayed.
@@ -254,7 +254,7 @@ When a Bible claim cites a source, follow the reference to understand the eviden
 **The claim:** Systematic investigation of customer problems produces better product decisions than responding to customer feature requests.
 
 **[E]** Evidence strength: **Moderate to Strong**
-- Supporting: Torres' Continuous Discovery (SRC-BOOK-0004), Cagan on customer problems vs solutions (SRC-BOOK-0001), Christensen on listening to existing customers leading to disruption vulnerability (SRC-POST-0003)
+- Supporting: Torres' Continuous Discovery (SRC-BOOK-0004), Cagan on customer problems vs solutions (SRC-BOOK-0001), Christensen on listening to existing customers leading to disruption vulnerability (SRC-BOOK-0010)
 - Counter: Some breakthrough products were not discoverable through customer research (SRC-BOOK-0021), customer request systems have produced major improvements (SRC-POST-0017)
 
 **[P]** The Discovery Interview Protocol (PRN-0008 practical tool) focuses on specific past experiences, not hypotheticals: "Tell me about the last time you [did X]." "What made that good or bad?" "What have you tried that didn't work?" "If you could wave a magic wand..." "Why is that important?"
@@ -1421,7 +1421,7 @@ From `02_principal_plus/PRINCIPAL_PM.md`:
 
 **Position B (Strategic conviction):** Customers cannot tell you what they will want. Breakthrough products come from singular vision that no amount of interviewing would validate. *Key proponents: Steve Jobs, Peter Thiel.*
 
-**[E]** Evidence: Position A supported by Continuous Discovery methodology (SRC-BOOK-0004), Lean Startup (SRC-BOOK-0014). Position B supported by Innovator's Dilemma insight (SRC-POST-0003), Zero to One (SRC-BOOK-0021).
+**[E]** Evidence: Position A supported by Continuous Discovery methodology (SRC-BOOK-0004), Lean Startup (SRC-BOOK-0014). Position B supported by Innovator's Dilemma insight (SRC-BOOK-0010), Zero to One (SRC-BOOK-0021).
 
 **[R]** Discovery should be the default. Conviction-driven bets should be the explicit exception, with clear rationale for why discovery is insufficient. The failure modes are symmetric: "discovery theater" (interviewing but only hearing what confirms beliefs) vs "strategic LARPing" (claiming conviction when unwilling to do discovery work).
 

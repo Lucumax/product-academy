@@ -1,5 +1,16 @@
 # Copyright and Access Policy
 
+## License of Academy Content
+
+The Academy's own original content — doctrine, cases, synthesis, analysis,
+frameworks, and tools — is licensed under the **Creative Commons Attribution
+4.0 International (CC BY 4.0)** license. See `LICENSE` for the full text.
+
+This license covers content authored by the Academy maintainer. It does NOT
+cover third-party source material quoted, referenced, or cited within the
+repository; that material remains subject to its own copyright and to the
+restrictions below.
+
 ## Principle
 
 The Product Leadership Academy is a learning system, not a content archive. It stores original synthesis, analytical notes, limited quotations with proper attribution, and source metadata. It does not reproduce copyrighted works.

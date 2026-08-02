@@ -154,7 +154,7 @@ sources:
       - growth_stage
       - mature_tech
     firsthand: true
-    evidence_tier: A
+    evidence_tier: B
     commercial_incentive: "Author offers consulting and courses (doshiai.com). Public threads are free and substantive."
     transcript_status: NOT_APPLICABLE
     exact_location: "Twitter/X threads on @shreyas; specific threads on LNO framework, product sense, strategy, and stakeholder management"
@@ -165,10 +165,10 @@ sources:
       - stakeholder_management
       - career_development
       - product_leadership
-    reliability_notes: "Doshi product experience includes roles at Stripe, Twitter, Google, Yahoo. Frameworks derived from firsthand operator experience. Public threads are high-signal but reflect personal heuristics, not systematic research."
+    reliability_notes: "Doshi product experience includes roles at Stripe, Twitter, Google, Yahoo. Frameworks derived from firsthand operator experience. Reclassified from Tier A to Tier B: Twitter threads are short-form, reactive, and not stable/verifiable in the way Tier A (stable publication) requires. Useful as corroborating practitioner doctrine, not as sole support for canonical claims."
     transferability_notes: "Most applicable to mid-to-large technology companies. Some strategic heuristics may assume product-led organizational culture."
     copyright_access_status: OPEN_ACCESS
-    canonical_claims_supported: true
+    canonical_claims_supported: false
     last_reviewed: "2026-08-01"
     deep_analysis: false
 
@@ -230,7 +230,7 @@ sources:
       - growth_stage
       - mature_tech
     firsthand: true
-    evidence_tier: A
+    evidence_tier: B
     commercial_incentive: "Author sells book. Primary content is firsthand management experience at Facebook."
     transcript_status: NOT_APPLICABLE
     exact_location: "Part I: What Is Management?; Part II: Managing Individuals; Part III: Managing Teams"
@@ -241,10 +241,10 @@ sources:
       - hiring
       - design_leadership
       - product_culture
-    reliability_notes: "Zhuo became a manager at Facebook at 25 and eventually VP of Product Design managing hundreds. Firsthand account of scaling management capability in hypergrowth environment."
+    reliability_notes: "Zhuo became a manager at Facebook at 25 and eventually VP of Product Design managing hundreds. Firsthand account of scaling management capability in hypergrowth environment. Reclassified from Tier A to Tier B: the book is primarily about people management fundamentals, which the Academy explicitly excludes from scope; treat as tangential management context, not product-leadership doctrine."
     transferability_notes: "Most applicable to managers transitioning from IC to management in tech companies. Facebook specific culture (move fast, Hackathon) may not translate to regulated or slower-paced environments."
     copyright_access_status: PAID_ACCESS
-    canonical_claims_supported: true
+    canonical_claims_supported: false
     last_reviewed: "2026-08-01"
     deep_analysis: false
 
@@ -272,7 +272,7 @@ sources:
       - growth_stage
       - mature_tech
     firsthand: true
-    evidence_tier: A
+    evidence_tier: B
     commercial_incentive: "Free Substack newsletter. Author consults independently. Newsletter serves as thought leadership and marketing for consulting practice."
     transcript_status: NOT_APPLICABLE
     exact_location: "Various newsletters at cutlefish.substack.com; notable posts on product operations, feature factories, systems thinking in PM"
@@ -283,10 +283,10 @@ sources:
       - product_metrics
       - product_health
       - cross_functional_collaboration
-    reliability_notes: "Cutler has held product roles at Zendesk, Amplitude, Toast, Pendo. Frameworks (e.g., Product Health, Feature Factory) are cited extensively in PM community. Content reflects firsthand synthesis but is primarily opinion/analysis."
+    reliability_notes: "Cutler has held product roles at Zendesk, Amplitude, Toast, Pendo. Frameworks (e.g., Product Health, Feature Factory) are cited extensively in PM community. Content reflects firsthand synthesis but is primarily opinion/analysis. Reclassified from Tier A to Tier B: newsletter opinion posts are not the same as directly describing systems built; reserve Tier A for Cutler's direct accounts of his own systems."
     transferability_notes: "Most applicable to B2B SaaS and product-led organizations. Systems-thinking lens may not resonate with early-stage startups prioritizing speed over process."
     copyright_access_status: OPEN_ACCESS
-    canonical_claims_supported: true
+    canonical_claims_supported: false
     last_reviewed: "2026-08-01"
     deep_analysis: false
 
@@ -5346,6 +5346,103 @@ sources:
     reliability_notes: "Registered to satisfy cross-reference integrity. Access and content pending verification."
     transferability_notes: "Pending review."
     copyright_access_status: UNKNOWN
+    canonical_claims_supported: false
+    last_reviewed: "2026-08-01"
+    deep_analysis: false
+
+  - source_id: SRC-POST-0101
+    title: "John Carreyrou, Wall Street Journal Investigation of Theranos"
+    author: John Carreyrou
+    organization: The Wall Street Journal
+    source_type: article
+    url: null
+    publication_date: "2015"
+    access_date: "2026-08-01"
+    evidence_tier: A
+    firsthand: false
+    commercial_incentive: "Journalism; investigative reporting."
+    transcript_status: NOT_APPLICABLE
+    exact_location: "WSJ investigation series, October 2015 onward"
+    key_topics:
+      - theranos
+      - investigative_journalism
+      - product_validation
+      - fraud
+    reliability_notes: "Award-winning investigative reporting later corroborated by court records and guilty verdicts. Documented mechanism of the fraud."
+    transferability_notes: "Primary documented account of the Theranos failure."
+    copyright_access_status: PAID_ACCESS
+    canonical_claims_supported: false
+    last_reviewed: "2026-08-01"
+    deep_analysis: false
+
+  - source_id: SRC-POST-0102
+    title: "Bad Blood: Secrets and Lies in a Silicon Valley Startup"
+    author: John Carreyrou
+    organization: Knopf
+    source_type: article
+    url: null
+    publication_date: "2018"
+    access_date: "2026-08-01"
+    evidence_tier: A
+    firsthand: false
+    commercial_incentive: "Author sells book."
+    transcript_status: NOT_APPLICABLE
+    exact_location: "Full-length investigative account"
+    key_topics:
+      - theranos
+      - product_validation
+      - fraud
+    reliability_notes: "Comprehensive investigative book; corroborated by trial evidence and convictions."
+    transferability_notes: "Definitive popular account of the Theranos failure."
+    copyright_access_status: PAID_ACCESS
+    canonical_claims_supported: false
+    last_reviewed: "2026-08-01"
+    deep_analysis: false
+
+  - source_id: SRC-POST-0103
+    title: "United States v. Elizabeth Holmes — Court Records and Trial Testimony"
+    author: United States Department of Justice
+    organization: U.S. District Court, Northern District of California
+    source_type: documentation
+    url: null
+    publication_date: "2021"
+    access_date: "2026-08-01"
+    evidence_tier: A
+    firsthand: true
+    commercial_incentive: "Government prosecution."
+    transcript_status: VERIFIED_CREATOR_TRANSCRIPT
+    exact_location: "Trial transcripts and filings, 2021-2022"
+    key_topics:
+      - theranos
+      - fraud
+      - legal_accountability
+    reliability_notes: "Primary legal record; verdict and sentencing (2022) document the fraud."
+    transferability_notes: "Authoritative legal documentation of the Theranos fraud."
+    copyright_access_status: OPEN_ACCESS
+    canonical_claims_supported: false
+    last_reviewed: "2026-08-01"
+    deep_analysis: false
+
+  - source_id: SRC-POST-0104
+    title: "SEC Charges Against Theranos and Elizabeth Holmes"
+    author: U.S. Securities and Exchange Commission
+    organization: SEC
+    source_type: documentation
+    url: null
+    publication_date: "2018"
+    access_date: "2026-08-01"
+    evidence_tier: A
+    firsthand: true
+    commercial_incentive: "Securities regulation."
+    transcript_status: NOT_APPLICABLE
+    exact_location: "SEC civil charges and settlement, March 2018"
+    key_topics:
+      - theranos
+      - securities_fraud
+      - regulatory_enforcement
+    reliability_notes: "Official regulatory finding of securities fraud."
+    transferability_notes: "Regulatory documentation of investor deception."
+    copyright_access_status: OPEN_ACCESS
     canonical_claims_supported: false
     last_reviewed: "2026-08-01"
     deep_analysis: false
