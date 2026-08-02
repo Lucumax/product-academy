@@ -12,6 +12,8 @@ name: kebab-case-skill-name
 description: >-
   What this skill does and when to invoke it, in plain language (this is the line
   agents read to decide whether to run the skill). Anthropics-compatible.
+metadata:
+  internal: true
 type: assess|assist
 version: 0.1.0
 best_for:

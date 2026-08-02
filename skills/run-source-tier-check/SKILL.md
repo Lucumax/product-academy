@@ -9,6 +9,8 @@ description: >-
 type: assess
 version: 0.2.0
 deprecated: true
+metadata:
+  internal: true
 replaced_by: audit-decision-evidence
 best_for:
   - "Routing: anyone invoking the former source-tier check should run audit-decision-evidence instead"
