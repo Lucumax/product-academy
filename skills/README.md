@@ -1,8 +1,8 @@
 # Skills — Product Academy Evidence Pack
 
 This folder is the **source of truth** for the Product Academy's agent-skill
-pack. The installable distribution lives in the `product-academy-skills`
-repository; this is where the skills are authored and validated.
+pack. Installable ZIPs are built from here by `scripts/package_skills.py`
+and attached to GitHub Releases on the Academy repo.
 
 ## What these skills are
 
@@ -45,6 +45,6 @@ Skills **cite** these by stable ID and never reproduce third-party content.
 
 ## Publishing
 
-The pack is released from this source to `product-academy-skills` via the
-release pipeline: ZIP bundles (starter / all), per-platform install docs,
-and the `.claude-plugin` marketplace manifest.
+The pack is released from this source to the Academy repo's GitHub Releases:
+ZIP bundles (starter / all), per-platform install docs (`INSTALL.md`), and
+the `.claude-plugin` marketplace manifest.

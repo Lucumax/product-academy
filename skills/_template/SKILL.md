@@ -71,8 +71,8 @@ third-party content.
 
 Named failure modes and how to correct them, drawn from the Academy's
 failure-mode discipline (PRN-0008 "discovery theater", PRN-0014 "data as a
-weapon", PRN-0002 "strategy as communication"). Every pitfall must have a
-concrete correction.
+weapon", PRN-0002 "strategy as communication rather than resource
+allocation"). Every pitfall must have a concrete correction.
 
 ## Related Skills
 

@@ -80,7 +80,7 @@ Confidence: Medium — launch thresholds and failure taxonomy exist; rollback an
 Citations:
   - Failure taxonomy: 05_ai_product_management/FAILURE_MODES.md (silent failure as meta-failure)
   - Rollback requirement: 05_ai_product_management/EVALUATION_CONTRACTS.md (Section 12, silent-failure rollback)
-  - Human baseline: 05_ai_product_management/EVALUATION_CONTRACTS.md (Section 14, monthly re-run)
+  - Human baseline: 05_ai_product_management/EVALUATION_CONTRACTS.md (Section 13, Monitoring Plan — "are humans still the benchmark, or has AI exceeded?")
 Stated assumptions:
   - Exact rollback numbers not yet written down (unknown); verdict would upgrade if the document contains them.
 What would change the verdict: a written rollback section with numeric silent-failure

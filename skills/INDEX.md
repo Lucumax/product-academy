@@ -12,11 +12,11 @@ between an executable skill and a document dressed up as one.
 
 ## Install
 
-- **Claude Code:** `/plugin marketplace add Lucumax/product-academy-skills`
+- **Claude Code:** `/plugin marketplace add Lucumax/product-academy`
   then `/plugin install evidence-pack`
 - **Claude.ai / Desktop:** download a ZIP below and upload it
 - **Codex / Cursor:** download a ZIP and drop it in `.agents/skills/` (Codex)
-  or `.cursor/skills/` (Cursor); see `START_HERE.md`
+  or `.cursor/skills/` (Cursor); see the `INSTALL.md` included with each ZIP
 
 ## The 10 P0 skills
 
@@ -60,5 +60,5 @@ they don't reproduce third-party content. See `LICENSE` and
 ## Source of truth
 
 The authoritative skill sources live in the Academy monorepo at `skills/`
-(validated by `scripts/validate_skills.py`). The installable pack is
-published to `product-academy-skills`.
+(validated by `scripts/validate_skills.py`). Installable ZIPs are built by
+`scripts/package_skills.py` and attached to GitHub Releases on this repo.
