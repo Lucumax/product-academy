@@ -59,8 +59,13 @@ The repo is mostly scaffolding rather than usable content.
 
 ### Gate 6: Ecosystem Integrity
 - Product Forge integration is labelled current or proposed
-- No adjacent repository was modified
+- No adjacent repository was modified by the Academy
 - No Product Forge execution artifacts duplicated in Academy
+- Note: adjacent-repo git status (VSH, Ops Hub, Hermes, Product Forge) is
+  reported as informational only. Those repos are independently operated;
+  the Academy's validation must not fail because an unrelated workflow left
+  one of them dirty. The hard requirement is that the Academy itself never
+  modifies them.
 
 ### Gate 7: Link and Reference Integrity
 - All internal markdown links resolve
