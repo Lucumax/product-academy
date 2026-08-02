@@ -7,6 +7,7 @@ import { sources } from "../../data/sources.json";
 import { contradictions } from "../../data/contradictions.json";
 import { cases } from "../../data/cases.json";
 import { relatedFor } from "../../lib/related.js";
+import { sourceTag, tierRank } from "../../lib/sourceLabels.js";
 
 export async function getStaticPaths() {
   const paths = [];
@@ -106,6 +107,37 @@ function strengthColor(s) {
         })}
       </>
     )}
+
+    {(() => {
+      const cited = new Map();
+      [...(p.evidence || []), ...(p.counterevidence || [])].forEach((e) => {
+        const src = sourceIndex[e.source_id];
+        if (src && src.url && !cited.has(src.id)) cited.set(src.id, src);
+      });
+      const top = [...cited.values()]
+        .sort((a, b) => tierRank(a.tier) - tierRank(b.tier))
+        .slice(0, 4);
+      if (!top.length) return null;
+      return (
+        <div class="verify-callout">
+          <h2>Don't take our word for it</h2>
+          <p class="verify-framing">
+            These are the original sources behind this principle. Read or watch them to verify and deepen — the Academy is a guide, not the last word.
+          </p>
+          <div class="verify-list">
+            {top.map((src) => (
+              <a class="verify-card" href={src.url} target="_blank" rel="noreferrer">
+                <span class={`chip tier-${src.tier}`}>{src.tier}</span>
+                <span class="verify-title">{src.title}</span>
+                <span class="verify-meta">{src.author}{src.year ? ` · ${src.year}` : ""}</span>
+                <span class="verify-tag">{sourceTag(src.type)}</span>
+                <span class="verify-arrow" aria-hidden="true">↗</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      );
+    })()}
 
     <div class="grid grid-2 mt-3">
       {p.applicability.length > 0 && (
@@ -212,4 +244,61 @@ function strengthColor(s) {
   .ev-counter { border-left-color: var(--e-debate-bg); }
   .ev-src { font-size: 12px; }
   .src-link { margin-left: 8px; }
+
+  .verify-callout {
+    margin-top: 28px;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--surface-2);
+    padding: 18px 20px;
+  }
+  .verify-callout h2 { margin-top: 0; }
+  .verify-framing {
+    font-size: 13px;
+    color: var(--ink-2);
+    font-family: var(--font-sans);
+    margin-bottom: 14px;
+  }
+  .verify-list { display: grid; gap: 10px; }
+  .verify-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    text-decoration: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .verify-card:hover {
+    border-color: #d9d2c4;
+    box-shadow: 0 2px 10px rgb(0 0 0 / 0.06);
+  }
+  .verify-title {
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 13px;
+    font-family: var(--font-sans);
+  }
+  .verify-meta {
+    color: var(--ink-3);
+    font-size: 12px;
+    font-family: var(--font-sans);
+    margin-left: auto;
+  }
+  .verify-tag {
+    flex: none;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink-3);
+    background: var(--surface-2);
+    border-radius: 999px;
+    padding: 1px 8px;
+  }
+  .verify-arrow { color: var(--accent); flex: none; }
+
 </style>

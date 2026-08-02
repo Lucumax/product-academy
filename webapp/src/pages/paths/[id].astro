@@ -3,6 +3,8 @@ import Base from "../../layouts/Base.astro";
 import ProgressTransfer from "../../components/ProgressTransfer.astro";
 import { paths } from "../../data/paths.json";
 import { scenarioRouteForTarget, scenarioFileId } from "../../lib/simulator.js";
+import { goDeeperSources } from "../../lib/journeySources.js";
+import { sourceTag } from "../../lib/sourceLabels.js";
 
 const scenarioModules = import.meta.glob("../../content/10_simulator/scenarios/*.md", {
   query: "?raw",
@@ -32,6 +34,26 @@ p.phases.forEach((ph, pi) =>
 );
 const totalSteps = allSteps.length;
 const pathKey = `path:${p.id}`;
+
+// Go deeper: map each week's read targets to curated external sources.
+const weekTargets = (week) => {
+  const targets = week.steps.filter((s) => s.type === "read" && s.target).map((s) => s.target);
+  if (targets.length === 0 && /\bAI\b/i.test(week.title || "")) return ["05_ai_product_management/"];
+  return targets;
+};
+const weekDeepers = p.phases.map((phase) =>
+  phase.weeks.map((week) => goDeeperSources(weekTargets(week))),
+);
+const phaseFraming = p.phases.map((phase, pi) => {
+  let shown = false;
+  return phase.weeks.map((week, wi) => {
+    if (weekDeepers[pi][wi].length && !shown) {
+      shown = true;
+      return true;
+    }
+    return false;
+  });
+});
 
 // Route simulator steps to the interactive simulator instead of plain docs.
 const stepHref = (step) => {
@@ -136,6 +158,34 @@ const stepHref = (step) => {
                 ))}
               </div>
             </details>
+            {weekDeepers[pi][wi].length > 0 && (
+              <details class="go-deeper">
+                <summary class="go-deeper-summary">
+                  <span class="go-deeper-title">Go deeper</span>
+                  <span class="go-deeper-count">
+                    {weekDeepers[pi][wi].length} external {weekDeepers[pi][wi].length === 1 ? "source" : "sources"}
+                  </span>
+                </summary>
+                <div class="go-deeper-body">
+                  {phaseFraming[pi][wi] && (
+                    <p class="go-deeper-framing">
+                      The Academy is the map. These are the deeper sources — follow them to go further.
+                    </p>
+                  )}
+                  <ul class="go-deeper-list">
+                    {weekDeepers[pi][wi].map((src) => (
+                      <li>
+                        <a class="go-deeper-link" href={src.url} target="_blank" rel="noreferrer">
+                          <span class="gd-arrow" aria-hidden="true">↗</span>
+                          <span class="gd-title">{src.title}</span>
+                          <span class="gd-tag">{sourceTag(src.type)}</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </details>
+            )}
           </div>
         ))}
       </section>
@@ -446,6 +496,74 @@ const stepHref = (step) => {
   }
   .rate-btn[data-rate="got"].active { border-color: #34d399; background: #ecfdf5; color: #065f46; }
   .rate-btn[data-rate="notyet"].active { border-color: #fca5a5; background: #fef2f2; color: #991b1b; }
+
+  /* ----------------------------------------------------------- go deeper */
+  .go-deeper {
+    margin-top: 14px;
+    border: 1px dashed var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+  }
+  .go-deeper-summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 9px 14px;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-3);
+    list-style: none;
+  }
+  .go-deeper-summary::-webkit-details-marker { display: none; }
+  .go-deeper-summary::before {
+    content: "▸";
+    color: var(--accent);
+    transition: transform 0.15s;
+  }
+  .go-deeper[open] .go-deeper-summary::before { transform: rotate(90deg); }
+  .go-deeper-count {
+    margin-left: auto;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+  }
+  .go-deeper-body { padding: 0 14px 12px; }
+  .go-deeper-framing {
+    font-size: 12px;
+    color: var(--ink-3);
+    font-family: var(--font-sans);
+    font-style: italic;
+    margin: 2px 0 10px;
+  }
+  .go-deeper-list { list-style: none; margin: 0; padding: 0; }
+  .go-deeper-list li { border-top: 1px solid var(--line); padding: 7px 0; }
+  .go-deeper-list li:first-child { border-top: none; }
+  .go-deeper-link {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-size: 13px;
+  }
+  .gd-arrow { color: var(--accent); flex: none; }
+  .gd-title { color: var(--ink); }
+  .go-deeper-link:hover .gd-title { text-decoration: underline; }
+  .gd-tag {
+    margin-left: auto;
+    flex: none;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink-3);
+    background: var(--surface-2);
+    border-radius: 999px;
+    padding: 1px 8px;
+  }
 
   .pt-tools { align-items: center; }
 </style>

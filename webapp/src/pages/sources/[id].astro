@@ -30,6 +30,14 @@ const sourceClaims = (claims.bySource || {})[s.id] || [];
 const idx = sources.findIndex((x) => x.id === s.id);
 const prevS = idx > 0 ? sources[idx - 1] : null;
 const nextS = idx < sources.length - 1 ? sources[idx + 1] : null;
+
+function reliabilityExcerpt(text, max = 180) {
+  if (!text) return "";
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max);
+  const at = cut.lastIndexOf(". ");
+  return (at > 80 ? cut.slice(0, at + 1) : cut.trimEnd()) + "…";
+}
 ---
 <Base title={`${s.id} — ${s.title}`} active="sources">
   <a href="/sources/" class="muted" style="font-size:14px">&larr; All sources</a>
@@ -40,23 +48,6 @@ const nextS = idx < sources.length - 1 ? sources[idx + 1] : null;
     </div>
     <h1>{s.title}</h1>
     <p class="card-sub">{s.author}{s.year ? ` · ${s.year}` : ""}{s.org ? ` · ${s.org}` : ""}</p>
-
-    {s.url && (
-      <p class="mt-1">
-        <a class="read-source" href={s.url} target="_blank" rel="noreferrer">
-          ↗ Read / watch the actual source
-        </a>
-      </p>
-    )}
-    {!s.url && (
-      <p class="mt-1 muted" style="font-size:13px">
-        No direct link available for this source. Use the title/author to find it.
-      </p>
-    )}
-
-    {s.exactLocation && (
-      <p class="mt-1 ev-src"><strong>Where to look:</strong> {s.exactLocation}</p>
-    )}
 
     {sourceClaims.length > 0 && (
       <>
@@ -70,6 +61,29 @@ const nextS = idx < sources.length - 1 ? sources[idx + 1] : null;
           ))}
         </ul>
       </>
+    )}
+
+    <h2>Using this source</h2>
+    {s.url ? (
+      <div class="using-source">
+        <a class="read-source" href={s.url} target="_blank" rel="noreferrer">
+          ↗ Read / watch the actual source
+        </a>
+        {s.exactLocation && (
+          <p class="mt-1 ev-src"><strong>Where to look:</strong> {s.exactLocation}</p>
+        )}
+      </div>
+    ) : (
+      <div class="using-source">
+        <p class="muted" style="font-size:13px">
+          No direct link available for this source. Use the title/author to find it.
+        </p>
+        {s.reliability && (
+          <p class="ev-src">
+            <strong>This is why the Academy keeps it at registry level:</strong> {reliabilityExcerpt(s.reliability)}
+          </p>
+        )}
+      </div>
     )}
 
     {s.reliability && (
