@@ -5,6 +5,7 @@ import { principles } from "../data/principles.json";
 import { cases } from "../data/cases.json";
 import { contradictions } from "../data/contradictions.json";
 import { sources } from "../data/sources.json";
+const b = (p) => (import.meta.env.BASE_URL || "/") + p.replace(/^\//, "");
 ---
 <Base title="Product Academy — Product management skills for AI agents" description="Evidence-backed product management skills for AI agents plus a guided, evidence-backed product leadership curriculum (Senior PM to CPO)." active="home">
   <section class="hero home-hero">
@@ -16,14 +17,14 @@ import { sources } from "../data/sources.json";
       Pick a journey, follow the sequence, mark progress as you go.
     </p>
     <div class="cta-row">
-      <a class="cta-primary" href="/paths/">Choose a journey</a>
-      <a class="cta-secondary" href="/principles/">Or start with doctrine</a>
+      <a class="cta-primary" href={b("/paths/")}>Choose a journey</a>
+      <a class="cta-secondary" href={b("/principles/")}>Or start with doctrine</a>
     </div>
   </section>
 
   <section class="hero skills-hero">
     <span class="eyebrow">New — for AI agents</span>
-    <h2><a href="/skills/">Product management skills for AI agents</a></h2>
+    <h2><a href={b("/skills/")}>Product management skills for AI agents</a></h2>
     <p class="lede">
       14 evidence-backed skills for Claude Code, Codex, Cursor, OpenCode, and ChatGPT —
       frame problems, synthesize discovery, prioritize, design experiments, and make
@@ -31,8 +32,8 @@ import { sources } from "../data/sources.json";
       <code>npx skills add Lucumax/product-academy</code>.
     </p>
     <div class="cta-row">
-      <a class="cta-primary" href="/skills/">Browse the skills</a>
-      <a class="cta-secondary" href="/skills/install/">Install</a>
+      <a class="cta-primary" href={b("/skills/")}>Browse the skills</a>
+      <a class="cta-secondary" href={b("/skills/install/")}>Install</a>
     </div>
   </section>
 

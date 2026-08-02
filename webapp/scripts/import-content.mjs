@@ -482,7 +482,7 @@ function parseSkillWorkflows() {
   const workflows = [];
   for (const f of fs.readdirSync(dir)) {
     if (!f.endsWith(".md")) continue;
-    const text = readText(path.join(dir, f));
+    const text = readText(path.join(dir, f)).replace(/\r\n/g, "\n"); // normalize CRLF (Windows checkouts)
     const titleMatch = text.match(/^# (.+)$/m);
     const decisionMatch = text.match(/^Decision: (.+)$/m);
     const entryMatch = text.match(/^## Entry conditions\n([\s\S]*?)(?=\n## )/m);
@@ -490,7 +490,7 @@ function parseSkillWorkflows() {
     workflows.push({
       id: f.replace(/\.md$/, ""),
       title: titleMatch ? titleMatch[1].trim() : f.replace(/\.md$/, ""),
-      decision: decisionMatch ? decisionMatch[1].trim() : "",
+      decision: decisionMatch ? decisionMatch[1].trim().replace(/\*\*/g, "") : "",
       entryConditions: entryMatch ? entryMatch[1].trim() : "",
       finalOutput: outputMatch ? outputMatch[1].trim() : "",
       body: text,

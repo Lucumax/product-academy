@@ -1,10 +1,10 @@
----
+﻿---
 import Base from "../../layouts/Base.astro";
 import { skills } from "../../data/skills.json";
 import { workflows } from "../../data/skillWorkflows.json";
 
 const jobs = [
-  { job: '"We should build X" — no problem statement', skill: "frame-product-problem", prompt: "Run the frame-product-problem skill. Input: we should build X for Y. Return the problem frame." },
+  { job: '"We should build X" â€” no problem statement', skill: "frame-product-problem", prompt: "Run the frame-product-problem skill. Input: we should build X for Y. Return the problem frame." },
   { job: "Interviews done, notes unsorted", skill: "synthesize-customer-discovery", prompt: "Run the synthesize-customer-discovery skill. Input: interview notes. Weight the themes." },
   { job: "More opportunities than capacity", skill: "prioritize-product-opportunities", prompt: "Run the prioritize-product-opportunities skill. Input: backlog and capacity. Rank it." },
   { job: '"We will see if it works"', skill: "design-product-experiment", prompt: "Run the design-product-experiment skill. Input: the change and the assumption. Return the experiment charter." },
@@ -14,7 +14,7 @@ const jobs = [
   { job: "Is this bet a thesis or a belief?", skill: "pressure-test-product-thesis", prompt: "Run the pressure-test-product-thesis skill. Input: the claim as stated." },
   { job: '"Our change caused the improvement"', skill: "conduct-causal-confidence-review", prompt: "Run the conduct-causal-confidence-review skill. Input: the claim D caused O." },
   { job: "AI feature: demos great, no evaluation", skill: "check-ai-evaluation-contract", prompt: "Run the check-ai-evaluation-contract skill. Input: the AI feature and its stage." },
-  { job: '"It is reversible" — verify', skill: "classify-decision-reversibility", prompt: "Run the classify-decision-reversibility skill. Input: the decision and its commitment." },
+  { job: '"It is reversible" â€” verify', skill: "classify-decision-reversibility", prompt: "Run the classify-decision-reversibility skill. Input: the decision and its commitment." },
   { job: "Before a Type-1 commitment", skill: "run-case-based-premortem", prompt: "Run the run-case-based-premortem skill. Input: the decision and its assumptions." },
   { job: "A decision is defended with the data", skill: "audit-decision-evidence", prompt: "Run the audit-decision-evidence skill. Input: the decision and its claims." },
   { job: "Two stakeholders see the same data differently", skill: "scan-contradictions-assumptions", prompt: "Run the scan-contradictions-assumptions skill. Input: the decision and both positions." },
@@ -22,9 +22,10 @@ const jobs = [
 
 const skillIndex = Object.fromEntries(skills.map((s) => [s.id, s]));
 const starter = ["frame-product-problem", "synthesize-customer-discovery", "prioritize-product-opportunities", "design-product-experiment", "align-stakeholders-on-decision", "assess-product-market-fit-health", "classify-decision-reversibility", "make-go-no-go-call"];
+const b = (p) => (import.meta.env.BASE_URL || "/") + p.replace(/^\//, "");
 ---
 <Base
-  title="Product Management Skills for AI Agents — Evidence-Backed Decisions"
+  title="Product Management Skills for AI Agents â€” Evidence-Backed Decisions"
   description="14 evidence-backed product management skills for Claude Code, Codex, Cursor, and OpenCode. Frame problems, synthesize discovery, prioritize, design experiments, and make defensible GO/NO-GO decisions."
   active="skills"
 >
@@ -32,7 +33,7 @@ const starter = ["frame-product-problem", "synthesize-customer-discovery", "prio
     <h1>Product Management Skills for AI Agents</h1>
     <p class="hero-sub">
       Evidence-backed product decisions, executable by Claude Code, Codex, Cursor, OpenCode,
-      and ChatGPT. Every skill returns a decision artifact with a next action — in fast mode
+      and ChatGPT. Every skill returns a decision artifact with a next action â€” in fast mode
       (reversible calls) or full mode (one-way doors).
     </p>
     <div class="install-bar">
@@ -47,7 +48,7 @@ const starter = ["frame-product-problem", "synthesize-customer-discovery", "prio
       {jobs.map((j) => {
         const s = skillIndex[j.skill];
         return (
-          <a class="job-card" href={`/skills/${j.skill}/`}>
+          <a class="job-card" href={b(`/skills/${j.skill}/`)}>
             <h3>{j.job}</h3>
             <p>{s?.description}</p>
             <code class="prompt">{j.prompt}</code>
@@ -71,14 +72,14 @@ const starter = ["frame-product-problem", "synthesize-customer-discovery", "prio
           causal-confidence assessment, and a premortem where required.</p>
       </div>
     </div>
-    <p class="muted">Rule of thumb: reversible → fast; irreversible → full. Every skill ships both.</p>
+    <p class="muted">Rule of thumb: reversible â†’ fast; irreversible â†’ full. Every skill ships both.</p>
   </section>
 
   <section id="all-skills">
     <h2>All 14 skills</h2>
     <div class="grid grid-3">
       {skills.map((s) => (
-        <a class="card skill-card" href={`/skills/${s.id}/`}>
+        <a class="card skill-card" href={b(`/skills/${s.id}/`)}>
           <span class="chip">{s.type}</span>
           <h3 class="mt-1" style="font-size:0.95rem">{s.name}</h3>
           <p class="muted" style="font-size:0.85rem">{s.description}</p>
@@ -91,7 +92,7 @@ const starter = ["frame-product-problem", "synthesize-customer-discovery", "prio
     <h2>End-to-end workflows</h2>
     <div class="grid grid-2">
       {workflows.map((w) => (
-        <a class="card" href={`/skills/workflows/${w.id}/`}>
+        <a class="card" href={b(`/skills/workflows/${w.id}/`)}>
           <h3 class="mt-1">{w.title}</h3>
           {w.decision ? <p class="muted" style="font-size:0.9rem">{w.decision}</p> : null}
         </a>
@@ -104,12 +105,18 @@ const starter = ["frame-product-problem", "synthesize-customer-discovery", "prio
     <div class="card">
       <p><em>Scenario:</em> "We should build an AI triage assistant. Sales loves it."</p>
       <p>Without the skills: three meetings arguing about the feature. With
-        <a href="/skills/pressure-test-product-thesis/"><code>pressure-test-product-thesis</code></a>
-        and <a href="/skills/check-ai-evaluation-contract/"><code>check-ai-evaluation-contract</code></a>:
+        <a href={b("/skills/pressure-test-product-thesis/")}><code>pressure-test-product-thesis</code></a>
+        and <a href={b("/skills/check-ai-evaluation-contract/")}><code>check-ai-evaluation-contract</code></a>:
         a <code>BELIEF-PRESENTED-AS-THESIS</code> verdict (no falsification condition, demo-only
         evidence) and a <code>NO-CONTRACT</code> verdict. <strong>Next action:</strong> write the
         falsification test and the evaluation contract before any build spend.</p>
     </div>
+    <p class="muted">Three run-it-yourself demonstrations (discovery synthesis, experiment
+      design, GO/NO-GO) are in the repository:
+      <a href="https://github.com/Lucumax/product-academy/blob/main/docs/growth/demos/01-discovery-synthesis.md">demo 1</a> ·
+      <a href="https://github.com/Lucumax/product-academy/blob/main/docs/growth/demos/02-experiment-design.md">demo 2</a> ·
+      <a href="https://github.com/Lucumax/product-academy/blob/main/docs/growth/demos/03-go-no-go-decision.md">demo 3</a>.
+    </p>
   </section>
 
   <section id="install">
@@ -120,7 +127,7 @@ const starter = ["frame-product-problem", "synthesize-customer-discovery", "prio
       <li><strong>ZIP:</strong> download <a href="https://github.com/Lucumax/product-academy/releases/latest">product-academy-skills-all.zip</a> (14 skills) or the <strong>8-skill starter pack</strong></li>
       <li><strong>Codex / Cursor:</strong> unzip the ZIP into <code>.agents/skills/</code> or <code>.cursor/skills/</code></li>
     </ul>
-    <p class="muted">Install statuses are verified in the <a href="/skills/install/">installation matrix</a>.</p>
+    <p class="muted">Install statuses are verified in the <a href={b("/skills/install/")}>installation matrix</a>.</p>
   </section>
 </Base>
 

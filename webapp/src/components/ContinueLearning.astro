@@ -6,6 +6,7 @@ interface Props {
   compact?: boolean;
 }
 const { compact = false } = Astro.props;
+const b = (p) => (import.meta.env.BASE_URL || "/") + p.replace(/^\//, "");
 ---
 <div id="continue-learning" class:list={["continue-learning", { compact }]} hidden>
   <div class="cl-inner">
@@ -14,7 +15,7 @@ const { compact = false } = Astro.props;
       <span class="cl-kicker">Continue learning</span>
       <span id="cl-title" class="cl-title">Loading…</span>
     </div>
-    <a id="cl-link" class="cl-cta" href="/paths/">Resume →</a>
+    <a id="cl-link" class="cl-cta" href={b("/paths/")}>Resume →</a>
   </div>
 </div>
 
@@ -87,6 +88,7 @@ const { compact = false } = Astro.props;
   function hydrate() {
     const el = document.getElementById("continue-learning");
     if (!el) return;
+    const base = (import.meta.env.BASE_URL || "").replace(/\/$/, "");
     try {
       const raw = localStorage.getItem("pa-progress-v1");
       const state = raw ? JSON.parse(raw) : {};
@@ -95,12 +97,13 @@ const { compact = false } = Astro.props;
         // Default: point to the senior PM path start.
         el.hidden = false;
         document.getElementById("cl-title").textContent = "Start with the Senior PM path";
-        document.getElementById("cl-link").href = "/paths/senior-pm-path/";
+        document.getElementById("cl-link").href = base + "/paths/senior-pm-path/";
         return;
       }
       el.hidden = false;
       document.getElementById("cl-title").textContent = stepLabel(cur);
-      document.getElementById("cl-link").href = cur.url || "/paths/";
+      const url = cur.url || "/paths/";
+      document.getElementById("cl-link").href = url.startsWith("/") ? base + url : url;
     } catch {
       el.hidden = true;
     }

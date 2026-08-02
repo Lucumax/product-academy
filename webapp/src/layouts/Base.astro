@@ -8,10 +8,11 @@ interface Props {
   ogImage?: string;
 }
 const { title = "Product Academy", description = "", active = "", noindex = false } = Astro.props;
-const site = "https://lucumax.github.io/product-academy";
-const path = Astro.url.pathname.endsWith("/") ? Astro.url.pathname : `${Astro.url.pathname}/`;
-const canonical = `${site}${path}`;
-const ogImage = Astro.props.ogImage ?? `${site}/og-skills.png`;
+const origin = "https://lucumax.github.io";
+const base = Astro.base || "/";
+const canonical = new URL(Astro.url.pathname, origin).href;
+const b = (path) => base + path.replace(/^\//, "");
+const ogImage = Astro.props.ogImage ?? `${origin}${base}og-skills.png`;
 const ogTitle = title.includes("Product Academy") ? title : `${title} | Product Academy`;
 const nav = [
   { href: "/", label: "Start", id: "home" },
@@ -36,7 +37,7 @@ import ContinueLearning from "../components/ContinueLearning.astro";
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex ? <meta name="robots" content="noindex" /> : null}
-    <link rel="icon" type="image/svg+xml" href={`${site}/favicon.svg`} />
+    <link rel="icon" type="image/svg+xml" href={`${origin}${base}favicon.svg`} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Product Academy" />
     <meta property="og:title" content={ogTitle} />
@@ -57,14 +58,14 @@ import ContinueLearning from "../components/ContinueLearning.astro";
   <body>
     <header class="site-header">
       <div class="header-inner">
-        <a class="brand" href="/">
+        <a class="brand" href={b("/")}>
           <span class="brand-mark">PA</span>
           <span class="brand-name">Product Academy</span>
         </a>
         <nav class="main-nav" aria-label="Primary">
           {nav.map((item) => (
             <a
-              href={item.href}
+              href={b(item.href)}
               class:list={["nav-link", { active: active === item.id }]}
             >{item.label}</a>
           ))}
@@ -79,7 +80,7 @@ import ContinueLearning from "../components/ContinueLearning.astro";
       <div class="footer-inner">
         <p>
           Product Academy — an evidence-backed product leadership curriculum with
-          <a href="/skills/"> product management skills for AI agents</a>.
+          <a href={b("/skills/")}> product management skills for AI agents</a>.
           Content from the Product Leadership Academy.
         </p>
         <p class="footer-notes">

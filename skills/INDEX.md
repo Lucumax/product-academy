@@ -43,19 +43,20 @@ The full job→skill→workflow map lives in [PORTFOLIO_MAP.md](PORTFOLIO_MAP.md
 
 ## Install
 
+- **Any agent (native CLI, verified):** `npx skills add Lucumax/product-academy` — lists the 14 skills and installs your selection
 - **Claude Code:** `/plugin marketplace add Lucumax/product-academy` then `/plugin install evidence-pack`
 - **Claude.ai / Desktop:** download a ZIP and upload it
 - **Codex / Cursor:** download a ZIP and drop it in `.agents/skills/` (Codex) or
   `.cursor/skills/` (Cursor); see the `INSTALL.md` in each ZIP
-- **Generic agents (OpenCode, etc.):** drop the skill folders in your agent's skills
-  directory, or point it at `skills/` in this repo
 
 ZIP bundles (starter / all) are attached to GitHub Releases on this repo. Each skill is
 self-contained (`SKILL.md` + `references/`); the shared contract
 ([`_shared/SKILL_CONTRACT.md`](_shared/SKILL_CONTRACT.md)) defines the evidence taxonomy and
 output format all skills use.
 
-## The skills (15, including 5 added this cycle)
+## The 14 active skills
+
+Active skills (the deprecated `run-source-tier-check` routing stub is listed separately below):
 
 | Skill | Type | What it returns |
 |---|---|---|

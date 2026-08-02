@@ -19,17 +19,24 @@ const relatedIds = (s.relatedSkills || "")
   .filter((x) => x && skills.some((o) => o.id === x));
 const related = relatedIds.map((id) => skills.find((o) => o.id === id)).filter(Boolean);
 
-const title = s.name.replace(/-/g, " ");
-const desc = s.description.split(".")[0].slice(0, 155) || s.description.slice(0, 155);
+function displayName(id) {
+  return id.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+}
+function clip(s, n) {
+  return s.length > n ? s.slice(0, n).trim() + "…" : s;
+}
+const title = displayName(s.name);
+const desc = clip(s.description, 158);
+const b = (p) => (import.meta.env.BASE_URL || "/") + p.replace(/^\//, "");
 ---
 <Base
   title={`${title} — AI skill for product managers`}
   description={desc}
   active="skills"
 >
-  <a href="/skills/" class="muted" style="font-size:14px">&larr; Skills index</a>
+  <a href={b("/skills/")} class="muted" style="font-size:14px">&larr; Skills index</a>
   <nav class="crumbs" aria-label="Breadcrumb">
-    <a href="/">Home</a> › <a href="/skills/">Skills</a> › <span>{title}</span>
+    <a href={b("/")}>Home</a> › <a href={b("/skills/")}>Skills</a> › <span>{title}</span>
   </nav>
   <article class="doc-page">
     <div class="flex-between mb-2">
@@ -63,7 +70,7 @@ const desc = s.description.split(".")[0].slice(0, 155) || s.description.slice(0,
       <h2>Related skills</h2>
       <div class="grid grid-3">
         {related.slice(0, 6).map((r) => (
-          <a class="card" href={`/skills/${r.id}/`}>
+          <a class="card" href={b(`/skills/${r.id}/`)}>
             <h3 class="mt-1" style="font-size:0.9rem">{r.name.replace(/-/g, " ")}</h3>
           </a>
         ))}
@@ -72,8 +79,8 @@ const desc = s.description.split(".")[0].slice(0, 155) || s.description.slice(0,
   )}
 
   <nav class="pager" aria-label="Pagination">
-    {prevS ? <a href={`/skills/${prevS.id}/`}>&larr; {prevS.name.replace(/-/g, " ")}</a> : <span />}
-    {nextS ? <a href={`/skills/${nextS.id}/`}>{nextS.name.replace(/-/g, " ")} &rarr;</a> : <span />}
+    {prevS ? <a href={b(`/skills/${prevS.id}/`)}>&larr; {prevS.name.replace(/-/g, " ")}</a> : <span />}
+    {nextS ? <a href={b(`/skills/${nextS.id}/`)}>{nextS.name.replace(/-/g, " ")} &rarr;</a> : <span />}
   </nav>
 </Base>
 

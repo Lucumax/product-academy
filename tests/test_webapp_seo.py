@@ -80,6 +80,18 @@ class TestConfigAndMetadata:
         ]:
             assert token in base, f"Base.astro missing {token}"
 
+    def test_canonical_does_not_double_the_base(self, webapp_root):
+        """Canonical must be origin + pathname (pathname already includes /product-academy/)."""
+        base = (webapp_root / "src" / "layouts" / "Base.astro").read_text(encoding="utf-8")
+        assert "new URL(Astro.url.pathname, origin).href" in base, "canonical must use origin, not site+base"
+
+    def test_nav_is_base_prefixed(self, webapp_root):
+        """Internal nav must be prefixed with the Astro base so it works under the Pages subpath."""
+        base = (webapp_root / "src" / "layouts" / "Base.astro").read_text(encoding="utf-8")
+        assert "const base = Astro.base || \"/\";" in base
+        assert "const b = (path) => base + path.replace(/^\\//, \"\");" in base
+        assert "href={b(item.href)}" in base, "nav links must be base-prefixed"
+
     def test_no_noindex_by_default(self, webapp_root):
         base = (webapp_root / "src" / "layouts" / "Base.astro").read_text(encoding="utf-8")
         # noindex is opt-in via prop, not default
@@ -119,6 +131,9 @@ class TestImportPipeline:
             assert s["id"] in active
             assert s["purpose"], f"{s['id']} missing purpose"
             assert s["verdict"], f"{s['id']} missing verdict"
+        for w in wf["workflows"]:
+            assert w["entryConditions"], f"workflow {w['id']} missing entry conditions"
+            assert w["finalOutput"], f"workflow {w['id']} missing final output"
 
     def test_skill_pages_cover_all_imported_skills(self, webapp_root):
         data = json.loads((webapp_root / "src" / "data" / "skills.json").read_text(encoding="utf-8"))

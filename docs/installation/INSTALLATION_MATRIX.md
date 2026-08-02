@@ -45,10 +45,9 @@ skills.sh page exists and the description is accurate.
 
 ## Known limitations
 
-- The deprecated `run-source-tier-check` routing stub is listed by the `skills` CLI (its
-  frontmatter name/description are valid, and the CLI's full-depth listing path does not honor
-  `metadata.internal`). Its description explicitly begins "DEPRECATED… merged into
-  `audit-decision-evidence`", so an installer is immediately routed. The skill template was
-  renamed to `_template/SKILL.template.md` so the CLI no longer lists a placeholder skill.
-- `metadata.internal: true` is set on the template and deprecated stub; it is honored at
-  install time but not by the CLI's `--list` full-depth path (upstream behavior).
+- The `skills` CLI lists **14 skills** on the hardened tree (the template was renamed to
+  `_template/SKILL.template.md` and the deprecated `run-source-tier-check` stub carries
+  `deprecated: true`, which the CLI excludes). Until this branch is merged, remote `main`
+  still lists 16 (template + deprecated stub) — re-test after merge.
+- `metadata.internal: true` is set on the template and deprecated stub as an additional
+  guard; it is honored at install time by the skills CLI.

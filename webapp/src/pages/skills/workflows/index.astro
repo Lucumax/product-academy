@@ -1,20 +1,25 @@
 ---
 import Base from "../../../layouts/Base.astro";
 import { workflows } from "../../../data/skillWorkflows.json";
+
+function displayName(id) {
+  return id.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+}
+const b = (p) => (import.meta.env.BASE_URL || "/") + p.replace(/^\//, "");
 ---
 <Base
   title="Product decision workflows for AI agents"
   description="End-to-end composable workflows for product bets, experiment decisions, launch gates, and product health reviews — built from the Product Academy skill pack."
   active="skills"
 >
-  <a href="/skills/" class="muted" style="font-size:14px">&larr; Skills index</a>
+  <a href={b("/skills/")} class="muted" style="font-size:14px">&larr; Skills index</a>
   <h1>Workflows</h1>
   <p class="muted">End-to-end paths that compose the skills into a decision. Each workflow has
     entry conditions, a skill chain, fast and full variants, and a final decision artifact.</p>
   <div class="grid grid-2">
     {workflows.map((w) => (
-      <a class="card" href={`/skills/workflows/${w.id}/`}>
-        <h3 class="mt-1">{w.title}</h3>
+      <a class="card" href={b(`/skills/workflows/${w.id}/`)}>
+        <h3 class="mt-1">{displayName(w.id)}</h3>
         {w.decision ? <p class="muted" style="font-size:0.9rem">{w.decision}</p> : null}
       </a>
     ))}

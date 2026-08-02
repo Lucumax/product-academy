@@ -1,12 +1,13 @@
 ---
 import Base from "../../layouts/Base.astro";
+const b = (p) => (import.meta.env.BASE_URL || "/") + p.replace(/^\//, "");
 ---
 <Base
   title="Install the Product Management Skills for AI Agents"
   description="Install the Product Academy skill pack with npx skills add, the Claude Code marketplace, or the release ZIP for Codex, Cursor, OpenCode, and ChatGPT."
   active="skills"
 >
-  <a href="/skills/" class="muted" style="font-size:14px">&larr; Skills index</a>
+  <a href={b("/skills/")} class="muted" style="font-size:14px">&larr; Skills index</a>
   <h1>Install the skills</h1>
 
   <section>

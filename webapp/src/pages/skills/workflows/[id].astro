@@ -1,27 +1,39 @@
 ---
 import Base from "../../../layouts/Base.astro";
+import Markdown from "../../components/Markdown.astro";
+import { skills } from "../../data/skills.json";
 import { workflows } from "../../../data/skillWorkflows.json";
+
+function displayName(id) {
+  return id.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+}
 
 export async function getStaticPaths() {
   return workflows.map((w) => ({ params: { id: w.id }, props: { w } }));
 }
 
 const { w } = Astro.props;
-const title = w.title;
-const desc = w.decision || w.entryConditions.split("\n")[0].slice(0, 150) || "End-to-end product decision workflow for AI agents.";
+const title = displayName(w.id);
+const desc = w.decision
+  ? clip(w.decision.replace(/\*\*/g, ""), 158)
+  : clip(w.entryConditions, 158);
+function clip(s, n) {
+  return s.length > n ? s.slice(0, n).trim() + "…" : s;
+}
+const b = (p) => (import.meta.env.BASE_URL || "/") + p.replace(/^\//, "");
 ---
 <Base
-  title={`${title} — workflow for AI product managers`}
+  title={`${title} — product decision workflow for AI agents`}
   description={desc}
   active="skills"
 >
-  <a href="/skills/" class="muted" style="font-size:14px">&larr; Skills index</a>
+  <a href={b("/skills/")} class="muted" style="font-size:14px">&larr; Skills index</a>
   <nav class="crumbs" aria-label="Breadcrumb">
-    <a href="/">Home</a> › <a href="/skills/">Skills</a> › <a href="/skills/workflows/">Workflows</a> › <span>{title}</span>
+    <a href={b("/")}>Home</a> › <a href={b("/skills/")}>Skills</a> › <a href={b("/skills/workflows/")}>Workflows</a> › <span>{title}</span>
   </nav>
   <article class="doc-page">
     <h1>{title}</h1>
-    {w.decision ? <div class="claim-block">{w.decision}</div> : null}
+    {w.decision ? <div class="claim-block">{w.decision.replace(/\*\*/g, "")}</div> : null}
     <h2>Entry conditions</h2>
     <div class="pre-wrap">{w.entryConditions}</div>
     <h2>Skill chain</h2>
@@ -30,7 +42,7 @@ const desc = w.decision || w.entryConditions.split("\n")[0].slice(0, 150) || "En
         .map((line) => line.match(/`([a-z0-9-]+)`/)[1]);
       return (
         <ol class="chain">
-          {chain.map((id) => <li><a href={`/skills/${id}/`}>{id.replace(/-/g, " ")}</a></li>)}
+          {chain.map((id) => <li><a href={b(`/skills/${id}/`)}>{displayName(id)}</a></li>)}
         </ol>
       );
     })()}
@@ -38,7 +50,7 @@ const desc = w.decision || w.entryConditions.split("\n")[0].slice(0, 150) || "En
     <div class="pre-wrap">{w.finalOutput}</div>
   </article>
   <p class="muted" style="font-size:13px">
-    <a href="/skills/workflows/">All workflows</a> · full workflow file lives at <code>skills/workflows/{w.id}.md</code>
+    <a href={b("/skills/workflows/")}>All workflows</a> · full workflow file lives at <code>skills/workflows/{w.id}.md</code>
   </p>
 </Base>
 

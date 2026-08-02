@@ -47,6 +47,15 @@ Scenario: *"We should build an AI triage assistant. Sales loves it."*
 
 A verdict and a next action — not a memo.
 
+## Try it yourself (three public demos)
+
+Run these with your own agent — each shows the raw scenario, the ordinary response shape,
+the skill invocation, the artifact, and the honest limitations:
+
+1. [Customer-discovery synthesis](docs/growth/demos/01-discovery-synthesis.md) — interview enthusiasm vs usage behavior
+2. [Product experiment design](docs/growth/demos/02-experiment-design.md) — pre-committed stop rules before results
+3. [High-stakes GO/NO-GO decision](docs/growth/demos/03-go-no-go-decision.md) — launch pressure vs missing reliability evidence
+
 ## What makes these different
 
 - **Internal evidence is first-class.** The shared [evidence taxonomy](skills/_shared/SKILL_CONTRACT.md) ranks a 90-day retention cohort for *your* product above a best-selling book for claims about your users. Published research never auto-outranks your own experiments, cohorts, analytics, interviews, support, and win/loss data.
@@ -56,7 +65,12 @@ A verdict and a next action — not a memo.
 
 ## What's inside
 
-- **14 skills** (10 hardened + 5 added in the latest release) covering high-frequency PM work *and* evidence/judgment: problem framing, discovery synthesis, prioritization, experiment design, stakeholder alignment, PMF health, evidence audit, causal review, GO/NO-GO, reversibility classification, premortem, thesis pressure-test, AI evaluation contract.
+- **14 active skills** (9 hardened from the original pack + 5 new high-frequency skills in
+  the latest release; the former `run-source-tier-check` was merged into the evidence audit)
+  covering high-frequency PM work *and* evidence/judgment: problem framing, discovery
+  synthesis, prioritization, experiment design, stakeholder alignment, PMF health, evidence
+  audit, causal review, GO/NO-GO, reversibility classification, premortem, thesis
+  pressure-test, AI evaluation contract.
 - **4 workflows:** [Product Bet](skills/workflows/product-bet.md), [Experiment Decision](skills/workflows/experiment-decision.md), [Launch Gate](skills/workflows/launch-gate.md), [Product Health Review](skills/workflows/product-health-review.md).
 - **Shared contract** `skills/_shared/SKILL_CONTRACT.md` — the evidence taxonomy + output schema every skill uses.
 - **Independent validation** — 12 eval scenarios, a rubric, an adversarial review, and a portfolio audit in `skills/evals/` and `skills/quality/`. Read the [evaluation report](skills/evals/EVALUATION_REPORT.md); it reports weaknesses, not just wins.
