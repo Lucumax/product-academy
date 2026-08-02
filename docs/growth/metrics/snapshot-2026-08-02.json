@@ -1,0 +1,54 @@
+{
+  "snapshot_date": "2026-08-02",
+  "repository": {
+    "full_name": "Lucumax/product-academy",
+    "description": "Evidence-backed product leadership curriculum (Senior PM \u2192 CPO) with a guided web app. Doctrine, cases, contradictions, a 180-source evidence registry, an interactive simulator, and role-based learning journeys.",
+    "homepage": "https://lucumax.github.io/product-academy/",
+    "topics": [],
+    "stars": 0,
+    "forks": 0,
+    "watchers": 0,
+    "open_issues": 0,
+    "open_pulls": 0,
+    "default_branch": "main"
+  },
+  "releases": [
+    {
+      "tag": "skills-v0.2.0",
+      "published_at": "2026-08-02T22:14:51Z",
+      "assets": [
+        {
+          "name": "INSTALL.md",
+          "download_count": 0
+        },
+        {
+          "name": "product-academy-skills-all.zip",
+          "download_count": 1
+        },
+        {
+          "name": "product-academy-skills-core.zip",
+          "download_count": 0
+        }
+      ]
+    },
+    {
+      "tag": "skills-v0.1.0",
+      "published_at": "2026-08-02T19:51:03Z",
+      "assets": [
+        {
+          "name": "INSTALL.md",
+          "download_count": 0
+        },
+        {
+          "name": "product-academy-skills-all.zip",
+          "download_count": 0
+        },
+        {
+          "name": "product-academy-skills-core.zip",
+          "download_count": 0
+        }
+      ]
+    }
+  ],
+  "note": "Public metrics only. No fabricated values. stars/forks/open issues reflect the snapshot date."
+}

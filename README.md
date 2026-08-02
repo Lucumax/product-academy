@@ -1,29 +1,87 @@
-# Product Leadership Academy
+# Product Management Skills for AI Agents
 
-An evidence-backed education system for product leaders from Senior PM through CPO — **with a web app** for guided learning.
+**Evidence-backed product management skills for Claude Code, Codex, Cursor, OpenCode, and ChatGPT — frame problems, synthesize discovery, prioritize, design experiments, align stakeholders, and make defensible GO/NO-GO decisions.**
 
-This is a monorepo. The **content** (doctrine, cases, sources, curriculum) lives at the root. The **web app** — a guided learning journey with progress tracking, an interactive simulator, and full-text search — lives in [`webapp/`](webapp/).
+Every skill returns a **decision artifact** — a problem frame, a weighted discovery synthesis, a ranked backlog, an experiment charter, a stakeholder map, a GO/NO-GO verdict — with a next action, not a generic memo. Each skill runs in **fast mode** (reversible decisions) or **full mode** (one-way doors).
 
-## Agent Skills (AI decision pack)
+```
+Reversible decision  → fast mode  → verdict + next action in minutes
+Irreversible decision → full mode → evidence audit + premortem + thresholds
+```
 
-Evidence-backed product management **skills for AI agents** — frame product problems,
-synthesize customer discovery, prioritize opportunities, design experiments, align
-stakeholders, and make defensible product decisions (GO/NO-GO, PMF health, AI evaluation
-contracts, causal review, premortem). Every skill returns a verdict or decision artifact with
-a next action, in fast mode (reversible calls) or full mode (one-way doors).
+## Install
 
-- **Install:** Claude Code `/plugin marketplace add Lucumax/product-academy` → `/plugin install evidence-pack`; or download a release ZIP for Claude.ai, Codex, Cursor, and generic agents.
-- **Find your skill:** [`skills/INDEX.md`](skills/INDEX.md) (finder by PM job + copy-paste invocations)
-- **Workflows:** [`skills/workflows/`](skills/workflows/) (product bet, experiment decision, launch gate, product health review)
+| I use… | Get this |
+|---|---|
+| **Any agent (native CLI)** | `npx skills add Lucumax/product-academy` — then pick skills (verified) |
+| **Claude Code** | `/plugin marketplace add Lucumax/product-academy` → `/plugin install evidence-pack` |
+| **Claude.ai / Desktop** | download [`product-academy-skills-all.zip`](https://github.com/Lucumax/product-academy/releases/latest) and upload it |
+| **Codex** | unzip [`product-academy-skills-all.zip`](https://github.com/Lucumax/product-academy/releases/latest) into `.agents/skills/` |
+| **Cursor** | unzip into `.cursor/skills/` |
+| **OpenCode / other agents** | point your agent at `skills/` in this repo, or the ZIP |
+| **Not sure** | start with the [8-skill starter pack](https://github.com/Lucumax/product-academy/releases/latest) + [START_HERE.md](START_HERE.md) |
 
-> The hardened 14-skill portfolio is merged into `main` and shipped as release
-> `skills-v0.2.0` (supersedes the pre-hardening ten-skill `skills-v0.1.0`).
+Full install matrix with statuses: [`docs/installation/INSTALLATION_MATRIX.md`](docs/installation/INSTALLATION_MATRIX.md).
+Install guides: [Claude Code](docs/installation/INSTALL-CLAUDE-CODE.md) · [Codex](docs/installation/INSTALL-CODEX.md) · [Cursor](docs/installation/INSTALL-CURSOR.md) · [Claude.ai/Desktop](docs/installation/INSTALL-CLAUDE-DESKTOP.md) · [ChatGPT](docs/installation/INSTALL-CHATGPT.md)
 
-## Quick Start
+## Start with the job you have
 
-**Read the content** — start with [00_orientation/](00_orientation/), the [Curriculum Map](CURRICULUM_MAP.md), and [Core Doctrine](01_core_doctrine/PRINCIPLES.md).
+- **"We should build X"** — [frame-product-problem](skills/frame-product-problem/SKILL.md) → a one-page problem frame (user problem, segment, business outcome, solution, assumptions)
+- **Interviews done, notes unsorted** — [synthesize-customer-discovery](skills/synthesize-customer-discovery/SKILL.md) → weighted themes (repeated observation vs loud anecdote)
+- **More opportunities than capacity** — [prioritize-product-opportunities](skills/prioritize-product-opportunities/SKILL.md) → a ranked backlog with exposed uncertainty
+- **"We'll see if it works"** — [design-product-experiment](skills/design-product-experiment/SKILL.md) → an experiment charter with pre-committed stop rules
+- **Sales / Product / Engineering stuck** — [align-stakeholders-on-decision](skills/align-stakeholders-on-decision/SKILL.md) → facts vs goals vs incentives vs risk vs decision rights
+- **Is PMF healthy or decaying?** — [assess-product-market-fit-health](skills/assess-product-market-fit-health/SKILL.md) → archetype-adaptive health verdict
+- **The actual call: fund, ship, or kill** — [make-go-no-go-call](skills/make-go-no-go-call/SKILL.md) → GO / NO-GO / PAUSE / SEEK-MORE-EVIDENCE / PROCEED-AT-RISK
 
-**Run the web app:**
+All 14 skills + the [skill finder](skills/INDEX.md) and 4 end-to-end [workflows](skills/workflows/) are in `skills/`.
+
+## One worked example
+
+Scenario: *"We should build an AI triage assistant. Sales loves it."*
+
+| Without the skill | With `pressure-test-product-thesis` + `check-ai-evaluation-contract` |
+|---|---|
+| Three meetings arguing about the feature | `BELIEF-PRESENTED-AS-THESIS` (no falsification condition, demo-only evidence) + `NO-CONTRACT` (no evaluation contract) |
+| A roadmap commitment based on enthusiasm | **Next action:** write the falsification test and the evaluation contract before any build spend |
+
+A verdict and a next action — not a memo.
+
+## What makes these different
+
+- **Internal evidence is first-class.** The shared [evidence taxonomy](skills/_shared/SKILL_CONTRACT.md) ranks a 90-day retention cohort for *your* product above a best-selling book for claims about your users. Published research never auto-outranks your own experiments, cohorts, analytics, interviews, support, and win/loss data.
+- **Evidence ≠ assumption ≠ inference.** Every skill separates them, records "unknown" as an explicit assumption, and names the evidence that would change the verdict.
+- **Fast and full modes.** Proportionate process: minimal ceremony for reversible calls, full evidence audit + premortem for one-way doors.
+- **Real decision artifacts.** Outputs follow a JSON-shaped contract with verdict, confidence, assumptions, what-would-change-it, and a next action.
+
+## What's inside
+
+- **14 skills** (10 hardened + 5 added in the latest release) covering high-frequency PM work *and* evidence/judgment: problem framing, discovery synthesis, prioritization, experiment design, stakeholder alignment, PMF health, evidence audit, causal review, GO/NO-GO, reversibility classification, premortem, thesis pressure-test, AI evaluation contract.
+- **4 workflows:** [Product Bet](skills/workflows/product-bet.md), [Experiment Decision](skills/workflows/experiment-decision.md), [Launch Gate](skills/workflows/launch-gate.md), [Product Health Review](skills/workflows/product-health-review.md).
+- **Shared contract** `skills/_shared/SKILL_CONTRACT.md` — the evidence taxonomy + output schema every skill uses.
+- **Independent validation** — 12 eval scenarios, a rubric, an adversarial review, and a portfolio audit in `skills/evals/` and `skills/quality/`. Read the [evaluation report](skills/evals/EVALUATION_REPORT.md); it reports weaknesses, not just wins.
+
+## The Academy behind it
+
+This is the execution layer of the **Product Leadership Academy** — an evidence-backed product leadership curriculum (Senior PM → CPO) with doctrine, cases, contradictions, a 184-source evidence registry, an interactive simulator, and role-based learning paths. The skills turn the Academy's evidence and judgment layer into decisions you can run with an agent today. The curriculum remains in this monorepo (see the [structure table](#repository-structure) below) and in the [web app](https://lucumax.github.io/product-academy/).
+
+## Start here
+
+→ **[START_HERE.md](START_HERE.md)** — 60-second onboarding, copy-paste prompts for seven PM jobs, and the fast/full rule.
+
+---
+
+## Repository structure
+
+| Area | Purpose |
+|------|---------|
+| `skills/` | The agent-skill pack (14 skills + workflows + shared contract) |
+| `00_orientation/` … `13_career_transitions/` | Academy curriculum |
+| `sources/`, `evidence/` | Evidence registry and processed evidence |
+| `webapp/` | The Astro web app (guided journey, simulator, search) |
+| `docs/growth/` | Discoverability audit, positioning, launch and measurement plans |
+
+## Quick Start (web app)
 
 ```bash
 cd webapp
@@ -32,41 +90,21 @@ npm run build      # imports content + builds static site + indexes search
 npm run preview    # serve locally, or deploy dist/ anywhere static
 ```
 
-The webapp reads content directly from this repo (monorepo layout) — no separate source to wire up.
-
-## Structure
-
-| Area | Purpose |
-|------|---------|
-| `00_orientation/` | Getting started and capability model |
-| `01_core_doctrine/` | Canonical product leadership principles |
-| `02_principal_plus/` | Principal PM and above capabilities |
-| `03_business_and_gtm/` | Business economics and go-to-market |
-| `04_product_archetypes/` | 13 product archetype patterns |
-| `05_ai_product_management/` | AI product management |
-| `06_industry_overlays/` | Industry-specific constraints |
-| `07_cases/` | Decision case studies |
-| `08_contradictions/` | Unresolved product leadership tensions |
-| `09_tools/` | Practical templates and frameworks |
-| `10_simulator/` | Practice scenarios |
-| `11_learning_paths/` | Role-based learning paths |
-| `12_personal_lab/` | Self-directed practice |
-| `13_career_transitions/` | Landing product roles, credibility building, emerging roles |
-| `webapp/` | The Astro web app (guided journey, simulator, search) |
-| `handbook/`, `docs/` | Generated handbooks and integration docs |
-| `sources/` | The evidence registry (184 sources, ranked by tier) |
-| `evidence/final/` | Processed evidence artifacts (claims ledger, corroboration matrix) |
-
 ## Validation
 
 ```bash
-python scripts/validate_academy.py   # 658 quality-gate checks
-python -m pytest -q                  # 57 tests
+python scripts/validate_academy.py   # 660 quality-gate checks
+python scripts/validate_skills.py    # skill-pack contract checks
+python -m pytest -q                  # 84 tests
 ```
+
+## Contributing
+
+Found a gap? A broken install? A framework worth formalizing? See [CONTRIBUTING.md](CONTRIBUTING.md) and the [issue templates](.github/ISSUE_TEMPLATE/). We want contributors and advocates, not spectators.
 
 ## License
 
-The Academy's original content is licensed under [CC BY 4.0](LICENSE). See [COPYRIGHT_AND_ACCESS_POLICY.md](COPYRIGHT_AND_ACCESS_POLICY.md) for how third-party source material is handled.
+Original content is [CC BY 4.0](LICENSE). Skills cite Academy doctrine by stable ID and never reproduce third-party content. See [COPYRIGHT_AND_ACCESS_POLICY.md](COPYRIGHT_AND_ACCESS_POLICY.md).
 
 ## Scope
 

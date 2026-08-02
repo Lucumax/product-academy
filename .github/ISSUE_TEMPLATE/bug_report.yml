@@ -1,0 +1,31 @@
+name: Bug report
+description: Report a broken skill, broken install, or broken documentation
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for reporting. Be precise — a reproducible report is the fastest fix.
+  - type: input
+    id: area
+    attributes:
+      label: What broke?
+      description: A skill, an install path, the website, the docs, the validator?
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Exact command or prompt, platform (Claude Code / Codex / Cursor / OpenCode / web), and what happened vs what you expected.
+      render: bash
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Release or branch
+      description: e.g. skills-v0.2.0, main
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Any output, error message, or behavior. Do not include secrets.

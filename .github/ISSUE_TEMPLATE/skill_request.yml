@@ -1,0 +1,34 @@
+name: Skill request
+description: Propose a missing product-management job for the skill pack
+title: "[Skill]: "
+labels: [skill-request]
+body:
+  - type: markdown
+    attributes:
+      value: We add skills for PM *jobs*, not frameworks. Describe the job and the artifact you need.
+  - type: textarea
+    id: job
+    attributes:
+      label: The PM job
+      description: What are you trying to get done, in one sentence? (e.g. "turn a quarter of interview notes into a weighted readout".)
+    validations:
+      required: true
+  - type: textarea
+    id: artifact
+    attributes:
+      label: Expected artifact
+      description: What concrete output should the skill return? (e.g. "a ranked theme table with repeated-vs-anecdote labels".)
+    validations:
+      required: true
+  - type: textarea
+    id: situation
+    attributes:
+      label: When you hit this
+      description: Trigger situations — how often, at what seniority, for which product types?
+  - type: checkboxes
+    id: overlap
+    attributes:
+      label: Existing coverage
+      options:
+        - label: "I checked skills/INDEX.md and PORTFOLIO_MAP.md and no existing skill covers this"
+          required: true
