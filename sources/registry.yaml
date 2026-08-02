@@ -88,7 +88,7 @@ sources:
     author: Marty Cagan
     organization: Silicon Valley Product Group (SVPG)
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/35249663-inspired
     publication_date: "2017"
     access_date: "2026-08-01"
     level:
@@ -214,7 +214,7 @@ sources:
     author: Julie Zhuo
     organization: Facebook (Meta)
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/38821039-the-making-of-a-manager
     publication_date: "2019"
     access_date: "2026-08-01"
     level:
@@ -339,7 +339,7 @@ sources:
     author: Ben Horowitz
     organization: Andreessen Horowitz (a16z)
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/18176747-the-hard-thing-about-hard-things
     publication_date: "2014"
     access_date: "2026-08-01"
     level:
@@ -383,7 +383,7 @@ sources:
     author: Teresa Torres
     organization: Product Talk
     source_type: book
-    url: null
+    url: https://www.producttalk.org/continuous-discovery-habits/
     publication_date: "2021"
     access_date: "2026-08-01"
     level:
@@ -424,7 +424,7 @@ sources:
     author: Matt LeMay
     organization: null
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/34691715-product-management-in-practice
     publication_date: "2017"
     access_date: "2026-08-01"
     level:
@@ -506,7 +506,7 @@ sources:
     author: Colin Bryar and Bill Carr
     organization: Amazon
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/53138083-working-backwards
     publication_date: "2021"
     access_date: "2026-08-01"
     level:
@@ -554,7 +554,7 @@ sources:
     author: Jason Fried and David Heinemeier Hansson
     organization: Basecamp (37signals)
     source_type: book
-    url: null
+    url: https://basecamp.com/books/calm
     publication_date: "2018"
     access_date: "2026-08-01"
     level:
@@ -636,7 +636,7 @@ sources:
     author: Melissa Perri
     organization: Produx Labs
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/42611483-escaping-the-build-trap
     publication_date: "2018"
     access_date: "2026-08-01"
     level:
@@ -918,7 +918,7 @@ sources:
     author: Clayton M. Christensen
     organization: Harvard Business School
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/2615.The_Innovator_s_Dilemma
     publication_date: "1997"
     access_date: "2026-08-01"
     level:
@@ -1004,7 +1004,7 @@ sources:
     author: Geoffrey A. Moore
     organization: The Chasm Group
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/61329.Crossing_the_Chasm
     publication_date: "1991"
     access_date: "2026-08-01"
     level:
@@ -1046,7 +1046,7 @@ sources:
     author: Jeff Patton
     organization: null
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/22221112-user-story-mapping
     publication_date: "2014"
     access_date: "2026-08-01"
     level:
@@ -1086,7 +1086,7 @@ sources:
     author: Eric Ries
     organization: null
     source_type: book
-    url: null
+    url: https://theleanstartup.com/book
     publication_date: "2011"
     access_date: "2026-08-01"
     level:
@@ -2448,7 +2448,7 @@ sources:
     author: Jason Fried and David Heinemeier Hansson
     organization: Basecamp (37signals)
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/6732019-rework
     publication_date: "2010"
     access_date: "2026-08-01"
     level:
@@ -2525,7 +2525,7 @@ sources:
     author: Richard Rumelt
     organization: UCLA Anderson School of Management
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/11721966-good-strategy-bad-strategy
     publication_date: "2011"
     access_date: "2026-08-01"
     level:
@@ -2657,7 +2657,7 @@ sources:
     author: Don Norman
     organization: Nielsen Norman Group / UC San Diego
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/840.The_Design_of_Everyday_Things
     publication_date: "1988"
     access_date: "2026-08-01"
     level:
@@ -2699,7 +2699,7 @@ sources:
     author: Jake Knapp, John Zeratsky, Braden Kowitz
     organization: Google Ventures
     source_type: book
-    url: null
+    url: https://www.thesprintbook.com
     publication_date: "2016"
     access_date: "2026-08-01"
     level:
@@ -2741,7 +2741,7 @@ sources:
     author: John Doerr
     organization: Kleiner Perkins
     source_type: book
-    url: null
+    url: https://www.whatmatters.com
     publication_date: "2018"
     access_date: "2026-08-01"
     level:
@@ -2823,7 +2823,7 @@ sources:
     author: Richard Banfield, Martin Eriksson, Nate Walkingshaw
     organization: null
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/30014114-product-leadership
     publication_date: "2017"
     access_date: "2026-08-01"
     level:
@@ -2863,7 +2863,7 @@ sources:
     author: Rob Fitzpatrick
     organization: null
     source_type: book
-    url: null
+    url: https://momtestbook.com
     publication_date: "2013"
     access_date: "2026-08-01"
     level:
@@ -2904,7 +2904,7 @@ sources:
     author: Elad Gil
     organization: null (formerly Google, Twitter, Color Genomics)
     source_type: book
-    url: null
+    url: https://press.stripe.com/high-growth-handbook
     publication_date: "2018"
     access_date: "2026-08-01"
     level:
@@ -3107,7 +3107,7 @@ sources:
     title: "Zero to One: Notes on Startups, or How to Build the Future"
     author: "Peter Thiel"
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/18050143-zero-to-one
     publication_date: "2014"
     access_date: "2026-08-01"
     evidence_tier: A
@@ -3128,7 +3128,7 @@ sources:
     title: "Blitzscaling: The Lightning-Fast Path to Building Massively Valuable Companies"
     author: "Reid Hoffman and Chris Yeh"
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/38398157-blitzscaling
     publication_date: "2018"
     access_date: "2026-08-01"
     evidence_tier: A
@@ -3170,7 +3170,7 @@ sources:
     title: "Predictable Revenue: Turn Your Business Into a Sales Machine"
     author: "Aaron Ross and Marylou Tyler"
     source_type: book
-    url: null
+    url: https://predictablerevenue.com
     publication_date: "2011"
     access_date: "2026-08-01"
     evidence_tier: A
@@ -3191,7 +3191,7 @@ sources:
     title: "Platform Revolution: How Networked Markets Are Transforming the Economy"
     author: "Geoffrey G. Parker, Marshall W. Van Alstyne, and Sangeet Paul Choudary"
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/25622861-platform-revolution
     publication_date: "2016"
     access_date: "2026-08-01"
     evidence_tier: A
@@ -3212,7 +3212,7 @@ sources:
     title: "Getting Real: The Smarter, Faster, Easier Way to Build a Successful Web Application"
     author: "Jason Fried and David Heinemeier Hansson (37signals)"
     source_type: book
-    url: null
+    url: https://basecamp.com/books/getting-real
     publication_date: "2006"
     access_date: "2026-08-01"
     evidence_tier: A
@@ -3233,7 +3233,7 @@ sources:
     title: "Accelerate: The Science of Lean Software and DevOps"
     author: "Nicole Forsgren, Jez Humble, and Gene Kim"
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/35747076-accelerate
     publication_date: "2018"
     access_date: "2026-08-01"
     evidence_tier: A
@@ -3254,7 +3254,7 @@ sources:
     title: "Site Reliability Engineering: How Google Runs Production Systems"
     author: "Betsy Beyer, Chris Jones, Jennifer Petoff, and Niall Richard Murphy"
     source_type: book
-    url: null
+    url: https://sre.google/sre-book/table-of-contents/
     publication_date: "2016"
     access_date: "2026-08-01"
     evidence_tier: A
@@ -3275,7 +3275,7 @@ sources:
     title: "Trustworthy Online Controlled Experiments: A Practical Guide to A/B Testing"
     author: "Ron Kohavi, Diane Tang, and Ya Xu"
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/51635906-trustworthy-online-controlled-experiments
     publication_date: "2020"
     access_date: "2026-08-01"
     evidence_tier: A
@@ -3296,7 +3296,7 @@ sources:
     title: "Building Evolutionary Architectures: Support Constant Change"
     author: "Neal Ford, Rebecca Parsons, and Patrick Kua"
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/35755822-building-evolutionary-architectures
     publication_date: "2017"
     access_date: "2026-08-01"
     evidence_tier: A
@@ -3380,7 +3380,7 @@ sources:
     title: "Subscribed: Why the Subscription Model Will Be Your Company's Future"
     author: "Tien Tzuo and Gabe Weisert"
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/38606235-subscribed
     publication_date: "2018"
     access_date: "2026-08-01"
     evidence_tier: A
@@ -3401,7 +3401,7 @@ sources:
     title: "No Rules Rules: Netflix and the Culture of Reinvention"
     author: "Reed Hastings and Erin Meyer"
     source_type: book
-    url: null
+    url: https://www.norulesrules.com
     publication_date: "2020"
     access_date: "2026-08-01"
     evidence_tier: A
@@ -3422,7 +3422,7 @@ sources:
     title: "Steve Jobs"
     author: "Walter Isaacson"
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/11084145-steve-jobs
     publication_date: "2011"
     access_date: "2026-08-01"
     evidence_tier: A
@@ -3443,7 +3443,7 @@ sources:
     title: "Becoming Steve Jobs: The Evolution of a Reckless Upstart into a Visionary Leader"
     author: "Brent Schlender and Rick Tetzeli"
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/22318382-becoming-steve-jobs
     publication_date: "2015"
     access_date: "2026-08-01"
     evidence_tier: A
@@ -3464,7 +3464,7 @@ sources:
     title: "Hit Refresh: The Quest to Rediscover Microsoft's Soul and Imagine a Better Future for Everyone"
     author: "Satya Nadella"
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/30835567-hit-refresh
     publication_date: "2017"
     access_date: "2026-08-01"
     evidence_tier: A
@@ -3506,7 +3506,7 @@ sources:
     title: "Dogfight: How Apple and Google Went to War and Started a Revolution"
     author: "Fred Vogelstein"
     source_type: book
-    url: null
+    url: https://www.goodreads.com/book/show/139679720-dogfight
     publication_date: "2013"
     access_date: "2026-08-01"
     evidence_tier: A
@@ -3569,7 +3569,7 @@ sources:
     title: "Shreyas Doshi on Product Sense and Judgment"
     author: "Shreyas Doshi"
     source_type: article
-    url: null
+    url: https://twitter.com/shreyas
     publication_date: "N/A"
     access_date: "2026-08-01"
     evidence_tier: B
@@ -3590,7 +3590,7 @@ sources:
     title: "Netflix Culture: Freedom and Responsibility"
     author: "Reed Hastings / Netflix"
     source_type: article
-    url: null
+    url: https://jobs.netflix.com/culture
     publication_date: "N/A"
     access_date: "2026-08-01"
     evidence_tier: B
@@ -3632,7 +3632,7 @@ sources:
     title: "Salesforce IdeaExchange and Customer-Driven Roadmap"
     author: "Salesforce"
     source_type: article
-    url: null
+    url: https://ideas.salesforce.com
     publication_date: "N/A"
     access_date: "2026-08-01"
     evidence_tier: B
@@ -3716,7 +3716,7 @@ sources:
     title: "Netflix Build vs Buy: The Open Connect CDN Decision"
     author: "Netflix Technology Blog"
     source_type: article
-    url: null
+    url: https://netflixtechblog.com
     publication_date: "N/A"
     access_date: "2026-08-01"
     evidence_tier: B
@@ -3758,7 +3758,7 @@ sources:
     title: "FDA Framework for AI/ML in Medical Devices"
     author: "U.S. Food and Drug Administration"
     source_type: article
-    url: null
+    url: https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-and-machine-learning-software-medical-device
     publication_date: "N/A"
     access_date: "2026-08-01"
     evidence_tier: B
@@ -3821,7 +3821,7 @@ sources:
     title: "Marty Cagan on Roadmap Myths"
     author: "Marty Cagan / SVPG"
     source_type: article
-    url: null
+    url: https://www.svpg.com/product-roadmaps/
     publication_date: "N/A"
     access_date: "2026-08-01"
     evidence_tier: B
@@ -3842,7 +3842,7 @@ sources:
     title: "Spotify Squad Model (and Its Abandonment)"
     author: "Various"
     source_type: article
-    url: null
+    url: https://engineering.atspotify.com/2014/03/spotify-engineering-culture-part-1/
     publication_date: "N/A"
     access_date: "2026-08-01"
     evidence_tier: B
@@ -3863,7 +3863,7 @@ sources:
     title: "Shreyas Doshi on PM Craft and Technical PMs"
     author: "Shreyas Doshi"
     source_type: article
-    url: null
+    url: https://twitter.com/shreyas
     publication_date: "N/A"
     access_date: "2026-08-01"
     evidence_tier: B
@@ -3884,7 +3884,7 @@ sources:
     title: "Lenny's Podcast Interviews on Team Outcomes"
     author: "Lenny Rachitsky"
     source_type: article
-    url: null
+    url: https://www.lennyspodcast.com
     publication_date: "N/A"
     access_date: "2026-08-01"
     evidence_tier: B
@@ -3905,7 +3905,7 @@ sources:
     title: "John Cutler on PM Leverage and Problem Definition"
     author: "John Cutler"
     source_type: article
-    url: null
+    url: https://cutlefish.substack.com
     publication_date: "N/A"
     access_date: "2026-08-01"
     evidence_tier: B
@@ -4031,7 +4031,7 @@ sources:
     title: "\"The Secret History of the iPhone\" (various journalists, including Fred Vogelstein)"
     author: "Various"
     source_type: article
-    url: null
+    url: https://www.wired.com/2008/01/ff-iphone/
     publication_date: "N/A"
     access_date: "2026-08-01"
     evidence_tier: C
@@ -4052,7 +4052,7 @@ sources:
     title: "Official Google Reader blog: \"A Second Spring of Cleaning\" (March 13, 2013)"
     author: "Various"
     source_type: article
-    url: null
+    url: https://googleblog.blogspot.com/2013/03/a-second-spring-of-cleaning.html
     publication_date: "N/A"
     access_date: "2026-08-01"
     evidence_tier: C
@@ -4157,7 +4157,7 @@ sources:
     title: "Developer ecosystem surveys and GitHub Octoverse reports"
     author: "Various"
     source_type: article
-    url: null
+    url: https://octoverse.github.com
     publication_date: "N/A"
     access_date: "2026-08-01"
     evidence_tier: C
@@ -4262,7 +4262,7 @@ sources:
     title: "SEC Regulation SCI (Regulation Systems Compliance and Integrity), adopted 2014"
     author: "Various"
     source_type: article
-    url: null
+    url: https://www.sec.gov/rules/final/2014/34-73639.pdf
     publication_date: "N/A"
     access_date: "2026-08-01"
     evidence_tier: C
@@ -4535,7 +4535,7 @@ sources:
     title: "Twitter blog: \"Giving You More Characters to Express Yourself\" (November 7, 2017)"
     author: "Various"
     source_type: article
-    url: null
+    url: https://blog.twitter.com/official/en_us/topics/product/2017/Giving-you-more-characters-to-express-yourself.html
     publication_date: "N/A"
     access_date: "2026-08-01"
     evidence_tier: C
@@ -4997,7 +4997,7 @@ sources:
     title: "Tesla Autopilot and FSD product pages and announcements (2014-2024)"
     author: "Various"
     source_type: article
-    url: null
+    url: https://www.tesla.com/autopilot
     publication_date: "N/A"
     access_date: "2026-08-01"
     evidence_tier: C
@@ -5081,7 +5081,7 @@ sources:
     title: "Apple App Store commission structure and policy documentation (2008-2024)"
     author: "Various"
     source_type: article
-    url: null
+    url: https://developer.apple.com/app-store/
     publication_date: "N/A"
     access_date: "2026-08-01"
     evidence_tier: C
@@ -5123,7 +5123,7 @@ sources:
     title: "EU Digital Markets Act (DMA) — App Store provisions and Apple's compliance (2024)"
     author: "Various"
     source_type: article
-    url: null
+    url: https://digital-markets-act.ec.europa.eu
     publication_date: "N/A"
     access_date: "2026-08-01"
     evidence_tier: C
@@ -5380,7 +5380,7 @@ sources:
     author: John Carreyrou
     organization: Knopf
     source_type: article
-    url: null
+    url: https://www.goodreads.com/book/show/37976541-bad-blood
     publication_date: "2018"
     access_date: "2026-08-01"
     evidence_tier: A
@@ -5428,7 +5428,7 @@ sources:
     author: U.S. Securities and Exchange Commission
     organization: SEC
     source_type: documentation
-    url: null
+    url: https://www.sec.gov/news/press-release/2018-41
     publication_date: "2018"
     access_date: "2026-08-01"
     evidence_tier: A
