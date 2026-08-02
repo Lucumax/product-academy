@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://product-leadership-academy/schemas/source.schema.json",
+  "title": "Source Record",
+  "description": "Schema for source records in the Product Leadership Academy registry",
+  "type": "object",
+  "required": [
+    "source_id",
+    "title",
+    "author",
+    "source_type",
+    "evidence_tier",
+    "access_date",
+    "firsthand",
+    "transcript_status",
+    "key_topics",
+    "copyright_access_status",
+    "last_reviewed"
+  ],
+  "properties": {
+    "source_id": {
+      "type": "string",
+      "description": "Stable unique identifier for this source",
+      "pattern": "^SRC-[A-Z]{3,6}-[0-9]{4}$"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the source"
+    },
+    "author": {
+      "type": "string",
+      "description": "Author, speaker, or creator name"
+    },
+    "organization": {
+      "type": ["string", "null"],
+      "description": "Publishing organization or affiliation"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": ["book", "interview", "course", "talk", "article", "paper", "documentation", "community_discussion", "case_study", "postmortem", "podcast", "video", "blog_post", "newsletter", "regulatory_document", "technical_report", "other"]
+    },
+    "url": {
+      "type": ["string", "null"],
+      "description": "URL or local path to the source"
+    },
+    "publication_date": {
+      "type": ["string", "null"],
+      "description": "Publication date in YYYY-MM-DD or YYYY format"
+    },
+    "access_date": {
+      "type": "string",
+      "description": "Date the source was accessed or reviewed"
+    },
+    "level": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["pm", "senior_pm", "group_pm", "principal_pm", "director", "vp_product", "cpo", "founder"]
+      },
+      "description": "Product leadership levels addressed"
+    },
+    "product_archetypes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["consumer", "enterprise_saas", "marketplace", "platform_api", "developer_product", "data_product", "ai_native", "ai_enabled_workflow", "internal_enterprise", "hardware_software_system", "regulated_decision_system", "infrastructure_product", "professional_services_enabled"]
+      }
+    },
+    "industries": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "organizational_stage": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["pre_product_startup", "seed_startup", "growth_stage", "mature_tech", "regulated_incumbent", "financial_institution", "public_sector", "transformation_turnaround", "platform_migration", "product_sunset"]
+      }
+    },
+    "firsthand": {
+      "type": "boolean",
+      "description": "Whether the source is a firsthand operator account"
+    },
+    "evidence_tier": {
+      "type": "string",
+      "enum": ["A", "B", "C", "D", "E"],
+      "description": "Evidence tier per source policy"
+    },
+    "commercial_incentive": {
+      "type": "string",
+      "description": "Description of any commercial incentive the author may have"
+    },
+    "transcript_status": {
+      "type": "string",
+      "enum": ["VERIFIED_CREATOR_TRANSCRIPT", "VERIFIED_PLATFORM_CAPTIONS", "ASR_DERIVED_TRANSCRIPT", "CREATOR_SUMMARY_ONLY", "SECONDARY_SUMMARY_ONLY", "TRANSCRIPT_UNAVAILABLE", "NOT_APPLICABLE"],
+      "description": "Transcript integrity status"
+    },
+    "exact_location": {
+      "type": "string",
+      "description": "Timestamp, page, section, or heading for key claims"
+    },
+    "key_topics": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Key topics covered by this source"
+    },
+    "reliability_notes": {
+      "type": "string",
+      "description": "Notes on source reliability"
+    },
+    "transferability_notes": {
+      "type": "string",
+      "description": "Notes on where claims do and do not transfer"
+    },
+    "copyright_access_status": {
+      "type": "string",
+      "enum": ["OPEN_ACCESS", "REGISTRATION_REQUIRED", "PAID_ACCESS", "ACCESS_REQUIRED", "RESTRICTED", "UNKNOWN"]
+    },
+    "canonical_claims_supported": {
+      "type": "boolean",
+      "description": "Whether canonical doctrine claims may rely on this source"
+    },
+    "last_reviewed": {
+      "type": "string",
+      "description": "Date last reviewed"
+    },
+    "deep_analysis": {
+      "type": "boolean",
+      "description": "Whether this source has been deeply analyzed"
+    },
+    "analysis_file": {
+      "type": ["string", "null"],
+      "description": "Path to deep analysis file if applicable"
+    }
+  }
+}

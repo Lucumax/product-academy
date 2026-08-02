@@ -1,0 +1,539 @@
+# =============================================================================
+# Product Leadership Academy — Claims Inventory v0.1
+# =============================================================================
+# Date: 2026-08-01
+# Claims extracted from registered sources, cross-referenced to source records
+# =============================================================================
+
+claims:
+
+  # ===========================================================================
+  # CLAIMS ABOUT PRODUCT TEAMS AND ORGANIZATION
+  # ===========================================================================
+
+  - claim_id: CLM-0001
+    statement: "Empowered product teams accountable to outcomes produce better results than feature teams accountable to outputs"
+    source_ids:
+      - SRC-BOOK-0001  # Cagan - Inspired
+      - SRC-TALK-0002  # Perri - Escaping the Build Trap talk
+      - SRC-BOOK-0008  # Perri - Escaping the Build Trap book
+    evidence_level: A
+    corroboration: "Multiple Tier A sources. Cagan defines the distinction; Perri provides the 'build trap' diagnosis framework."
+    contested: true
+    counter_claim_sources:
+      - SRC-BOOK-0007  # Basecamp - calm company model doesn't use this structure
+      - SRC-BOOK-0013  # Rework - small teams don't need this distinction
+    notes: "Core doctrine claim. Widely accepted in product-led organizations. Contested by organizations with different operational models."
+    applicable_modules:
+      - 01_core_doctrine
+      - 04_product_archetypes
+
+  - claim_id: CLM-0002
+    statement: "The 'build trap' occurs when organizations measure success by features shipped rather than problems solved"
+    source_ids:
+      - SRC-TALK-0002
+      - SRC-BOOK-0008
+      - SRC-POST-0003  # Cutler - Beautiful Mess (feature factory concept)
+    evidence_level: A
+    corroboration: "Perri defined the term; Cutler provides complementary 'feature factory' framing from different operator experience."
+    contested: false
+    counter_claim_sources: []
+    notes: "High consensus in PM community. The disagreement is about prevalence and severity, not whether the pattern exists."
+    applicable_modules:
+      - 01_core_doctrine
+      - 07_cases
+
+  - claim_id: CLM-0003
+    statement: "Single-threaded leadership (one leader, one team, one mission) reduces coordination overhead and improves outcomes"
+    source_ids:
+      - SRC-BOOK-0006  # Working Backwards
+    evidence_level: A
+    corroboration: "Single Tier A source. Claim is Amazon-specific but widely referenced. Spotify's squad model (SRC-DOC-0019) represents an alternative approach to team autonomy."
+    contested: true
+    counter_claim_sources:
+      - SRC-DOC-0019  # Spotify model - smaller cross-functional teams without single-threaded executive
+    notes: "Amazon's model is well-documented but organizational research on its generalizability is limited."
+    applicable_modules:
+      - 02_principal_plus
+      - 04_product_archetypes
+
+  - claim_id: CLM-0004
+    statement: "The transition from individual contributor to manager is one of the hardest career shifts, requiring deliberate skill development"
+    source_ids:
+      - SRC-BOOK-0002  # Zhuo - Making of a Manager
+    evidence_level: A
+    corroboration: "Single Tier A source but widely corroborated anecdotally in PM community."
+    contested: false
+    counter_claim_sources: []
+    notes: "High face validity. The specific practices Zhuo recommends may be Facebook-specific."
+    applicable_modules:
+      - 11_learning_paths
+      - 02_principal_plus
+
+  # ===========================================================================
+  # CLAIMS ABOUT PRODUCT STRATEGY
+  # ===========================================================================
+
+  - claim_id: CLM-0005
+    statement: "Good strategy has a kernel: diagnosis of the challenge, guiding policy for addressing it, and coherent actions to execute"
+    source_ids:
+      - SRC-BOOK-0015  # Rumelt - Good Strategy Bad Strategy
+    evidence_level: B
+    corroboration: "Single source (academic framework). Widely cited in strategy literature. Rumelt's framework provides analytical rigor that product strategy frameworks often lack."
+    contested: false
+    counter_claim_sources: []
+    notes: "Framework is analytical, not empirical. Distinguishing strategy from goals is a persistent challenge in product organizations."
+    applicable_modules:
+      - 01_core_doctrine
+      - 02_principal_plus
+
+  - claim_id: CLM-0006
+    statement: "Product strategy should connect company vision to tactical work through a coherent framework"
+    source_ids:
+      - SRC-BOOK-0001  # Cagan
+      - SRC-BOOK-0008  # Perri
+      - SRC-BOOK-0015  # Rumelt
+    evidence_level: A
+    corroboration: "Multiple Tier A and B sources providing complementary framing of the same concept."
+    contested: false
+    counter_claim_sources: []
+    notes: "Broad consensus. Disagreement is about the specific framework, not the principle."
+    applicable_modules:
+      - 01_core_doctrine
+      - 02_principal_plus
+
+  - claim_id: CLM-0007
+    statement: "The 'working backwards' approach (starting from customer experience and working backwards to technology) produces better products"
+    source_ids:
+      - SRC-BOOK-0006  # Working Backwards
+    evidence_level: A
+    corroboration: "Single source but highly detailed. Amazon's commercial success is circumstantial corroboration."
+    contested: false
+    counter_claim_sources: []
+    notes: "Specific to Amazon's implementation. The PR/FAQ methodology is Amazon-specific; the underlying principle (customer-first) is broadly accepted."
+    applicable_modules:
+      - 01_core_doctrine
+      - 03_business_and_gtm
+      - 10_simulator
+
+  # ===========================================================================
+  # CLAIMS ABOUT PRODUCT DISCOVERY AND VALIDATION
+  # ===========================================================================
+
+  - claim_id: CLM-0008
+    statement: "Product discovery should be continuous, not episodic, and should be conducted by cross-functional product trios (PM, design, engineering)"
+    source_ids:
+      - SRC-BOOK-0004  # Torres - Continuous Discovery
+      - SRC-BOOK-0001  # Cagan
+    evidence_level: A
+    corroboration: "Two Tier A sources. Cagan emphasizes the concept; Torres provides the most detailed methodology."
+    contested: false
+    counter_claim_sources: []
+    notes: "High consensus among product-led organizations. Implementation feasibility varies significantly by organization."
+    applicable_modules:
+      - 02_principal_plus
+      - 10_simulator
+
+  - claim_id: CLM-0009
+    statement: "Build-Measure-Learn cycles with MVPs produce better validated learning than upfront specification"
+    source_ids:
+      - SRC-BOOK-0014  # Ries - Lean Startup
+    evidence_level: A
+    corroboration: "Single source but widely adopted. The claim is about startup contexts, not all product development."
+    contested: true
+    counter_claim_sources:
+      - SRC-BOOK-0007  # Basecamp - plan-driven simplicity
+    notes: "Applicability boundaries are well-understood. Contested in regulated environments and hardware products."
+    applicable_modules:
+      - 01_core_doctrine
+      - 08_contradictions
+
+  - claim_id: CLM-0010
+    statement: "Opportunity Solution Trees provide structured visual framework for connecting outcomes to opportunities to solutions to experiments"
+    source_ids:
+      - SRC-BOOK-0004  # Torres
+    evidence_level: A
+    corroboration: "Single source. Torres's original contribution. Validated through coaching 200+ teams but not independently researched."
+    contested: false
+    counter_claim_sources: []
+    notes: "Widely adopted but no comparative effectiveness data vs alternative discovery frameworks."
+    applicable_modules:
+      - 02_principal_plus
+      - 09_tools
+
+  - claim_id: CLM-0011
+    statement: "Customer interviews should avoid bias by asking about specific past behaviors, not hypothetical future behaviors"
+    source_ids:
+      - SRC-BOOK-0020  # Fitzpatrick - Mom Test
+      - SRC-BOOK-0004  # Torres
+    evidence_level: A
+    corroboration: "Two Tier A sources providing complementary interview methodologies."
+    contested: false
+    counter_claim_sources: []
+    notes: "Strong consensus. The 'Mom Test' framework is the most widely referenced approach."
+    applicable_modules:
+      - 02_principal_plus
+      - 10_simulator
+
+  # ===========================================================================
+  # CLAIMS ABOUT PRODUCT LEADERSHIP AND MANAGEMENT
+  # ===========================================================================
+
+  - claim_id: CLM-0012
+    statement: "Company culture is defined by what you actually reward and punish, not by what you say in mission statements or culture decks"
+    source_ids:
+      - SRC-BOOK-0003  # Horowitz
+      - SRC-DOC-0001  # Netflix culture deck (associated philosophy)
+    evidence_level: A
+    corroboration: "Horowitz states it directly; Netflix's culture deck embodies the principle. Multiple operator sources reinforce."
+    contested: false
+    counter_claim_sources: []
+    notes: "Broad consensus. The gap between stated and actual culture is a central theme in organizational behavior research."
+    applicable_modules:
+      - 01_core_doctrine
+      - 07_cases
+
+  - claim_id: CLM-0013
+    statement: "In crisis (wartime), leadership must make decisions with incomplete information and live with consequences; standard management frameworks don't apply"
+    source_ids:
+      - SRC-BOOK-0003  # Horowitz
+    evidence_level: A
+    corroboration: "Single Tier A source (firsthand CEO account). Wartime/peacetime distinction has been widely discussed but not empirically validated."
+    contested: true
+    counter_claim_sources:
+      - SRC-BOOK-0007  # Basecamp - argues against 'wartime' framing entirely
+    notes: "The dichotomization (wartime vs peacetime) may oversimplify organizational reality. Basecamp authors explicitly reject the framing."
+    applicable_modules:
+      - 08_contradictions
+      - 07_cases
+
+  - claim_id: CLM-0014
+    statement: "Talent density is the most important factor in organizational performance; a great workplace is stunning colleagues, not perks"
+    source_ids:
+      - SRC-DOC-0001  # Netflix culture deck
+      - SRC-BOOK-0003  # Horowitz (Take care of people, products, profits)
+    evidence_level: A
+    corroboration: "Netflix's culture deck explicitly states this. Horowitz's emphasis on people reinforces. Both Tier A."
+    contested: true
+    counter_claim_sources:
+      - SRC-BOOK-0007  # Basecamp - values sustainability over talent density
+    notes: "Netflix's model assumes ability to pay top-of-market compensation and fire aggressively. Not transferable to organizations with different constraints."
+    applicable_modules:
+      - 01_core_doctrine
+      - 08_contradictions
+
+  # ===========================================================================
+  # CLAIMS ABOUT PRODUCT DEVELOPMENT METHODOLOGY
+  # ===========================================================================
+
+  - claim_id: CLM-0015
+    statement: "Design sprints (5-day time-boxed process) can compress months of debate and prototyping into a validated direction"
+    source_ids:
+      - SRC-BOOK-0017  # Sprint - Knapp et al.
+    evidence_level: A
+    corroboration: "Single source but method was developed and validated across 150+ GV portfolio companies."
+    contested: false
+    counter_claim_sources: []
+    notes: "Method is well-documented. Conditions for success (well-scoped problem, full team commitment, user access) are clear."
+    applicable_modules:
+      - 02_principal_plus
+      - 10_simulator
+
+  - claim_id: CLM-0016
+    statement: "OKRs should measure outcomes, not outputs, and serve as a communication and alignment tool, not a performance evaluation tool"
+    source_ids:
+      - SRC-BOOK-0018  # Doerr - Measure What Matters
+      - SRC-BOOK-0001  # Cagan
+    evidence_level: A
+    corroboration: "Two Tier A sources. Doerr introduced OKRs to Google; Cagan advocates for outcome-based OKRs in product context."
+    contested: true
+    counter_claim_sources:
+      - SRC-BOOK-0007  # Basecamp - rejects formal goal-setting frameworks
+    notes: "Implementation quality varies dramatically. Common failure modes: cascaded OKRs as command-and-control, output-based OKRs, tying OKRs to compensation."
+    applicable_modules:
+      - 02_principal_plus
+      - 09_tools
+
+  - claim_id: CLM-0017
+    statement: "A startup is a company designed to grow fast; growth is definitional, not aspirational"
+    source_ids:
+      - SRC-POST-0005  # Graham - Essays
+    evidence_level: A
+    corroboration: "Single source but Graham's definition has become standard in venture capital and startup ecosystem."
+    contested: true
+    counter_claim_sources:
+      - SRC-BOOK-0007  # Basecamp - profitable sustainability without growth imperative
+      - SRC-BOOK-0013  # Rework
+    notes: "Definition reflects venture capital model. Explicitly contested by bootstrapped/sustainable business advocates."
+    applicable_modules:
+      - 03_business_and_gtm
+      - 08_contradictions
+
+  # ===========================================================================
+  # CLAIMS ABOUT AI AND PRODUCT MANAGEMENT
+  # ===========================================================================
+
+  - claim_id: CLM-0018
+    statement: "LLMs have a 'jagged frontier' of capability — they excel at some tasks in a domain and fail at apparently similar tasks"
+    source_ids:
+      - SRC-POST-0006  # Mollick - One Useful Thing
+    evidence_level: B
+    corroboration: "Single source but consistent with broader AI research findings. Mollick provides concrete examples."
+    contested: false
+    counter_claim_sources: []
+    notes: "Important for setting AI product expectations. The jagged frontier is a key challenge for productizing LLMs."
+    applicable_modules:
+      - 05_ai_product_management
+
+  - claim_id: CLM-0019
+    statement: "Model cards (structured transparency documentation) increase accountability and enable downstream users to make informed decisions about ML model use"
+    source_ids:
+      - SRC-PAPER-0001  # Model Cards paper
+    evidence_level: A
+    corroboration: "Peer-reviewed academic publication (FAccT 2019). Framework adopted by Hugging Face, OpenAI, Google."
+    contested: false
+    counter_claim_sources: []
+    notes: "Adoption is voluntary. Effectiveness at improving outcomes is not yet empirically demonstrated."
+    applicable_modules:
+      - 05_ai_product_management
+      - 06_industry_overlays
+
+  - claim_id: CLM-0020
+    statement: "AI product development requires iterative deployment with safety guardrails, not fully-specified upfront design"
+    source_ids:
+      - SRC-DOC-0009  # OpenAI - Iterative Deployment
+      - SRC-DOC-0010  # Microsoft Responsible AI
+      - SRC-DOC-0008  # Google AI Principles
+    evidence_level: A
+    corroboration: "Three Tier A sources from leading AI companies providing consistent framing."
+    contested: false
+    counter_claim_sources: []
+    notes: "Consistent industry position. The tension between speed of deployment and thoroughness of testing remains unresolved."
+    applicable_modules:
+      - 05_ai_product_management
+
+  # ===========================================================================
+  # CLAIMS ABOUT TECH ADOPTION AND MARKET STRATEGY
+  # ===========================================================================
+
+  - claim_id: CLM-0021
+    statement: "Technology products face a 'chasm' between early adopters and mainstream market; crossing it requires a focused beachhead strategy"
+    source_ids:
+      - SRC-BOOK-0011  # Moore - Crossing the Chasm
+    evidence_level: B
+    corroboration: "Single source but framework has been used and cited for 30+ years. Rooted in Rogers' Diffusion of Innovations research."
+    contested: false
+    counter_claim_sources: []
+    notes: "Originally developed for enterprise technology. Consumer products with rapid network effects may not exhibit the chasm. Still widely taught."
+    applicable_modules:
+      - 03_business_and_gtm
+      - 04_product_archetypes
+
+  - claim_id: CLM-0022
+    statement: "Incumbent firms fail when they listen to their best customers and ignore disruptive technologies that initially serve different markets"
+    source_ids:
+      - SRC-BOOK-0010  # Christensen - Innovator's Dilemma
+    evidence_level: B
+    corroboration: "Academic framework (HBS professor). Widely influential. Subject to ongoing debate about generalizability."
+    contested: true
+    counter_claim_sources: []
+    notes: "Theory was developed from manufacturing industry cases (disk drives, excavators). Debate about whether Apple, Amazon, Netflix disprove the theory."
+    applicable_modules:
+      - 08_contradictions
+      - 07_cases
+
+  # ===========================================================================
+  # CLAIMS ABOUT PRODUCT FAILURE AND REVERSAL
+  # ===========================================================================
+
+  - claim_id: CLM-0023
+    statement: "Product failures often result from building what the company wants rather than what customers actually need"
+    source_ids:
+      - SRC-CASE-0004  # Amazon Fire Phone
+      - SRC-CASE-0002  # Google Glass
+    evidence_level: B
+    corroboration: "Two postmortem case sources. Pattern is consistent across multiple product failures."
+    contested: false
+    counter_claim_sources: []
+    notes: "Compelling pattern but retrospective analysis. Some company-led innovations (iPhone, Tesla) succeeded despite not being requested by customers."
+    applicable_modules:
+      - 07_cases
+      - 08_contradictions
+
+  - claim_id: CLM-0024
+    statement: "Premature scaling — investing heavily in marketing and distribution before validating product-market fit — amplifies failure rather than accelerating success"
+    source_ids:
+      - SRC-CASE-0003  # Quibi
+    evidence_level: B
+    corroboration: "Single well-documented case. Consistent with Lean Startup principles."
+    contested: false
+    counter_claim_sources: []
+    notes: "Quibi's $1.75B failure is an extreme example. The principle is well-established in startup literature."
+    applicable_modules:
+      - 03_business_and_gtm
+      - 07_cases
+
+  - claim_id: CLM-0025
+    statement: "Competitive moat based on features alone erodes quickly; ecosystem lock-in and network effects provide more durable advantages"
+    source_ids:
+      - SRC-CASE-0006  # Microsoft Zune
+      - SRC-CASE-0005  # Clubhouse
+    evidence_level: B
+    corroboration: "Two postmortem cases illustrating different aspects of the same principle."
+    contested: false
+    counter_claim_sources: []
+    notes: "Zune: ecosystem lock-in (iTunes). Clubhouse: feature parity competition (Twitter Spaces). Both illustrate the fragility of feature-based moats."
+    applicable_modules:
+      - 03_business_and_gtm
+      - 07_cases
+
+  # ===========================================================================
+  # CLAIMS ABOUT REGULATED PRODUCT MANAGEMENT
+  # ===========================================================================
+
+  - claim_id: CLM-0026
+    statement: "Software as a Medical Device requires risk-based classification, clinical evaluation, and quality management systems that differ fundamentally from consumer software development"
+    source_ids:
+      - SRC-DOC-0012  # FDA SaMD Guidance
+    evidence_level: A
+    corroboration: "Regulatory source. Authoritative by definition within jurisdiction."
+    contested: false
+    counter_claim_sources: []
+    notes: "Framework is authoritative within U.S. jurisdiction. Aligned with IMDRF international framework."
+    applicable_modules:
+      - 06_industry_overlays
+      - 04_product_archetypes
+
+  - claim_id: CLM-0027
+    statement: "Privacy regulations (GDPR) require data protection by design and default, creating architectural constraints on product development that must be considered from inception"
+    source_ids:
+      - SRC-DOC-0014  # GDPR
+    evidence_level: A
+    corroboration: "Regulatory source. Enforceable EU law since 2018."
+    contested: false
+    counter_claim_sources: []
+    notes: "GDPR has influenced global privacy frameworks. Product implications include consent flows, data architecture, and data subject rights implementation."
+    applicable_modules:
+      - 06_industry_overlays
+      - 04_product_archetypes
+
+  - claim_id: CLM-0028
+    statement: "Enterprise SaaS products must meet compliance standards (SOC 2, PCI DSS, HIPAA) that shape product architecture, data handling, and operational processes"
+    source_ids:
+      - SRC-DOC-0015  # PCI DSS
+      - SRC-DOC-0016  # SOC 2
+      - SRC-DOC-0013  # HIPAA
+    evidence_level: A
+    corroboration: "Three authoritative regulatory/standards sources."
+    contested: false
+    counter_claim_sources: []
+    notes: "Compliance is increasingly table-stakes for enterprise procurement. The specific standards applicable depend on industry and data types."
+    applicable_modules:
+      - 06_industry_overlays
+      - 03_business_and_gtm
+
+  # ===========================================================================
+  # CLAIMS ABOUT DESIGN AND USER EXPERIENCE
+  # ===========================================================================
+
+  - claim_id: CLM-0029
+    statement: "Good design makes affordances visible, provides clear feedback, and uses conceptual models that match users' mental models"
+    source_ids:
+      - SRC-BOOK-0016  # Norman - Design of Everyday Things
+    evidence_level: B
+    corroboration: "Foundational text in user-centered design. Widely cited in academia and practice."
+    contested: false
+    counter_claim_sources: []
+    notes: "Norman's principles are universal. The specific examples are primarily physical/digital consumer products."
+    applicable_modules:
+      - 02_principal_plus
+      - 04_product_archetypes
+
+  - claim_id: CLM-0030
+    statement: "Design systems (component libraries, design tokens, conventions) improve consistency, velocity, and accessibility across product portfolios"
+    source_ids:
+      - SRC-DOC-0004  # Apple HIG
+      - SRC-DOC-0017  # Material Design
+    evidence_level: A
+    corroboration: "Two Tier A first-party design system documentations from major platform providers."
+    contested: false
+    counter_claim_sources: []
+    notes: "Platform-specific conventions differ (iOS vs Android vs web) but underlying principles (consistency, componentization) are universal."
+    applicable_modules:
+      - 02_principal_plus
+      - 09_tools
+
+  # ===========================================================================
+  # CLAIMS ABOUT PLATFORM AND API PRODUCTS
+  # ===========================================================================
+
+  - claim_id: CLM-0031
+    statement: "Developer experience is a product discipline requiring as much attention as end-user experience for platform and API products"
+    source_ids:
+      - SRC-DOC-0003  # Stripe API docs
+      - SRC-POST-0004  # Chu - Black Box of PM (platform PM)
+    evidence_level: A
+    corroboration: "Two Tier A sources. Stripe is widely considered the gold standard for developer experience."
+    contested: false
+    counter_claim_sources: []
+    notes: "Stripe's investment in DX is exceptional and may exceed what typical organizations can resource."
+    applicable_modules:
+      - 04_product_archetypes
+      - 09_tools
+
+  - claim_id: CLM-0032
+    statement: "The 'Spotify model' (squads, tribes, chapters, guilds) was aspirational and has been widely misunderstood as a fixed blueprint rather than a point-in-time description"
+    source_ids:
+      - SRC-DOC-0019  # Spotify Engineering Culture
+    evidence_level: A
+    corroboration: "First-party documentation. Spotify itself has noted the model's evolution and that it was never intended as a prescriptive template."
+    contested: false
+    counter_claim_sources: []
+    notes: "Important corrective to cargo-cult adoption of organizational models. The model's popularity exceeded its creators' intentions."
+    applicable_modules:
+      - 02_principal_plus
+      - 08_contradictions
+
+  # ===========================================================================
+  # CONTESTED/FALSIFIED CLAIMS
+  # ===========================================================================
+
+  - claim_id: CLM-0033
+    statement: "Products should do things that don't scale in early stages to gain initial traction and learn"
+    source_ids:
+      - SRC-POST-0005  # Graham
+    evidence_level: A
+    corroboration: "Graham's essay on this topic is one of the most cited in startup literature."
+    contested: false
+    counter_claim_sources: []
+    notes: "Widely accepted for early-stage startups. The boundary condition (when to stop doing things that don't scale) is the practical challenge."
+    applicable_modules:
+      - 03_business_and_gtm
+      - 10_simulator
+
+  - claim_id: CLM-0034
+    statement: "Subscriptions create better incentives for product quality than advertising because the customer is also the user"
+    source_ids:
+      - SRC-TALK-0001  # Biddle - Netflix
+    evidence_level: A
+    corroboration: "Biddle provides firsthand Netflix perspective. The principle is broadly understood in media and software."
+    contested: false
+    counter_claim_sources: []
+    notes: "Netflix's specific context (subscription streaming) generalizes to some extent. Free/ad-supported models can also produce quality products depending on market structure."
+    applicable_modules:
+      - 03_business_and_gtm
+      - 04_product_archetypes
+
+  - claim_id: CLM-0035
+    statement: "A/B testing at scale reveals counterintuitive product insights that intuition alone cannot produce"
+    source_ids:
+      - SRC-TALK-0001  # Biddle - Netflix
+      - SRC-BOOK-0006  # Working Backwards (Amazon)
+    evidence_level: A
+    corroboration: "Two Tier A sources from companies with industry-leading experimentation cultures."
+    contested: false
+    counter_claim_sources: []
+    notes: "Both Netflix and Amazon are exceptional in their experimentation investment. The claim is valid but the prerequisite infrastructure is substantial."
+    applicable_modules:
+      - 02_principal_plus
+      - 05_ai_product_management

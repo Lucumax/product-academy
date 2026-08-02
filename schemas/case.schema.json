@@ -1,0 +1,145 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://product-leadership-academy/schemas/case.schema.json",
+  "title": "Case Study",
+  "description": "Schema for case studies in the Product Leadership Academy",
+  "type": "object",
+  "required": [
+    "case_id",
+    "title",
+    "decision_maker",
+    "product_archetype",
+    "industry",
+    "organizational_stage",
+    "decision_level",
+    "situation",
+    "decision",
+    "outcome",
+    "causal_confidence",
+    "what_was_learned",
+    "what_does_not_transfer",
+    "source_locations"
+  ],
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "description": "Stable unique identifier",
+      "pattern": "^CASE-[0-9]{4}$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "decision_maker": {
+      "type": "string",
+      "description": "Role and context of the decision maker"
+    },
+    "product_archetype": {
+      "type": "string",
+      "enum": ["consumer", "enterprise_saas", "marketplace", "platform_api", "developer_product", "data_product", "ai_native", "ai_enabled_workflow", "internal_enterprise", "hardware_software_system", "regulated_decision_system", "infrastructure_product", "professional_services_enabled"]
+    },
+    "industry": {
+      "type": "string"
+    },
+    "organizational_stage": {
+      "type": "string"
+    },
+    "decision_level": {
+      "type": "string",
+      "enum": ["senior_pm", "principal_pm", "director", "vp", "cpo", "founder"]
+    },
+    "situation": {
+      "type": "string",
+      "description": "Context and situation at time of decision"
+    },
+    "information_available": {
+      "type": "string",
+      "description": "What information was available at the time"
+    },
+    "information_missing": {
+      "type": "string",
+      "description": "What information was not available at the time"
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "alternatives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "alternative": {"type": "string"},
+          "rationale": {"type": "string"},
+          "why_not_chosen": {"type": "string"}
+        }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "decision": {
+      "type": "string",
+      "description": "The actual decision made"
+    },
+    "resource_commitment": {
+      "type": "string",
+      "description": "What was committed (capital, headcount, time, architecture, reputation)"
+    },
+    "outcome": {
+      "type": "string"
+    },
+    "causal_confidence": {
+      "type": "string",
+      "enum": ["high", "medium", "low", "correlation_only", "retrospective_narrative"],
+      "description": "Confidence that the decision caused the outcome"
+    },
+    "what_was_learned": {
+      "type": "string"
+    },
+    "what_does_not_transfer": {
+      "type": "string"
+    },
+    "failure_modes": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "reversal_conditions": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Conditions under which the decision should be reversed"
+    },
+    "source_locations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source_id": {"type": "string"},
+          "location": {"type": "string"},
+          "note": {"type": "string"}
+        }
+      }
+    },
+    "discussion_questions": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "walter_application": {
+      "type": "object",
+      "properties": {
+        "relevance": {"type": "string"},
+        "applicable_initiatives": {"type": "array", "items": {"type": "string"}},
+        "key_transfer": {"type": "string"},
+        "cautions": {"type": "string"}
+      }
+    },
+    "case_type": {
+      "type": "string",
+      "enum": ["success", "failure", "reversal", "sunset", "platform_migration", "ambiguous", "regulated_decision"]
+    },
+    "tags": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  }
+}

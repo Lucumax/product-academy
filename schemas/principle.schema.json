@@ -1,0 +1,130 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://product-leadership-academy/schemas/principle.schema.json",
+  "title": "Canonical Principle",
+  "description": "Schema for canonical doctrine principles in the Product Leadership Academy",
+  "type": "object",
+  "required": [
+    "principle_id",
+    "title",
+    "claim",
+    "leadership_levels",
+    "evidence",
+    "counterevidence",
+    "applicability_conditions",
+    "non_applicability_conditions",
+    "failure_modes",
+    "confidence",
+    "last_reviewed"
+  ],
+  "properties": {
+    "principle_id": {
+      "type": "string",
+      "description": "Stable unique identifier",
+      "pattern": "^PRN-[0-9]{4}$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "claim": {
+      "type": "string",
+      "description": "The core claim or principle statement"
+    },
+    "leadership_levels": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["senior_pm", "principal_pm", "director", "vp_product", "cpo", "founder"]
+      }
+    },
+    "product_archetypes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["consumer", "enterprise_saas", "marketplace", "platform_api", "developer_product", "data_product", "ai_native", "ai_enabled_workflow", "internal_enterprise", "hardware_software_system", "regulated_decision_system", "infrastructure_product", "professional_services_enabled"]
+      }
+    },
+    "organizational_stages": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "industries": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source_id": {"type": "string"},
+          "claim_summary": {"type": "string"},
+          "strength": {"type": "string", "enum": ["strong", "moderate", "weak", "anecdotal"]}
+        }
+      },
+      "description": "Evidence supporting this principle"
+    },
+    "counterevidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source_id": {"type": "string"},
+          "claim_summary": {"type": "string"},
+          "strength": {"type": "string", "enum": ["strong", "moderate", "weak", "anecdotal"]}
+        }
+      },
+      "description": "Strongest credible evidence against this principle"
+    },
+    "applicability_conditions": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Conditions under which this principle applies"
+    },
+    "non_applicability_conditions": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Conditions under which this principle does NOT apply"
+    },
+    "failure_modes": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "How this principle fails or is misapplied"
+    },
+    "reversal_conditions": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "When this principle should be reversed or abandoned"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["high", "medium", "low", "speculative"],
+      "description": "Confidence in the principle given available evidence"
+    },
+    "practical_tool": {
+      "type": "string",
+      "description": "Link to a practical tool or template"
+    },
+    "practice_exercise": {
+      "type": "string",
+      "description": "Practice exercise for this principle"
+    },
+    "walter_application": {
+      "type": "string",
+      "description": "How this applies to Walter's portfolio"
+    },
+    "last_reviewed": {
+      "type": "string"
+    },
+    "related_contradictions": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Related contradiction IDs"
+    },
+    "related_cases": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Related case IDs"
+    }
+  }
+}

@@ -1,0 +1,745 @@
+contradictions:
+
+  - contradiction_id: CON-0001
+    question: "Should product teams be fully empowered to set their own direction, or should a central product leadership function define the strategic direction?"
+    doctrine_a:
+      position: Empowered teams produce better outcomes
+      description: >
+        Cross-functional product teams with direct customer access, clear outcomes,
+        and decision-making authority outperform centrally-directed teams. Autonomy
+        increases motivation, speeds up decision cycles, and produces solutions
+        that fit local context better than top-down mandates. The leadership role
+        is to set context (vision, strategy, guardrails) not to make product decisions.
+      key_proponents: Marty Cagan (SVPG), Spotify squad model practitioners, Teresa Torres
+    doctrine_b:
+      position: Centralized product direction is necessary for coherence
+      description: >
+        Without strong centralized product direction, teams optimize locally,
+        produce fragmented user experiences, duplicate effort, and fail to make
+        the hard trade-offs required for platform-level bets. The most consequential
+        product decisions — architecture, platform strategy, major resource allocation —
+        cannot be delegated to individual teams without losing coherence.
+      key_proponents: Steve Jobs (Apple), Brian Chesky (Airbnb re-centralization), Jason Fried (Basecamp/37signals)
+    strongest_evidence_a:
+      - source_id: SRC-BK-0001
+        note: "Inspired: How to Create Tech Products Customers Love (Cagan, 2017) — Chapters on empowered product teams"
+      - source_id: SRC-BK-0002
+        note: "Empowered (Cagan, 2020) — Full treatment of the empowered team model"
+      - source_id: SRC-AR-0001
+        note: "Spotify engineering culture videos (Kniberg, 2014-2016) — Squad autonomy model"
+    strongest_evidence_b:
+      - source_id: SRC-TK-0001
+        note: "Brian Chesky, Config 2024 — Airbnb's re-centralization of product after period of team autonomy"
+      - source_id: SRC-BK-0003
+        note: "Good Strategy Bad Strategy (Rumelt, 2011) — Strategy as choice of what not to do"
+      - source_id: SRC-AR-0002
+        note: "Apple's functional organization (HBR, 2019, Podolny & Hansen) — How Apple structures for central direction"
+    context_where_a_stronger:
+      - "Mature product with stable architecture and clear platform boundaries"
+      - "Well-staffed teams with strong PM and engineering leadership at the team level"
+      - "Product that serves distinct customer segments with different needs"
+      - "Organization with strong alignment mechanisms (OKRs, reviews, design systems)"
+    context_where_b_stronger:
+      - "Early-stage product seeking product-market fit"
+      - "Platform or product requiring tight cross-surface integration"
+      - "Resource-constrained organization that cannot afford duplication"
+      - "Turnaround situation requiring fast, coordinated action"
+      - "Founder with unusually strong product intuition and a coherent vision"
+    failure_modes:
+      - "Autonomy without accountability: teams optimize for team-level metrics at expense of system outcomes"
+      - "Central direction without buy-in: central team makes decisions without understanding local constraints"
+      - "The messy middle: neither fully empowered nor fully directed, producing the worst of both"
+      - "Autonomy as abdication: leaders use 'empowerment' to avoid making hard strategic choices"
+    reversal_conditions:
+      - "Customer experience becomes fragmented and complaints about inconsistency rise"
+      - "Teams are duplicating infrastructure or platform work across squads"
+      - "Strategic bets that require coordination across 3+ teams are consistently failing"
+      - "Teams are not making real decisions — autonomy exists in name only"
+    open_questions:
+      - "At what organizational scale does the balance tip from empowered teams to centralized direction?"
+      - "Can the Spotify 'mission-based' model work at companies that are not Spotify-scale?"
+      - "How do you measure whether empowered teams are producing enough coherence?"
+      - "Is there a durable middle ground (e.g., platform teams + product teams with API contracts)?"
+    confidence: medium
+    walter_provisional_position: ""
+
+  - contradiction_id: CON-0002
+    question: "Should product development be driven by continuous customer discovery, or should it be driven by concentrated strategic conviction from leadership?"
+    doctrine_a:
+      position: Continuous discovery produces better product decisions
+      description: >
+        Regular, structured customer interaction — weekly or more frequent — produces
+        better product decisions than periodic strategic planning. The market moves
+        too fast for annual strategy cycles. Teams that talk to customers weekly
+        outperform teams that rely on leadership intuition, regardless of how
+        experienced that leadership is.
+      key_proponents: Teresa Torres (Continuous Discovery Habits), Jeff Gothelf & Josh Seiden (Lean UX), Eric Ries (Lean Startup)
+    doctrine_b:
+      position: Concentrated strategic conviction drives breakthrough products
+      description: >
+        Customers cannot tell you what they will want. Breakthrough products come
+        from a singular vision that customers would never have articulated in an
+        interview. Continuous discovery produces incremental improvement, but the
+        most valuable product bets require strategic conviction that goes beyond
+        what any amount of customer interviewing can validate.
+      key_proponents: Steve Jobs (Apple), Peter Thiel (Zero to One), Henry Ford apocryphal "faster horses"
+    strongest_evidence_a:
+      - source_id: SRC-BK-0004
+        note: "Continuous Discovery Habits (Torres, 2021) — Full methodology"
+      - source_id: SRC-BK-0005
+        note: "The Lean Startup (Ries, 2011) — Build-measure-learn loop"
+    strongest_evidence_b:
+      - source_id: SRC-BK-0006
+        note: "Zero to One (Thiel, 2014) — Argument that great companies are built on secrets, not consensus"
+      - source_id: SRC-AR-0003
+        note: "Clayton Christensen, 'The Innovator's Dilemma' (1997) — Customers can lead incumbents astray"
+    context_where_a_stronger:
+      - "Existing product with an established user base you can interview"
+      - "B2B SaaS where buyers can articulate workflow pain points"
+      - "Product optimization phase (after product-market fit)"
+      - "Team that is new to the domain and needs to build customer intuition"
+    context_where_b_stronger:
+      - "Truly novel product category with no existing user behavior to study"
+      - "Deep technology bet where customer cannot evaluate feasibility"
+      - "Founder with deep domain expertise built over years"
+      - "Platform shift (e.g., mobile, AI) where old user habits are misleading"
+    failure_modes:
+      - "Discovery theater: teams interview customers but only hear what confirms existing beliefs"
+      - "Vision without feedback: leader ignores market signals because 'customers don't know what they want'"
+      - "Discovery overfitting: optimizing for the customers you can reach, ignoring the ones you cannot"
+      - "Strategic LARPing: claiming strategic conviction when the real problem is unwillingness to do the discovery work"
+    reversal_conditions:
+      - "Discovery output is producing only incremental feature ideas, no strategic insights"
+      - "Strategic conviction is producing products that nobody buys despite 'vision'"
+      - "Customer interviews consistently validate a direction that leadership intuition rejects"
+    open_questions:
+      - "What is the optimal ratio of discovery time to conviction-driven bet time at different company stages?"
+      - "Can you train strategic product intuition, or is it innate?"
+      - "How do you distinguish between a conviction-driven bet that is failing vs one that needs more time?"
+    confidence: medium
+    walter_provisional_position: ""
+
+  - contradiction_id: CON-0003
+    question: "Should product leadership remain with the founder, or should it transition to a professional product organization as the company scales?"
+    doctrine_a:
+      position: Founder-led product organizations outperform professionalized ones
+      description: >
+        Founders possess context, authority, and emotional investment that professional
+        product leaders cannot replicate. Founder-led product companies make bolder bets,
+        move faster, and maintain product coherence longer. The transition to professional
+        product management often coincides with a decline in product velocity and ambition.
+      key_proponents: Paul Graham (Y Combinator), Marc Andreessen, Ben Horowitz
+    doctrine_b:
+      position: Professional product organizations are necessary for sustainable scaling
+      description: >
+        Founder intuition does not scale past a certain organization size. At some
+        point — typically 50-150 people — the founder becomes a bottleneck. Professional
+        product leaders bring systematic decision-making, portfolio management, talent
+        development, and stakeholder management that a founder cannot provide while
+        also running the company.
+      key_proponents: Reid Hoffman (Blitzscaling), professional CPO community, venture capital operating partners
+    strongest_evidence_a:
+      - source_id: SRC-AR-0004
+        note: "Founder Mode (Paul Graham, 2024) — Argument that founders should manage differently, not hand off"
+      - source_id: SRC-BK-0007
+        note: "The Hard Thing About Hard Things (Horowitz, 2014) — Founder persistence through crisis"
+    strongest_evidence_b:
+      - source_id: SRC-BK-0008
+        note: "Blitzscaling (Hoffman & Yeh, 2018) — Professionalization as scaling requirement"
+      - source_id: SRC-AR-0005
+        note: "Various founder-to-CPO transition postmortems — Slack, Atlassian, Shopify"
+    context_where_a_stronger:
+      - "Pre-product-market-fit companies"
+      - "Companies where the founder IS the product visionary (Jobs, Musk, Chesky tier)"
+      - "Companies under 150 people where founder can still touch every product decision"
+      - "Hard-tech companies where product and technical vision are inseparable"
+    context_where_b_stronger:
+      - "Multi-product companies with 500+ people"
+      - "Companies where the founder's interest and skill is in GTM, fundraising, or operations, not product"
+      - "Regulated industries requiring systematic compliance and risk management"
+      - "Companies where founder product instincts have produced multiple failed bets"
+    failure_modes:
+      - "Founder bottleneck: founder becomes the single point of failure for all product decisions"
+      - "Professional atrophy: hired CPO implements process that kills the product culture"
+      - "Founder-in-denial: founder retains product authority but cannot give it adequate attention"
+      - "CPO-as-scapegoat: founder hires CPO but undermines them, then blames them for failures"
+    reversal_conditions:
+      - "Product velocity is declining and the root cause is founder decision bottleneck"
+      - "Professional product organization is producing process-heavy, low-conviction products"
+      - "Founder has lost product-market intuition as the company's market has evolved"
+    open_questions:
+      - "Is there a durable 'founder product partner' model that preserves founder vision while adding professional capacity?"
+      - "Can 'Founder Mode' as described by Paul Graham be systematized for non-founders?"
+      - "What are the early warning signs that a founder is becoming a product bottleneck?"
+    confidence: low
+    walter_provisional_position: ""
+
+  - contradiction_id: CON-0004
+    question: "Should product growth be driven primarily by the product itself (product-led growth), or should enterprise sales drive product development (sales-led growth)?"
+    doctrine_a:
+      position: Product-led growth creates healthier, more sustainable businesses
+      description: >
+        PLG aligns product value with business value. When users adopt and expand
+        through product experience rather than sales relationships, the business
+        scales more efficiently, customer acquisition costs decline, and the product
+        stays honest — it must be good enough to sell itself. PLG companies have
+        higher net revenue retention and lower churn.
+      key_proponents: OpenView Partners, Blake Bartlett, Wes Bush (Product-Led Growth)
+    doctrine_b:
+      position: Sales-led development builds bigger, stickier enterprise businesses
+      description: >
+        Enterprise customers do not buy through self-serve. They buy through relationships,
+        RFPs, security reviews, and executive sponsorship. Sales-led companies capture
+        higher contract values, build deeper organizational penetration, and create
+        switching costs that product quality alone cannot match. The most valuable
+        software companies in the world (SAP, Oracle, Salesforce) are sales-led.
+      key_proponents: Enterprise SaaS veterans, venture investors in enterprise, traditional enterprise software leaders
+    strongest_evidence_a:
+      - source_id: SRC-BK-0009
+        note: "Product-Led Growth (Bush, 2019) — PLG methodology and case studies"
+      - source_id: SRC-AR-0006
+        note: "OpenView Partners PLG research — Benchmarks and playbooks"
+    strongest_evidence_b:
+      - source_id: SRC-AR-0007
+        note: "Enterprise sales efficiency benchmarks — various SaaS metrics reports"
+      - source_id: SRC-BK-0010
+        note: "Predictable Revenue (Ross & Tyler, 2011) — Outbound enterprise sales methodology"
+    context_where_a_stronger:
+      - "Products with strong individual-user value proposition (Figma, Notion, Slack)"
+      - "SMB and mid-market target segments"
+      - "Highly competitive markets where product quality is the main differentiator"
+      - "Developer tools and API products where self-serve evaluation is the norm"
+    context_where_b_stronger:
+      - "Products requiring organizational behavior change (ERP, HRIS, CRM at scale)"
+      - "Regulated industries with procurement requirements"
+      - "Products where value only emerges at departmental or company-wide deployment"
+      - "High-ACV products where self-serve economics do not work"
+    failure_modes:
+      - "PLG cargo cult: adding a free tier to an enterprise product and calling it PLG"
+      - "Sales-driven feature factory: building whatever the largest prospect asks for"
+      - "PLG ceiling: product-led motion works for initial adoption but stalls on expansion revenue"
+      - "Sales-product disconnect: product team ignores sales because 'we're product-led'"
+    reversal_conditions:
+      - "PLG is producing high signups but zero conversion to paid at scale"
+      - "Sales-led motion is producing churn because product cannot deliver on sales promises"
+      - "The market has shifted and your GTM model no longer matches buyer behavior"
+    open_questions:
+      - "What is the optimal PLG-to-sales hybrid model at different ACV levels?"
+      - "Can enterprise companies successfully add PLG without cannibalizing their sales motion?"
+      - "At what company scale does PLG stop being a competitive advantage and become table stakes?"
+    confidence: medium
+    walter_provisional_position: ""
+
+  - contradiction_id: CON-0005
+    question: "Should products be built as general-purpose platforms that users configure, or as opinionated workflows that enforce a specific way of working?"
+    doctrine_a:
+      position: General platforms maximize value and reach
+      description: >
+        General-purpose platforms allow users to solve problems the product team never
+        anticipated. This creates network effects, ecosystem lock-in, and expansion
+        revenue. The best products — Excel, Salesforce, AWS — are platforms first.
+        Opinionated products limit TAM and constrain power users.
+      key_proponents: Platform product leaders, enterprise platform architects, Salesforce/AWS product philosophy
+    doctrine_b:
+      position: Opinionated workflows produce faster time-to-value
+      description: >
+        Most users do not want a platform. They want a product that solves their
+        problem with minimal configuration. Opinionated products deliver faster
+        time-to-value, reduce cognitive load, produce more consistent outcomes,
+        and cost less to support. Horizontal platforms serve a minority of power
+        users at the expense of the majority.
+      key_proponents: Basecamp/37signals (Jason Fried & DHH), Superhuman (Rahul Vohra), Linear, opinionated SaaS builders
+    strongest_evidence_a:
+      - source_id: SRC-AR-0008
+        note: "AWS product strategy — Platform-first approach and ecosystem economics"
+      - source_id: SRC-BK-0011
+        note: "Platform Revolution (Parker, Van Alstyne & Choudary, 2016) — Platform economics"
+    strongest_evidence_b:
+      - source_id: SRC-BK-0012
+        note: "Getting Real (37signals, 2006) — Opinionated software philosophy"
+      - source_id: SRC-AR-0009
+        note: "Superhuman, Linear, and other opinionated workflow products — Growth through constraint"
+    context_where_a_stronger:
+      - "Developer tools and infrastructure products"
+      - "Enterprise products serving heterogeneous workflows across customers"
+      - "Products where extensibility and integration are core value propositions"
+      - "Mature markets where best practices are not yet standard"
+    context_where_b_stronger:
+      - "Products targeting a specific workflow with known best practice"
+      - "Consumer products where simplicity is the primary value proposition"
+      - "Products where fast time-to-value is critical (trial conversion dependent)"
+      - "Early-stage products that need to prove value before adding flexibility"
+    failure_modes:
+      - "Platform sprawl: so configurable that new users cannot get started"
+      - "Opinionated blindness: enforcing a workflow that does not fit a large segment"
+      - "Configuration as product: shipping configuration options instead of solving problems"
+      - "Rigidity: opinionated product cannot adapt as the market's best practices evolve"
+    reversal_conditions:
+      - "Platform adoption is low because time-to-first-value exceeds user patience"
+      - "Opinionated product is losing large deals because it cannot accommodate customer workflows"
+      - "Support costs from configuration complexity exceed revenue from extensibility"
+    open_questions:
+      - "What is the right point in a product's lifecycle to add platform capabilities?"
+      - "Can a product be opinionated at the workflow layer while being a platform at the data/integration layer?"
+      - "How do you measure whether configuration complexity is actually reducing value delivery?"
+    confidence: medium
+    walter_provisional_position: ""
+
+  - contradiction_id: CON-0006
+    question: "Should product organizations prioritize speed of delivery over assurance of quality and correctness?"
+    doctrine_a:
+      position: Speed is the primary competitive advantage
+      description: >
+        In software, speed compounds. Teams that ship faster learn faster, iterate
+        faster, and capture markets faster. The cost of delay exceeds the cost of
+        imperfection in most cases. The vast majority of assurance activities —
+        extensive QA, multi-stage approvals, architecture review boards — add less
+        value than they claim and primarily serve organizational comfort.
+      key_proponents: Amazon (two-pizza teams, "disagree and commit"), Facebook/Meta (move fast), modern DevOps/CI/CD movement
+    doctrine_b:
+      position: Assurance prevents catastrophic failures that erase all speed advantages
+      description: >
+        Speed without assurance produces technical debt, security vulnerabilities,
+        compliance failures, and customer trust erosion. One major incident —
+        a data breach, a life-threatening bug, a compliance penalty — can destroy
+        years of speed advantage. In regulated industries, speed that sacrifices
+        assurance is not just risky — it is illegal.
+      key_proponents: Regulated industry product leaders, SRE movement (Google), financial services product leadership
+    strongest_evidence_a:
+      - source_id: SRC-BK-0013
+        note: "Accelerate (Forsgren, Humble & Kim, 2018) — Evidence that elite performers ship faster AND more reliably"
+      - source_id: SRC-AR-0010
+        note: "Amazon's 'Speed Matters' (Bezos shareholder letters, 2012-2017)"
+    strongest_evidence_b:
+      - source_id: SRC-BK-0014
+        note: "Site Reliability Engineering (Beyer et al., 2016) — Google's approach to balancing velocity and reliability"
+      - source_id: SRC-AR-0011
+        note: "Knight Capital incident (2012) — A deployment error that destroyed the company in 45 minutes"
+    context_where_a_stronger:
+      - "Pre-product-market-fit companies where learning speed is existential"
+      - "Consumer software where bugs are annoying but not dangerous"
+      - "Internal tools and low-stakes products"
+      - "Companies with strong CI/CD, feature flags, and fast rollback capability"
+    context_where_b_stronger:
+      - "Safety-critical systems (medical devices, aviation, autonomous vehicles)"
+      - "Financial systems processing money or trading"
+      - "Products handling sensitive personal data (HIPAA, GDPR)"
+      - "Enterprise products where customer trust depends on reliability SLAs"
+    failure_modes:
+      - "Speed without learning: shipping fast but not measuring or iterating"
+      - "Assurance theater: ceremonies and approvals that do not actually reduce risk"
+      - "Bimodal dysfunction: creating separate 'fast' and 'safe' delivery tracks that diverge"
+      - "Risk homeostasis: adding assurance that just shifts risk elsewhere rather than reducing it"
+    reversal_conditions:
+      - "Speed is producing customer trust erosion or churn due to quality issues"
+      - "Assurance overhead is preventing any meaningful delivery of value"
+      - "An incident reveals that assurance activities were not actually preventing the failures they were designed for"
+    open_questions:
+      - "What is the minimum viable assurance bar for different product risk categories?"
+      - "Can AI-assisted testing and review meaningfully reduce the speed-assurance trade-off?"
+      - "How do you measure whether your assurance activities are actually reducing risk?"
+    confidence: medium
+    walter_provisional_position: ""
+
+  - contradiction_id: CON-0007
+    question: "Should product decisions be driven by structured experimentation (A/B testing, data), or by experienced product judgment?"
+    doctrine_a:
+      position: Experimentation produces more reliable decisions than judgment
+      description: >
+        Human judgment is systematically biased, overconfident, and inconsistent.
+        Experimentation — A/B testing, controlled rollouts, statistically rigorous
+        evaluation — produces decisions that are more reliable, more defensible, and
+        more scalable than any individual's intuition. The companies that win at
+        scale (Google, Meta, Amazon, Netflix, Booking.com) are experimentation-first.
+      key_proponents: Ron Kohavi (Trustworthy Online Controlled Experiments), Booking.com, Microsoft Experimentation Platform
+    doctrine_b:
+      position: Judgment is necessary because most important decisions cannot be experimentally tested
+      description: >
+        Truly important product decisions — entering a new market, choosing a platform
+        architecture, sunsetting a product — cannot be A/B tested. They are one-way
+        doors. Experimentation works for button colors and conversion optimization,
+        but strategic product decisions require judgment that experimentation cannot
+        provide and may actively undermine by optimizing local metrics at strategic expense.
+      key_proponents: Product strategy practitioners, Shreyas Doshi, various CPOs and VPs of Product
+    strongest_evidence_a:
+      - source_id: SRC-BK-0015
+        note: "Trustworthy Online Controlled Experiments (Kohavi, Tang & Xu, 2020) — Evidence for experimentation at scale"
+      - source_id: SRC-AR-0012
+        note: "Booking.com experimentation culture — 1000+ concurrent experiments"
+    strongest_evidence_b:
+      - source_id: SRC-AR-0013
+        note: "Amazon's one-way vs two-way door decision framework — Not all decisions support experimentation"
+      - source_id: SRC-AR-0014
+        note: "Shreyas Doshi on product sense vs data — The limits of experimentation"
+    context_where_a_stronger:
+      - "Consumer products with large user bases enabling statistical significance"
+      - "Conversion optimization and growth-stage products"
+      - "Products where the main questions are about user behavior, not vision"
+      - "Organizations with strong experimentation infrastructure and culture"
+    context_where_b_stronger:
+      - "Early-stage products without sufficient users for statistical power"
+      - "Strategic decisions about product direction, architecture, or market entry"
+      - "Products where experiment duration would exceed decision timeframe"
+      - "B2B products with small customer counts where n is too small"
+    failure_modes:
+      - "Experimentation myopia: optimizing local metrics that do not aggregate to strategic outcomes"
+      - "Judgment overreach: claiming 'judgment' as cover for not wanting to be measured"
+      - "Experiment infrastructure costs exceeding the value of decisions improved"
+      - "HiPPO reincarnation: experimentation that is systematically designed to validate leadership intuition"
+    reversal_conditions:
+      - "Experimentation is producing statistically significant but strategically irrelevant results"
+      - "Judgment-driven decisions are consistently losing to experimentally-validated alternatives"
+      - "Experimentation infrastructure costs and decision latency exceed the value of improved decisions"
+    open_questions:
+      - "What is the optimal framework for deciding which decisions should be experimental vs judgment-driven?"
+      - "Can AI reduce the cost and increase the scope of experimentation enough to shift the boundary?"
+      - "How do you develop product judgment systematically rather than relying on innate ability?"
+    confidence: medium
+    walter_provisional_position: ""
+
+  - contradiction_id: CON-0008
+    question: "Should product teams have full decision autonomy within their domain, or should enterprise architecture govern cross-team decisions?"
+    doctrine_a:
+      position: Local team autonomy produces faster, better decisions
+      description: >
+        Teams closest to the problem and the customer make better technical and product
+        decisions than a central architecture function. Central architecture teams
+        become bottlenecks, make decisions without understanding local context, and
+        create the illusion of coherence while actually producing rigid systems that
+        teams work around. The best architecture emerges from empowered teams with
+        strong API contracts between them.
+      key_proponents: ThoughtWorks (evolutionary architecture), Netflix (microservices, freedom and responsibility), Amazon (API mandates)
+    doctrine_b:
+      position: Enterprise architecture prevents systemic failures and technical bankruptcy
+      description: >
+        Without architectural governance, teams build incompatible systems, duplicate
+        capabilities, introduce conflicting data models, and accumulate technical
+        debt that eventually paralyzes the organization. Architecture decisions are
+        inherently cross-cutting and long-lived — they cannot be made locally without
+        creating systemic fragility. Someone must own the coherence of the system.
+      key_proponents: Enterprise architects, regulated industry CTOs, legacy modernization practitioners
+    strongest_evidence_a:
+      - source_id: SRC-BK-0016
+        note: "Building Evolutionary Architectures (Ford, Parsons & Kua, 2017) — Architecture without central control"
+      - source_id: SRC-AR-0015
+        note: "Netflix engineering culture — Freedom and responsibility in architecture"
+    strongest_evidence_b:
+      - source_id: SRC-BK-0017
+        note: "Fundamentals of Software Architecture (Richards & Ford, 2020) — Architecture governance tradeoffs"
+      - source_id: SRC-AR-0016
+        note: "Amazon's 'API mandate' (Bezos, 2002) — A centralized architecture decision that enabled team autonomy"
+    context_where_a_stronger:
+      - "Well-defined bounded contexts with clear API contracts"
+      - "Organizations with strong engineering culture and senior engineers on every team"
+      - "Greenfield development where architectural decisions are not yet locked in"
+      - "Products where time-to-market for individual features trumps system-wide coherence"
+    context_where_b_stronger:
+      - "Legacy modernization where technical debt is systemic"
+      - "Platform products where data model consistency is critical"
+      - "Products with regulatory requirements that apply across all teams"
+      - "Organizations where teams lack the seniority to make sound architectural decisions"
+    failure_modes:
+      - "Architecture by accident: local autonomy produces an unmaintainable system with nobody responsible"
+      - "Architecture as gatekeeping: central architecture team uses governance as power rather than enablement"
+      - "API contracts that are too rigid: prescribing implementation details rather than interface contracts"
+      - "Ivory tower architecture: central team makes decisions without understanding the cost of compliance"
+    reversal_conditions:
+      - "Local autonomy has produced a system where cross-cutting changes require touching 10+ services"
+      - "Central architecture has become a bottleneck that teams actively route around"
+      - "A major incident exposes a systemic architectural failure that no individual team could have prevented"
+    open_questions:
+      - "What is the right unit of architectural governance — principles, patterns, constraints, or decisions?"
+      - "Can platform teams provide architectural coherence without becoming gatekeepers?"
+      - "How do you distinguish between healthy architectural diversity and dangerous fragmentation?"
+    confidence: medium
+    walter_provisional_position: ""
+
+  - contradiction_id: CON-0009
+    question: "Should product organizations be highly responsive to customer requests, or should they protect a coherent product vision even when it means saying no?"
+    doctrine_a:
+      position: Customer responsiveness drives retention and expansion
+      description: >
+        Customers who feel heard stay longer, buy more, and advocate for your product.
+        Responsiveness to customer requests — especially from paying enterprise customers —
+        is the most reliable driver of retention and expansion revenue. Products that
+        ignore customer input in favor of internal vision lose to competitors who listen.
+      key_proponents: Customer success leaders, enterprise SaaS companies, Salesforce customer-driven model
+    doctrine_b:
+      position: Coherent product vision requires saying no to most customer requests
+      description: >
+        The job of product leadership is to maintain a coherent product vision, which
+        means saying no to most customer requests. Customers ask for features that
+        serve their specific context, not the product's long-term health. Building
+        what customers ask for produces a feature swamp — a product that does many
+        things poorly rather than a few things well. The best products are curated,
+        not crowdsourced.
+      key_proponents: Steve Jobs (Apple), Brian Chesky (Airbnb), Jason Fried (Basecamp), Des Traynor (Intercom)
+    strongest_evidence_a:
+      - source_id: SRC-AR-0017
+        note: "Salesforce IdeaExchange — Customer-driven product development at enterprise scale"
+      - source_id: SRC-BK-0018
+        note: "The Customer Success Economy (Mehta, Steinman & Murphy, 2020) — Retention economics"
+    strongest_evidence_b:
+      - source_id: SRC-AR-0018
+        note: "Intercom on product vision (Des Traynor) — Saying no as a product leadership discipline"
+      - source_id: SRC-BK-0003
+        note: "Good Strategy Bad Strategy (Rumelt, 2011) — Strategy as choice of what NOT to do"
+    context_where_a_stronger:
+      - "Mature enterprise SaaS with high expansion revenue targets"
+      - "Products where switching costs are low and competition is feature-competitive"
+      - "Products with customer advisory boards representing strategic accounts"
+      - "Markets where the product is a utility and differentiation comes from customer relationship"
+    context_where_b_stronger:
+      - "Consumer products where simplicity and opinionation are the core value proposition"
+      - "Products in a new category where customers do not yet know what good looks like"
+      - "Products where the vision is a genuine source of competitive advantage"
+      - "Resource-constrained products that cannot afford to be everything to everyone"
+    failure_modes:
+      - "Customer-driven feature creep: product becomes a collection of one-off requests with no coherence"
+      - "Vision-driven arrogance: ignoring customer feedback that contains genuine product insights"
+      - "The loudest customer trap: responding only to the most vocal customers, who are not representative"
+      - "Feature request theater: soliciting feedback but never acting on it, eroding customer trust"
+    reversal_conditions:
+      - "Customer NPS is declining with 'they don't listen to us' as a recurring theme"
+      - "Product has accumulated so many features that new users cannot navigate it"
+      - "Vision-driven product is losing large customers who need capabilities that vision explicitly excludes"
+    open_questions:
+      - "What framework reliably distinguishes between feature requests that should be honored vs ignored?"
+      - "How do you set customer expectations about what you will and will not build without damaging relationships?"
+      - "Can 'customer jobs to be done' framework bridge the gap between responsiveness and vision?"
+    confidence: medium
+    walter_provisional_position: ""
+
+  - contradiction_id: CON-0010
+    question: "Should product teams build custom solutions in-house, or should they buy and integrate third-party products and services?"
+    doctrine_a:
+      position: Build when it differentiates, but default to buy
+      description: >
+        Most software should be bought, not built. Building custom software for
+        non-differentiating capabilities consumes scarce engineering resources that
+        should be focused on what makes the product unique. The build decision
+        commits the organization to ongoing maintenance, bug fixes, and feature
+        development that a vendor would handle more efficiently. Default to buy
+        unless the capability is genuinely differentiating.
+      key_proponents: Pragmatic product and engineering leaders, Marty Cagan, enterprise architecture best practice
+    doctrine_b:
+      position: Build creates strategic control and avoids vendor dependency
+      description: >
+        Buying creates dependency on vendors whose incentives may not align with
+        yours. Vendors change pricing, deprecate features, get acquired, or go
+        out of business. Building gives you control over your destiny, avoids
+        integration fragility, and builds institutional capability. The build-vs-buy
+        calculus undervalues the long-term cost of vendor lock-in and overvalues
+        the short-term cost of building.
+      key_proponents: 37signals (independence philosophy), Amazon (build vs buy culture), Netflix (build for control)
+    strongest_evidence_a:
+      - source_id: SRC-AR-0019
+        note: "Build vs Buy Decision Framework — Various enterprise architecture sources"
+      - source_id: SRC-AR-0020
+        note: "Stripe, Twilio, and the API economy — Buy what is not differentiating"
+    strongest_evidence_b:
+      - source_id: SRC-BK-0019
+        note: "It Doesn't Have to Be Crazy at Work (Fried & Hansson, 2018) — Independence and control philosophy"
+      - source_id: SRC-AR-0021
+        note: "Netflix building its own CDN (Open Connect) — Strategic control through build"
+    context_where_a_stronger:
+      - "Early-stage companies with limited engineering capacity"
+      - "Non-differentiating commodity capabilities (auth, payments, email, hosting)"
+      - "Products that need to move fast and validate a market"
+      - "Capabilities where vendor products are mature, competitive, and reliable"
+    context_where_b_stronger:
+      - "Capabilities that are core to the product's differentiation"
+      - "Markets where vendor lock-in risk is high (single vendor, high switching cost)"
+      - "Products requiring deep customization that no vendor supports"
+      - "Companies with strong engineering culture and capacity"
+    failure_modes:
+      - "Not-invented-here syndrome: building everything, even commodity capabilities"
+      - "Vendor sprawl: buying so many tools that integration costs exceed build costs"
+      - "Buy-and-abandon: purchasing a tool but failing to invest in integration and adoption"
+      - "Build without maintenance plan: underestimating the TCO of custom-built capabilities"
+    reversal_conditions:
+      - "A bought solution has become a gating constraint on differentiation"
+      - "A built solution is consuming disproportionate maintenance effort"
+      - "A vendor has changed pricing or terms to the point where build becomes economically rational"
+    open_questions:
+      - "How do you account for the optionality value of owning a capability that COULD become differentiating?"
+      - "What is the right threshold for 'differentiating enough to build'?"
+      - "How does the build-vs-buy calculus change with AI-assisted development reducing build costs?"
+    confidence: high
+    walter_provisional_position: ""
+
+  - contradiction_id: CON-0011
+    question: "Should product workflows keep a human in the loop for decisions, or automate fully to maximize efficiency and scale?"
+    doctrine_a:
+      position: Human-in-the-loop is necessary for safety, judgment, and accountability
+      description: >
+        Automated systems make errors that humans would catch — and some of those
+        errors are catastrophic. Human-in-the-loop provides safety, handles edge
+        cases that automation cannot anticipate, maintains accountability (someone
+        must be responsible), and preserves the learning signal that makes systems
+        improve. In regulated industries, human oversight is often a legal requirement.
+      key_proponents: Regulated industry practitioners, AI safety researchers, HCI researchers
+    doctrine_b:
+      position: Automation is the goal — humans in the loop are cost, latency, and error
+      description: >
+        Humans are slow, expensive, inconsistent, and biased. The goal of product
+        development should be full automation wherever possible. Human-in-the-loop
+        is a transitional state on the way to full automation. Systems that keep
+        humans in the loop permanently are leaving value on the table and will be
+        outcompeted by systems that do not.
+      key_proponents: Automation-first product leaders, AI-native product builders, Stripe, Amazon fulfillment
+    strongest_evidence_a:
+      - source_id: SRC-AR-0022
+        note: "AI safety and alignment research — Human oversight requirements for high-stakes decisions"
+      - source_id: SRC-AR-0023
+        note: "FDA regulatory framework for AI/ML in medical devices — Human oversight requirements"
+    strongest_evidence_b:
+      - source_id: SRC-AR-0024
+        note: "Stripe's automation philosophy — Removing humans from payment operations"
+      - source_id: SRC-BK-0020
+        note: "The Automatic Customer (Warrillow, 2015) — Business case for full automation"
+    context_where_a_stronger:
+      - "High-stakes decisions (medical diagnosis, credit adjudication, criminal justice)"
+      - "Edge-case-rich domains where automation failure modes are expensive"
+      - "Regulated industries requiring explainability and accountability"
+      - "Products where user trust depends on transparency of decision-making"
+    context_where_b_stronger:
+      - "High-volume, low-stakes decisions (spam filtering, content recommendation)"
+      - "Operational workflows with clear correctness criteria (payment processing)"
+      - "Products where speed and scale are the primary value proposition"
+      - "Systems that perform measurably better than humans on the target task"
+    failure_modes:
+      - "Human-in-the-loop as automation-washing: humans are in the loop but cannot meaningfully intervene"
+      - "Automation at all costs: automating decisions that should not be automated (medical, legal, safety)"
+      - "Human overreliance: humans trust automated recommendations too much and stop exercising judgment"
+      - "Automation without observability: system operates without anyone understanding what it is doing"
+    reversal_conditions:
+      - "The human in the loop is adding latency without measurably improving outcomes"
+      - "Automated decisions are producing errors that humans would not have made, at an unacceptable rate"
+      - "The cost of human review exceeds the value of errors prevented"
+    open_questions:
+      - "What is the right framework for determining the acceptable error rate for full automation by domain?"
+      - "Can AI systems be designed to know when they are uncertain and escalate to humans appropriately?"
+      - "How does the human role evolve from operator to supervisor to auditor as automation increases?"
+    confidence: medium
+    walter_provisional_position: ""
+
+  - contradiction_id: CON-0012
+    question: "Should the organization operate from a single unified product roadmap, or should each team maintain its own independent roadmap?"
+    doctrine_a:
+      position: One unified roadmap provides coherence, alignment, and strategic focus
+      description: >
+        A single roadmap forces the organization to make hard trade-offs, ensures
+        that everyone is working on the most important things, and provides a single
+        source of truth for stakeholders, customers, and the board. Independent team
+        roadmaps produce fragmentation, duplicate effort, and make it impossible to
+        sequence cross-cutting work. Without a single roadmap, there is no real
+        product strategy — only a collection of team-level backlogs.
+      key_proponents: Product strategy practitioners, portfolio management advocates, large enterprise PMOs
+    doctrine_b:
+      position: Independent team roadmaps enable speed, ownership, and local optimization
+      description: >
+        A single product roadmap is a fiction. The organization is too complex,
+        the market too dynamic, and the teams too different for one document to
+        meaningfully represent reality. A single roadmap creates an illusion of
+        control, becomes political, and wastes enormous coordination energy that
+        would be better spent on building. Teams should own their roadmaps, with
+        lightweight cross-team coordination where necessary.
+      key_proponents: Agile and Lean practitioners, Spotify model advocates, team autonomy champions
+    strongest_evidence_a:
+      - source_id: SRC-AR-0025
+        note: "Product roadmap best practices — Various sources on portfolio-level prioritization"
+      - source_id: SRC-BK-0021
+        note: "Escaping the Build Trap (Perri, 2018) — Strategy vs independent team backlogs"
+    strongest_evidence_b:
+      - source_id: SRC-AR-0026
+        note: "Marty Cagan on roadmap myths — Roadmaps as commitment rather than hypothesis"
+      - source_id: SRC-AR-0027
+        note: "Spotify engineering culture — Squads owning their own backlogs"
+    context_where_a_stronger:
+      - "Small to mid-size companies where coordination overhead is manageable"
+      - "Products where cross-team dependencies are frequent and high-stakes"
+      - "Organizations with a strong product strategy function"
+      - "Stakeholder environments (board, investors, large customers) that require roadmap clarity"
+    context_where_b_stronger:
+      - "Large organizations where a single roadmap would be too abstract to be useful"
+      - "Products serving distinct and independent customer segments"
+      - "Organizations with strong OKR or outcomes-based alignment"
+      - "Teams that have demonstrated ability to make good autonomous decisions"
+    failure_modes:
+      - "The roadmap becomes a promise: single roadmap creates false certainty and commitment"
+      - "Every team is an island: independent roadmaps produce systemic incoherence"
+      - "Roadmap as control mechanism: single roadmap is used to deny teams agency"
+      - "Roadmap fatigue: the organization updates the roadmap more than it ships product"
+    reversal_conditions:
+      - "Single roadmap is creating bureaucratic overhead disproportionate to coordination value"
+      - "Independent roadmaps have produced customer-visible fragmentation"
+      - "A major initiative failed because teams could not coordinate across independent roadmaps"
+    open_questions:
+      - "Is there a 'roadmap hierarchy' model that works — strategic themes at the top, team roadmaps at the bottom?"
+      - "At what organizational size does a single roadmap become counterproductive?"
+      - "How do you maintain enough coherence with independent roadmaps to satisfy board and customer expectations?"
+    confidence: medium
+    walter_provisional_position: ""
+
+  - contradiction_id: CON-0013
+    question: "Is the product manager primarily a builder who is deeply involved in creation, or an organizational multiplier who enables others to build?"
+    doctrine_a:
+      position: The PM is a builder — deeply involved in product creation
+      description: >
+        The best PMs are builders. They prototype, they write PRDs with precision,
+        they understand the technology well enough to contribute to architecture
+        discussions, and they are deeply involved in the details of what gets built.
+        PMs who position themselves as 'organizational multipliers' often use that
+        framing to avoid the hard work of understanding the product deeply. The
+        PM-as-facilitator model produces mediocre products because nobody is truly
+        sweating the details.
+      key_proponents: Shreyas Doshi, product craft practitioners, early-stage and technical PMs
+    doctrine_b:
+      position: The PM is an organizational multiplier who enables the team to build
+      description: >
+        At any significant scale, the PM cannot and should not be the most
+        knowledgeable person about every detail. The PM's leverage comes from
+        enabling great decisions across the team — framing problems, unblocking
+        engineers and designers, aligning stakeholders, managing dependencies,
+        creating the conditions for the team to do its best work. The PM-as-builder
+        model does not scale past a single team and creates a bottleneck.
+      key_proponents: Marty Cagan (SVPG), larger-company PM leaders, John Cutler
+    strongest_evidence_a:
+      - source_id: SRC-AR-0028
+        note: "Shreyas Doshi on PM craft — Deep involvement in product creation as PM superpower"
+      - source_id: SRC-AR-0029
+        note: "Lenny's Podcast PM interviews — Recurring theme of builder PMs at high-performing companies"
+    strongest_evidence_b:
+      - source_id: SRC-BK-0001
+        note: "Inspired (Cagan, 2017) — PM as enabler of cross-functional teams"
+      - source_id: SRC-AR-0030
+        note: "John Cutler on PM leverage — Leverage through enablement, not individual contribution"
+    context_where_a_stronger:
+      - "Early-stage companies where PMs need to do everything"
+      - "Technical products where domain expertise is the primary PM value-add"
+      - "Small teams where the PM can reasonably be the most knowledgeable person"
+      - "Products in highly technical or specialized domains (AI, developer tools, fintech)"
+    context_where_b_stronger:
+      - "Large organizations where the PM manages across multiple teams"
+      - "Products where the domain is well-understood and the challenge is coordination"
+      - "PMs managing PMs — group PM, director, VP levels"
+      - "Organizations with strong engineering and design leadership"
+    failure_modes:
+      - "Builder bottleneck: PM is doing work that engineers or designers should own"
+      - "Facilitator emptiness: PM adds no unique value beyond scheduling meetings"
+      - "Builder micromanagement: PM's deep involvement stifles team ownership"
+      - "Multiplier abdication: PM uses 'empowerment' as excuse for not understanding the product"
+    reversal_conditions:
+      - "The PM as builder has become a bottleneck — decisions and details cannot move without them"
+      - "The PM as multiplier is producing outputs (meetings, docs, processes) but no product outcomes"
+      - "The team does not understand the product vision because the PM has not articulated it clearly"
+    open_questions:
+      - "Is the builder-multiplier tension actually a career stage progression (builder early, multiplier later)?"
+      - "What specific activities should a PM never delegate regardless of level?"
+      - "Can a PM be a multiplier at the organizational level while remaining a builder at the craft level?"
+    confidence: low
+    walter_provisional_position: ""
+
+last_updated: "2026-08-01"
+next_review: "2026-11-01"
