@@ -1,0 +1,50 @@
+---
+import Base from "../../../layouts/Base.astro";
+import { workflows } from "../../../data/skillWorkflows.json";
+
+export async function getStaticPaths() {
+  return workflows.map((w) => ({ params: { id: w.id }, props: { w } }));
+}
+
+const { w } = Astro.props;
+const title = w.title;
+const desc = w.decision || w.entryConditions.split("\n")[0].slice(0, 150) || "End-to-end product decision workflow for AI agents.";
+---
+<Base
+  title={`${title} — workflow for AI product managers`}
+  description={desc}
+  active="skills"
+>
+  <a href="/skills/" class="muted" style="font-size:14px">&larr; Skills index</a>
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> › <a href="/skills/">Skills</a> › <a href="/skills/workflows/">Workflows</a> › <span>{title}</span>
+  </nav>
+  <article class="doc-page">
+    <h1>{title}</h1>
+    {w.decision ? <div class="claim-block">{w.decision}</div> : null}
+    <h2>Entry conditions</h2>
+    <div class="pre-wrap">{w.entryConditions}</div>
+    <h2>Skill chain</h2>
+    {(() => {
+      const chain = (w.body.match(/^\| \d+(?:\.\d+)? \| `([a-z0-9-]+)`/gm) || [])
+        .map((line) => line.match(/`([a-z0-9-]+)`/)[1]);
+      return (
+        <ol class="chain">
+          {chain.map((id) => <li><a href={`/skills/${id}/`}>{id.replace(/-/g, " ")}</a></li>)}
+        </ol>
+      );
+    })()}
+    <h2>Final output</h2>
+    <div class="pre-wrap">{w.finalOutput}</div>
+  </article>
+  <p class="muted" style="font-size:13px">
+    <a href="/skills/workflows/">All workflows</a> · full workflow file lives at <code>skills/workflows/{w.id}.md</code>
+  </p>
+</Base>
+
+<style>
+  .crumbs { font-size: 13px; color: var(--ink-3); margin: 0.5rem 0 1rem; }
+  .crumbs a { color: var(--ink-3); }
+  .pre-wrap { white-space: pre-wrap; font-size: 0.95rem; }
+  .chain { padding-left: 1.2rem; }
+</style>

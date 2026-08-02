@@ -1,0 +1,142 @@
+---
+import Base from "../../layouts/Base.astro";
+import { skills } from "../../data/skills.json";
+import { workflows } from "../../data/skillWorkflows.json";
+
+const jobs = [
+  { job: '"We should build X" — no problem statement', skill: "frame-product-problem", prompt: "Run the frame-product-problem skill. Input: we should build X for Y. Return the problem frame." },
+  { job: "Interviews done, notes unsorted", skill: "synthesize-customer-discovery", prompt: "Run the synthesize-customer-discovery skill. Input: interview notes. Weight the themes." },
+  { job: "More opportunities than capacity", skill: "prioritize-product-opportunities", prompt: "Run the prioritize-product-opportunities skill. Input: backlog and capacity. Rank it." },
+  { job: '"We will see if it works"', skill: "design-product-experiment", prompt: "Run the design-product-experiment skill. Input: the change and the assumption. Return the experiment charter." },
+  { job: "Sales / Product / Engineering stuck", skill: "align-stakeholders-on-decision", prompt: "Run the align-stakeholders-on-decision skill. Input: each side's position. What is going on?" },
+  { job: "Is PMF healthy or decaying?", skill: "assess-product-market-fit-health", prompt: "Run the assess-product-market-fit-health skill. Input: archetype and leading signals." },
+  { job: "The actual fund / ship / kill call", skill: "make-go-no-go-call", prompt: "Run the make-go-no-go-call skill. Input: the initiative, strategy, and evidence." },
+  { job: "Is this bet a thesis or a belief?", skill: "pressure-test-product-thesis", prompt: "Run the pressure-test-product-thesis skill. Input: the claim as stated." },
+  { job: '"Our change caused the improvement"', skill: "conduct-causal-confidence-review", prompt: "Run the conduct-causal-confidence-review skill. Input: the claim D caused O." },
+  { job: "AI feature: demos great, no evaluation", skill: "check-ai-evaluation-contract", prompt: "Run the check-ai-evaluation-contract skill. Input: the AI feature and its stage." },
+  { job: '"It is reversible" — verify', skill: "classify-decision-reversibility", prompt: "Run the classify-decision-reversibility skill. Input: the decision and its commitment." },
+  { job: "Before a Type-1 commitment", skill: "run-case-based-premortem", prompt: "Run the run-case-based-premortem skill. Input: the decision and its assumptions." },
+  { job: "A decision is defended with the data", skill: "audit-decision-evidence", prompt: "Run the audit-decision-evidence skill. Input: the decision and its claims." },
+  { job: "Two stakeholders see the same data differently", skill: "scan-contradictions-assumptions", prompt: "Run the scan-contradictions-assumptions skill. Input: the decision and both positions." },
+];
+
+const skillIndex = Object.fromEntries(skills.map((s) => [s.id, s]));
+const starter = ["frame-product-problem", "synthesize-customer-discovery", "prioritize-product-opportunities", "design-product-experiment", "align-stakeholders-on-decision", "assess-product-market-fit-health", "classify-decision-reversibility", "make-go-no-go-call"];
+---
+<Base
+  title="Product Management Skills for AI Agents — Evidence-Backed Decisions"
+  description="14 evidence-backed product management skills for Claude Code, Codex, Cursor, and OpenCode. Frame problems, synthesize discovery, prioritize, design experiments, and make defensible GO/NO-GO decisions."
+  active="skills"
+>
+  <section class="hero">
+    <h1>Product Management Skills for AI Agents</h1>
+    <p class="hero-sub">
+      Evidence-backed product decisions, executable by Claude Code, Codex, Cursor, OpenCode,
+      and ChatGPT. Every skill returns a decision artifact with a next action — in fast mode
+      (reversible calls) or full mode (one-way doors).
+    </p>
+    <div class="install-bar">
+      <code>npx skills add Lucumax/product-academy</code>
+      <a href="#install" class="btn">See all install options</a>
+    </div>
+  </section>
+
+  <section id="finder">
+    <h2>Find your skill by job</h2>
+    <div class="job-grid">
+      {jobs.map((j) => {
+        const s = skillIndex[j.skill];
+        return (
+          <a class="job-card" href={`/skills/${j.skill}/`}>
+            <h3>{j.job}</h3>
+            <p>{s?.description}</p>
+            <code class="prompt">{j.prompt}</code>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+  <section id="modes">
+    <h2>Fast mode vs full mode</h2>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Fast mode</h3>
+        <p>For <strong>reversible</strong> decisions: a few questions, a provisional verdict,
+          explicit uncertainty, and a next action. No research ceremony.</p>
+      </div>
+      <div class="card">
+        <h3>Full mode</h3>
+        <p>For <strong>one-way doors</strong>: evidence audit, contradiction review,
+          causal-confidence assessment, and a premortem where required.</p>
+      </div>
+    </div>
+    <p class="muted">Rule of thumb: reversible → fast; irreversible → full. Every skill ships both.</p>
+  </section>
+
+  <section id="all-skills">
+    <h2>All 14 skills</h2>
+    <div class="grid grid-3">
+      {skills.map((s) => (
+        <a class="card skill-card" href={`/skills/${s.id}/`}>
+          <span class="chip">{s.type}</span>
+          <h3 class="mt-1" style="font-size:0.95rem">{s.name}</h3>
+          <p class="muted" style="font-size:0.85rem">{s.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section id="workflows">
+    <h2>End-to-end workflows</h2>
+    <div class="grid grid-2">
+      {workflows.map((w) => (
+        <a class="card" href={`/skills/workflows/${w.id}/`}>
+          <h3 class="mt-1">{w.title}</h3>
+          {w.decision ? <p class="muted" style="font-size:0.9rem">{w.decision}</p> : null}
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section id="example">
+    <h2>A worked example</h2>
+    <div class="card">
+      <p><em>Scenario:</em> "We should build an AI triage assistant. Sales loves it."</p>
+      <p>Without the skills: three meetings arguing about the feature. With
+        <a href="/skills/pressure-test-product-thesis/"><code>pressure-test-product-thesis</code></a>
+        and <a href="/skills/check-ai-evaluation-contract/"><code>check-ai-evaluation-contract</code></a>:
+        a <code>BELIEF-PRESENTED-AS-THESIS</code> verdict (no falsification condition, demo-only
+        evidence) and a <code>NO-CONTRACT</code> verdict. <strong>Next action:</strong> write the
+        falsification test and the evaluation contract before any build spend.</p>
+    </div>
+  </section>
+
+  <section id="install">
+    <h2>Install</h2>
+    <ul>
+      <li><strong>Any agent (native CLI):</strong> <code>npx skills add Lucumax/product-academy</code></li>
+      <li><strong>Claude Code:</strong> <code>/plugin marketplace add Lucumax/product-academy</code> then <code>/plugin install evidence-pack</code></li>
+      <li><strong>ZIP:</strong> download <a href="https://github.com/Lucumax/product-academy/releases/latest">product-academy-skills-all.zip</a> (14 skills) or the <strong>8-skill starter pack</strong></li>
+      <li><strong>Codex / Cursor:</strong> unzip the ZIP into <code>.agents/skills/</code> or <code>.cursor/skills/</code></li>
+    </ul>
+    <p class="muted">Install statuses are verified in the <a href="/skills/install/">installation matrix</a>.</p>
+  </section>
+</Base>
+
+<style>
+  .hero { padding: 2rem 0 1rem; }
+  .hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.1; }
+  .hero-sub { font-size: 1.05rem; color: var(--ink-2); max-width: 60ch; }
+  .install-bar { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin: 1.25rem 0; }
+  .install-bar code { background: var(--surface-2); border: 1px solid var(--line); padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); font-size: 0.9rem; }
+  .btn { background: var(--accent); color: #fff; padding: 0.5rem 1rem; border-radius: var(--radius-sm); text-decoration: none; font-weight: 600; }
+  .job-grid { display: grid; gap: 0.75rem; }
+  .job-card { display: block; border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0.9rem 1rem; text-decoration: none; background: var(--surface); }
+  .job-card:hover { border-color: #d9d2c4; box-shadow: 0 2px 10px rgb(0 0 0 / 0.06); }
+  .job-card h3 { margin: 0 0 0.25rem; font-size: 0.95rem; }
+  .job-card p { margin: 0 0 0.5rem; font-size: 0.85rem; color: var(--ink-2); }
+  .prompt { font-size: 0.78rem; color: var(--ink-3); }
+  section { margin: 2rem 0; }
+  .skill-card { min-height: 120px; }
+</style>

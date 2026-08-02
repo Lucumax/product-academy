@@ -12,6 +12,7 @@
     "check": "astro check"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
     "astro": "^5.1.0",
     "markdown-it": "^15.0.0",
     "pagefind": "^1.2.0",

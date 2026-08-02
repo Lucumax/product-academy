@@ -4,10 +4,18 @@ interface Props {
   title?: string;
   description?: string;
   active?: string;
+  noindex?: boolean;
+  ogImage?: string;
 }
-const { title = "Product Academy", description = "", active = "" } = Astro.props;
+const { title = "Product Academy", description = "", active = "", noindex = false } = Astro.props;
+const site = "https://lucumax.github.io/product-academy";
+const path = Astro.url.pathname.endsWith("/") ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const canonical = `${site}${path}`;
+const ogImage = Astro.props.ogImage ?? `${site}/og-skills.png`;
+const ogTitle = title.includes("Product Academy") ? title : `${title} | Product Academy`;
 const nav = [
   { href: "/", label: "Start", id: "home" },
+  { href: "/skills/", label: "Skills", id: "skills" },
   { href: "/paths/", label: "Journeys", id: "paths" },
   { href: "/principles/", label: "Doctrine", id: "principles" },
   { href: "/simulator/", label: "Simulator", id: "simulator" },
@@ -24,8 +32,21 @@ import ContinueLearning from "../components/ContinueLearning.astro";
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <title>{ogTitle}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : null}
+    <link rel="icon" type="image/svg+xml" href={`${site}/favicon.svg`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Product Academy" />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -57,7 +78,8 @@ import ContinueLearning from "../components/ContinueLearning.astro";
     <footer class="site-footer">
       <div class="footer-inner">
         <p>
-          Product Academy — an evidence-backed product leadership curriculum.
+          Product Academy — an evidence-backed product leadership curriculum with
+          <a href="/skills/"> product management skills for AI agents</a>.
           Content from the Product Leadership Academy.
         </p>
         <p class="footer-notes">

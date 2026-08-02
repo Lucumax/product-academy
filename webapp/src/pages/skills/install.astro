@@ -1,0 +1,42 @@
+---
+import Base from "../../layouts/Base.astro";
+---
+<Base
+  title="Install the Product Management Skills for AI Agents"
+  description="Install the Product Academy skill pack with npx skills add, the Claude Code marketplace, or the release ZIP for Codex, Cursor, OpenCode, and ChatGPT."
+  active="skills"
+>
+  <a href="/skills/" class="muted" style="font-size:14px">&larr; Skills index</a>
+  <h1>Install the skills</h1>
+
+  <section>
+    <h2>Native CLI (any agent)</h2>
+    <pre><code>npx skills add Lucumax/product-academy</code></pre>
+    <p class="muted" style="font-size:0.85rem">Verified end-to-end: lists the 14 skills and
+      installs any selection into your agent's skills directory (Codex, OpenCode, Claude Code, and more).</p>
+  </section>
+
+  <section>
+    <h2>Claude Code</h2>
+    <pre><code>/plugin marketplace add Lucumax/product-academy
+/plugin install evidence-pack</code></pre>
+  </section>
+
+  <section>
+    <h2>ZIP download (Codex, Cursor, Claude.ai/Desktop, ChatGPT)</h2>
+    <p>Download <a href="https://github.com/Lucumax/product-academy/releases/latest">product-academy-skills-all.zip</a>
+      (14 skills) or the 8-skill starter pack, then:</p>
+    <ul>
+      <li><strong>Codex:</strong> unzip into <code>.agents/skills/</code></li>
+      <li><strong>Cursor:</strong> unzip into <code>.cursor/skills/</code></li>
+      <li><strong>Claude.ai / Desktop / ChatGPT:</strong> upload the ZIP as project knowledge</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Install status</h2>
+    <p>The full, per-path test record (commands, results, and statuses) is in the
+      <a href="https://github.com/Lucumax/product-academy/blob/main/docs/installation/INSTALLATION_MATRIX.md">installation matrix</a>.
+      Nothing is advertised as working that has not been run.</p>
+  </section>
+</Base>

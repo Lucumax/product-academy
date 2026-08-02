@@ -1,0 +1,87 @@
+---
+import Base from "../../layouts/Base.astro";
+import Markdown from "../../components/Markdown.astro";
+import { skills } from "../../data/skills.json";
+import { workflows } from "../../data/skillWorkflows.json";
+
+export async function getStaticPaths() {
+  return skills.map((s) => ({ params: { id: s.id }, props: { s } }));
+}
+
+const { s } = Astro.props;
+const idx = skills.findIndex((x) => x.id === s.id);
+const prevS = idx > 0 ? skills[idx - 1] : null;
+const nextS = idx < skills.length - 1 ? skills[idx + 1] : null;
+
+const relatedIds = (s.relatedSkills || "")
+  .split(/[\n`,\-]+/)
+  .map((x) => x.trim().replace(/^[^a-z0-9]|[^a-z0-9]$/g, ""))
+  .filter((x) => x && skills.some((o) => o.id === x));
+const related = relatedIds.map((id) => skills.find((o) => o.id === id)).filter(Boolean);
+
+const title = s.name.replace(/-/g, " ");
+const desc = s.description.split(".")[0].slice(0, 155) || s.description.slice(0, 155);
+---
+<Base
+  title={`${title} — AI skill for product managers`}
+  description={desc}
+  active="skills"
+>
+  <a href="/skills/" class="muted" style="font-size:14px">&larr; Skills index</a>
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> › <a href="/skills/">Skills</a> › <span>{title}</span>
+  </nav>
+  <article class="doc-page">
+    <div class="flex-between mb-2">
+      <span class="chip">{s.type}</span>
+      <span class="chip">v{s.version}</span>
+    </div>
+    <h1>{title}</h1>
+    <p class="claim-block">{s.description}</p>
+
+    {s.bestFor.length > 0 && (
+      <>
+        <h2>Use when</h2>
+        <ul>
+          {s.bestFor.map((b) => <li>{b}</li>)}
+        </ul>
+      </>
+    )}
+
+    <div class="quick-prompt card">
+      <h3>Try it</h3>
+      <p class="muted" style="font-size:0.85rem">Copy this into your agent (Claude Code, Codex, Cursor, OpenCode, ChatGPT):</p>
+      <code>Run the {s.name} skill. Input: [your situation]. Return the verdict and a next action.</code>
+    </div>
+
+    <h2>Skill contract</h2>
+    <Markdown content={s.body} />
+  </article>
+
+  {related.length > 0 && (
+    <section class="related">
+      <h2>Related skills</h2>
+      <div class="grid grid-3">
+        {related.slice(0, 6).map((r) => (
+          <a class="card" href={`/skills/${r.id}/`}>
+            <h3 class="mt-1" style="font-size:0.9rem">{r.name.replace(/-/g, " ")}</h3>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <nav class="pager" aria-label="Pagination">
+    {prevS ? <a href={`/skills/${prevS.id}/`}>&larr; {prevS.name.replace(/-/g, " ")}</a> : <span />}
+    {nextS ? <a href={`/skills/${nextS.id}/`}>{nextS.name.replace(/-/g, " ")} &rarr;</a> : <span />}
+  </nav>
+</Base>
+
+<style>
+  .crumbs { font-size: 13px; color: var(--ink-3); margin: 0.5rem 0 1rem; }
+  .crumbs a { color: var(--ink-3); }
+  .quick-prompt { margin: 1.25rem 0; }
+  .quick-prompt code { display: block; font-size: 0.85rem; white-space: pre-wrap; }
+  .related { margin: 2rem 0; }
+  .pager { display: flex; justify-content: space-between; margin-top: 2.5rem; font-size: 0.9rem; }
+</style>

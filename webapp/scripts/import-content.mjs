@@ -416,6 +416,91 @@ function routeForTarget(target) {
 }
 
 // ---------------------------------------------------------------------------
+// Agent skills + workflows (skills/)
+// ---------------------------------------------------------------------------
+
+const SKILLS_SKIP_DIRS = new Set([
+  "_shared", "_template", "quality", "evals", "workflows", "__pycache__",
+]);
+
+function frontmatterData(text) {
+  const m = text.match(/^---\n([\s\S]*?)\n---/);
+  if (!m) return null;
+  try {
+    return YAML.parse(m[1]);
+  } catch (e) {
+    console.error("  DEBUG YAML error:", e.message);
+    return null;
+  }
+}
+
+function skillSection(text, name) {
+  const re = new RegExp(`## ${name}\\n([\\s\\S]*?)(?=\\n## |$)`, "i");
+  const m = text.match(re);
+  return m ? m[1].trim() : "";
+}
+
+function parseSkills() {
+  const dir = path.join(SOURCE, "skills");
+  if (!fs.existsSync(dir)) return [];
+  const skills = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (!entry.isDirectory() || SKILLS_SKIP_DIRS.has(entry.name)) continue;
+    const skillMd = path.join(dir, entry.name, "SKILL.md");
+    if (!fs.existsSync(skillMd)) continue;
+    const raw = readText(skillMd).replace(/\r\n/g, "\n"); // normalize CRLF (Windows checkouts)
+    const fm = frontmatterData(raw);
+    if (!fm || !fm.name) continue;
+    if (fm.deprecated) continue; // deprecated routing stubs are not offered
+    skills.push({
+      id: entry.name,
+      name: fm.name,
+      description: fm.description || "",
+      type: fm.type || "",
+      version: fm.version || "",
+      bestFor: Array.isArray(fm.best_for) ? fm.best_for : [],
+      doctrine: Array.isArray(fm.doctrine) ? fm.doctrine : [],
+      license: fm.license || "",
+      purpose: skillSection(raw, "Purpose"),
+      useWhen: skillSection(raw, "Use when"),
+      doNotUseWhen: skillSection(raw, "Do not use when"),
+      fastMode: skillSection(raw, "Fast mode"),
+      fullMode: skillSection(raw, "Full mode"),
+      verdict: skillSection(raw, "Verdict Contract").split("\n")[0].replace(/\*\*/g, ""),
+      workedExample: skillSection(raw, "Worked example"),
+      relatedSkills: skillSection(raw, "Related Skills"),
+      body: raw,
+    });
+  }
+  skills.sort((a, b) => a.id.localeCompare(b.id));
+  return skills;
+}
+
+function parseSkillWorkflows() {
+  const dir = path.join(SOURCE, "skills", "workflows");
+  if (!fs.existsSync(dir)) return [];
+  const workflows = [];
+  for (const f of fs.readdirSync(dir)) {
+    if (!f.endsWith(".md")) continue;
+    const text = readText(path.join(dir, f));
+    const titleMatch = text.match(/^# (.+)$/m);
+    const decisionMatch = text.match(/^Decision: (.+)$/m);
+    const entryMatch = text.match(/^## Entry conditions\n([\s\S]*?)(?=\n## )/m);
+    const outputMatch = text.match(/^## Final output\n([\s\S]*?)(?=\n## )/m);
+    workflows.push({
+      id: f.replace(/\.md$/, ""),
+      title: titleMatch ? titleMatch[1].trim() : f.replace(/\.md$/, ""),
+      decision: decisionMatch ? decisionMatch[1].trim() : "",
+      entryConditions: entryMatch ? entryMatch[1].trim() : "",
+      finalOutput: outputMatch ? outputMatch[1].trim() : "",
+      body: text,
+    });
+  }
+  workflows.sort((a, b) => a.id.localeCompare(b.id));
+  return workflows;
+}
+
+// ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 
@@ -465,6 +550,12 @@ function main() {
   writeJson("claims.json", { generatedAt: new Date().toISOString(), claims, bySource: claimsBySource });
   writeJson("paths.json", { generatedAt: new Date().toISOString(), paths });
   writeJson("manifest.json", { generatedAt: new Date().toISOString(), manifest });
+
+  const skills = parseSkills();
+  const skillWorkflows = parseSkillWorkflows();
+  console.log(`  skills: ${skills.length} | workflows: ${skillWorkflows.length}`);
+  writeJson("skills.json", { generatedAt: new Date().toISOString(), skills });
+  writeJson("skillWorkflows.json", { generatedAt: new Date().toISOString(), workflows: skillWorkflows });
 
   console.log("  done.");
 }

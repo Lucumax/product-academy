@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lucumax.github.io/product-academy/sitemap-index.xml
