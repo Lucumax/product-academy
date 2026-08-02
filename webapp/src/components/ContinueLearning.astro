@@ -1,0 +1,109 @@
+---
+// ContinueLearning: a persistent "where you are / what's next" banner.
+// Reads progress from localStorage and links to the current step or the
+// start of the default path.
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+<div id="continue-learning" class:list={["continue-learning", { compact }]} hidden>
+  <div class="cl-inner">
+    <span class="cl-orb" aria-hidden="true"></span>
+    <div class="cl-text">
+      <span class="cl-kicker">Continue learning</span>
+      <span id="cl-title" class="cl-title">Loading…</span>
+    </div>
+    <a id="cl-link" class="cl-cta" href="/paths/">Resume →</a>
+  </div>
+</div>
+
+<style>
+  .continue-learning {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+    background: var(--ink);
+    color: #faf9f7;
+    border-radius: 14px;
+    box-shadow: 0 8px 30px rgb(0 0 0 / 0.25);
+    max-width: min(640px, calc(100vw - 32px));
+    width: 100%;
+  }
+  .continue-learning.compact { max-width: 360px; }
+  .cl-inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+  .cl-orb {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #34d399;
+    flex: none;
+    box-shadow: 0 0 0 4px rgb(52 211 153 / 0.2);
+  }
+  .cl-text { flex: 1; min-width: 0; }
+  .cl-kicker {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgb(250 249 247 / 0.6);
+  }
+  .cl-title {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cl-cta {
+    flex: none;
+    background: #f59e0b;
+    color: #1a1917;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: background 0.15s;
+  }
+  .cl-cta:hover { background: #fbbf24; }
+</style>
+
+<script>
+  function stepLabel(step) {
+    if (!step) return "Begin your learning path";
+    if (step.title) return step.title;
+    return "Continue your journey";
+  }
+
+  function hydrate() {
+    const el = document.getElementById("continue-learning");
+    if (!el) return;
+    try {
+      const raw = localStorage.getItem("pa-progress-v1");
+      const state = raw ? JSON.parse(raw) : {};
+      const cur = state.current;
+      if (!cur) {
+        // Default: point to the senior PM path start.
+        el.hidden = false;
+        document.getElementById("cl-title").textContent = "Start with the Senior PM path";
+        document.getElementById("cl-link").href = "/paths/senior-pm-path/";
+        return;
+      }
+      el.hidden = false;
+      document.getElementById("cl-title").textContent = stepLabel(cur);
+      document.getElementById("cl-link").href = cur.url || "/paths/";
+    } catch {
+      el.hidden = true;
+    }
+  }
+  hydrate();
+</script>

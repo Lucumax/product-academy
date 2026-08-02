@@ -1,0 +1,129 @@
+---
+// ProgressTransfer: export / import learner progress (pa-progress-v1,
+// pa-selfcheck-*, pa-sim-*) as a JSON file, so progress can move between
+// devices. Client-side only: Blob download + FileReader import.
+const fileName = `pa-progress-${new Date().toISOString().slice(0, 10)}.json`;
+---
+<div class="pt-wrap" data-file={fileName}>
+  <button class="pt-btn" type="button" data-action="export">Export progress</button>
+  <button class="pt-btn" type="button" data-action="import">Import progress</button>
+  <input class="pt-file" type="file" accept=".json,application/json" hidden />
+  <span class="pt-status" role="status" aria-live="polite"></span>
+</div>
+
+<style>
+  .pt-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .pt-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-3);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    transition: color 0.15s;
+  }
+  .pt-btn:hover { color: var(--accent-ink); }
+  .pt-status {
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+</style>
+
+<script>
+  const wrap = document.querySelector<HTMLElement>(".pt-wrap");
+  if (wrap) {
+    const fileInput = wrap.querySelector<HTMLInputElement>(".pt-file");
+    const status = wrap.querySelector<HTMLElement>(".pt-status");
+    const fileName = wrap.dataset.file || "pa-progress.json";
+
+    let statusTimer = null;
+    function say(msg) {
+      status.textContent = msg;
+      clearTimeout(statusTimer);
+      statusTimer = setTimeout(() => { status.textContent = ""; }, 5000);
+    }
+
+    function relevantKeys() {
+      const out = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (!k) continue;
+        if (k === "pa-progress-v1" || k.startsWith("pa-selfcheck-") || k.startsWith("pa-sim-")) {
+          out.push(k);
+        }
+      }
+      return out;
+    }
+
+    wrap.querySelector('[data-action="export"]').addEventListener("click", () => {
+      try {
+        const keys = relevantKeys();
+        const data = {};
+        keys.forEach((k) => {
+          try { data[k] = JSON.parse(localStorage.getItem(k)); } catch { data[k] = localStorage.getItem(k); }
+        });
+        const payload = JSON.stringify(
+          { app: "product-academy", version: 1, exportedAt: new Date().toISOString(), data },
+          null,
+          2,
+        );
+        const blob = new Blob([payload], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        say(`Progress saved to file${keys.length ? ` (${keys.length} item${keys.length === 1 ? "" : "s"})` : ""}`);
+      } catch {
+        say("Couldn't export progress");
+      }
+    });
+
+    wrap.querySelector('[data-action="import"]').addEventListener("click", () => {
+      fileInput.value = "";
+      fileInput.click();
+    });
+
+    fileInput.addEventListener("change", () => {
+      const file = fileInput.files && fileInput.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const parsed = JSON.parse(String(reader.result));
+          const data = parsed && parsed.data && typeof parsed.data === "object" ? parsed.data : null;
+          if (!data) throw new Error("bad payload");
+          const keys = Object.keys(data);
+          if (!keys.length) throw new Error("empty payload");
+          keys.forEach((k) => {
+            if (typeof k !== "string") return;
+            try {
+              localStorage.setItem(k, JSON.stringify(data[k]));
+            } catch {
+              /* storage unavailable for a key */
+            }
+          });
+          say(`Imported ${keys.length} item${keys.length === 1 ? "" : "s"}`);
+          window.dispatchEvent(new CustomEvent("pa:progress-imported"));
+        } catch {
+          say("Import failed — not a valid progress file");
+        }
+      };
+      reader.onerror = () => say("Import failed — could not read file");
+      reader.readAsText(file);
+    });
+  }
+</script>

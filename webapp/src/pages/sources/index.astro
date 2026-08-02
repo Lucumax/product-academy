@@ -1,0 +1,46 @@
+---
+import Base from "../../layouts/Base.astro";
+import { sources } from "../../data/sources.json";
+
+const tierOrder = ["A", "B", "C", "E"];
+const tierNames = { A: "Firsthand operator / official", B: "Credible practitioner", C: "Community", E: "Pending verification" };
+const typeNames = {
+  book: "Book", article: "Article", talk: "Talk", course: "Course",
+  documentation: "Documentation", paper: "Paper", community_discussion: "Community",
+  podcast: "Podcast", video: "Video", case_study: "Case study", other: "Other",
+};
+---
+<Base title="Source Registry — Product Academy" description="Evidence source registry" active="sources">
+  <section class="hero">
+    <span class="eyebrow">Source Registry</span>
+    <h1>{sources.length} Evidence Sources</h1>
+    <p class="lede">
+      Every book, talk, and article behind the Academy's claims, ranked by
+      evidence tier. Tier A sources are firsthand operator accounts or
+      official documentation; Tier E are pending verification.
+    </p>
+  </section>
+
+  {tierOrder.map((tier) => {
+    const list = sources.filter((s) => s.tier === tier);
+    if (!list.length) return null;
+    return (
+      <section>
+        <h2><span class={`chip tier-${tier}`}>Tier {tier}</span> {tierNames[tier]} — {list.length}</h2>
+        <div class="grid grid-2">
+          {list.map((s) => (
+            <a class="card" href={`/sources/${s.id}/`}>
+              <div class="flex-between">
+                <span class={`chip tier-${tier}`}>{s.id}</span>
+                <span class="chip">{typeNames[s.type] || s.type}</span>
+              </div>
+              <h3 class="mt-1">{s.title}</h3>
+              <p class="card-sub">{s.author}</p>
+              {s.canonical && <p class="card-sub">supports canonical claims</p>}
+            </a>
+          ))}
+        </div>
+      </section>
+    );
+  })}
+</Base>

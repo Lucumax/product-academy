@@ -1,0 +1,73 @@
+---
+import Base from "../../layouts/Base.astro";
+import Markdown from "../../components/Markdown.astro";
+import JourneyNav from "../../components/JourneyNav.astro";
+import RelatedRail from "../../components/RelatedRail.astro";
+import { cases } from "../../data/cases.json";
+import { sources } from "../../data/sources.json";
+import { relatedFor } from "../../lib/related.js";
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (const c of cases) {
+    const props = { c };
+    paths.push({ params: { id: c.slug || c.id }, props });
+    paths.push({ params: { id: c.id }, props });
+  }
+  return paths;
+}
+const { c } = Astro.props;
+const idx = cases.findIndex((x) => x.id === c.id);
+const prevC = idx > 0 ? cases[idx - 1] : null;
+const nextC = idx < cases.length - 1 ? cases[idx + 1] : null;
+const sourceIndex = Object.fromEntries(sources.map((s) => [s.id, s]));
+
+// Extract source ids from the body's source_locations section.
+const srcRefs = [...c.body.matchAll(/SRC-[A-Z]{3,6}-\d{4}/g)].map((m) => m[0]);
+const caseSources = [...new Set(srcRefs)].map((id) => sourceIndex[id]).filter(Boolean);
+
+// Related principles (citing the case's sources) + sources referenced here.
+const related = relatedFor({ kind: "case", case: c, url: `/cases/${c.id}/` });
+---
+<Base title={`${c.id} — ${c.title}`} active="cases">
+  <a href="/cases/" class="muted" style="font-size:14px">&larr; All cases</a>
+  <article class="doc-page">
+    <div class="flex-between mb-2">
+      <span class="chip">{c.id}</span>
+      <span class={`chip ${c.type === "failure" ? "tier-E" : c.type === "reversal" ? "tier-C" : "tier-A"}`}>{c.type || "—"}</span>
+    </div>
+    <h1>{c.title}</h1>
+    <p class="card-sub">
+      {[c.decisionMaker, c.industry, c.archetype, c.stage].filter(Boolean).join(" · ")}
+    </p>
+    {c.causalConfidence && (
+      <p class="mt-2"><span class="chip tier-B">causal confidence: {c.causalConfidence}</span></p>
+    )}
+
+    <Markdown content={c.body} />
+
+    {caseSources.length > 0 && (
+      <>
+        <h2>Sources Behind This Case</h2>
+        <div class="grid grid-3">
+          {caseSources.map((s) => (
+            <a class="card" href={`/sources/${s.id}/`}>
+              <span class={`chip tier-${s.tier}`}>{s.id}</span>
+              <h3 class="mt-1" style="font-size:0.9rem">{s.title}</h3>
+              {s.url && <span class="card-sub">↗ read source</span>}
+            </a>
+          ))}
+        </div>
+      </>
+    )}
+
+    <RelatedRail groups={related.groups} next={related.next} />
+
+    <JourneyNav
+      prev={prevC ? { url: `/cases/${prevC.id}/`, label: prevC.title.slice(0, 36) } : undefined}
+      next={nextC ? { url: `/cases/${nextC.id}/`, label: nextC.title.slice(0, 36) } : undefined}
+      stepKey={`read:${c.id}`}
+      stepLabel={c.title}
+    />
+  </article>
+</Base>

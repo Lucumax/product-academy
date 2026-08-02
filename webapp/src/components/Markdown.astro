@@ -1,0 +1,13 @@
+---
+// Markdown renderer: converts raw markdown to HTML with epistemic-label
+// highlighting and safe inline handling. Uses a tiny, dependency-free
+// renderer sufficient for the Academy's markdown dialect.
+import { renderMarkdown } from "../lib/markdown";
+interface Props {
+  content: string;
+  className?: string;
+}
+const { content, className = "doc-body" } = Astro.props;
+const html = renderMarkdown(content);
+---
+<div class={className} set:html={html} />

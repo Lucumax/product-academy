@@ -1,0 +1,38 @@
+---
+import Base from "../../layouts/Base.astro";
+import { paths } from "../../data/paths.json";
+---
+<Base title="Learning Paths — Product Academy" description="Guided learning journeys by role" active="paths">
+  <section class="hero">
+    <span class="eyebrow">Choose your journey</span>
+    <h1>Where are you in your career?</h1>
+    <p class="lede">
+      Pick the role you're developing toward. You'll get a week-by-week
+      guided path through the Academy — not a menu to browse, but a sequence
+      to follow, with practice built in.
+    </p>
+  </section>
+  <div class="grid grid-2">
+    {paths.map((p) => (
+      <a class="card journey-card" href={`/paths/${p.id}/`}>
+        <div class="jc-top">
+          <span class="chip">{p.phases.length} phases</span>
+          <span class="chip">{p.stepCount} steps</span>
+        </div>
+        <h3 class="mt-1">{p.title}</h3>
+        <p class="card-sub">A guided sequence through the Academy, role-specific.</p>
+        <span class="jc-start">Start the journey →</span>
+      </a>
+    ))}
+  </div>
+</Base>
+
+<style>
+  .journey-card { display: flex; flex-direction: column; }
+  .jc-start {
+    margin-top: 14px;
+    color: var(--accent-ink);
+    font-weight: 700;
+    font-size: 14px;
+  }
+</style>

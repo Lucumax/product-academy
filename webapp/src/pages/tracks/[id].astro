@@ -1,0 +1,25 @@
+---
+import Base from "../../layouts/Base.astro";
+import { tracks } from "../../data/tracks.json";
+import { docSlug, docTitle, DOC_SKIP } from "../../lib/slugs.js";
+export async function getStaticPaths() {
+  return tracks.map((t) => ({ params: { id: t.id }, props: { track: t } }));
+}
+const { track } = Astro.props;
+const visibleFiles = track.files.filter((f) => !DOC_SKIP.has(f.path));
+---
+<Base title={`${track.title} — Product Academy`} active="">
+  <a href="/" class="muted" style="font-size:14px">&larr; All tracks</a>
+  <section class="hero">
+    <span class="eyebrow">{track.isTrack ? `Track ${String(track.number).padStart(2, "0")}` : "Reference"}</span>
+    <h1>{track.title}</h1>
+  </section>
+  <div class="grid grid-2">
+    {visibleFiles.map((f) => (
+      <a class="card" href={`/doc/${track.id}/${docSlug(f.path)}/`}>
+        <h3>{docTitle(f.path)}</h3>
+        <p class="card-sub">{f.path}</p>
+      </a>
+    ))}
+  </div>
+</Base>

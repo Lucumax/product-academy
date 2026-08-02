@@ -1,0 +1,139 @@
+---
+// Search component using Pagefind.
+---
+<div class="search-wrap">
+  <input id="search-input" type="search" placeholder="Search principles, cases, sources…" autocomplete="off" />
+  <div id="search-results" class="search-results" hidden></div>
+</div>
+
+<style>
+  .search-wrap {
+    position: relative;
+    min-width: 260px;
+  }
+  #search-input {
+    width: 100%;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    font-size: 14px;
+    font-family: var(--font-sans);
+    color: var(--ink);
+    outline: none;
+  }
+  #search-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgb(180 83 9 / 0.12);
+  }
+  .search-results {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: min(560px, 90vw);
+    max-height: 60vh;
+    overflow-y: auto;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 30px rgb(0 0 0 / 0.12);
+    z-index: 100;
+  }
+  .search-results ul {
+    list-style: none;
+    margin: 0;
+    padding: 8px;
+  }
+  .search-results li a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .search-results li a:hover {
+    background: var(--surface-2);
+  }
+  .search-results .r-title {
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .search-results .r-excerpt {
+    font-size: 12px;
+    color: var(--ink-2);
+    margin-top: 2px;
+  }
+  .search-empty {
+    padding: 14px;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  @media (max-width: 640px) {
+    .search-wrap { min-width: 0; width: 100%; }
+  }
+</style>
+
+<script>
+  let pagefind = null;
+
+  function ensurePagefind() {
+    if (pagefind) return Promise.resolve(pagefind);
+    return new Promise((resolve, reject) => {
+      const existing = document.querySelector("script[data-pagefind]");
+      if (existing) {
+        existing.addEventListener("load", () => resolve(window.pagefind));
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = "/pagefind/pagefind.js";
+      script.dataset.pagefind = "1";
+      script.onload = () => resolve(window.pagefind);
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+  }
+
+  const input = document.getElementById("search-input");
+  const results = document.getElementById("search-results");
+  let debounce;
+
+  input.addEventListener("input", () => {
+    clearTimeout(debounce);
+    debounce = setTimeout(doSearch, 200);
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".search-wrap")) results.hidden = true;
+  });
+
+  async function doSearch() {
+    const q = input.value.trim();
+    if (q.length < 2) {
+      results.hidden = true;
+      return;
+    }
+    const pf = await ensurePagefind();
+    const search = await pf.search(q);
+    results.hidden = false;
+    if (!search.results || search.results.length === 0) {
+      results.innerHTML = '<div class="search-empty">No results</div>';
+      return;
+    }
+    const ul = document.createElement("ul");
+    for (const r of search.results.slice(0, 12)) {
+      const data = await r.data();
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = data.url;
+      a.innerHTML =
+        `<span class="r-title">${data.meta.title || data.url}</span>` +
+        (data.excerpt
+          ? `<div class="r-excerpt">${data.excerpt}</div>`
+          : "");
+      li.appendChild(a);
+      ul.appendChild(li);
+    }
+    results.innerHTML = "";
+    results.appendChild(ul);
+  }
+</script>

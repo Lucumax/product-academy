@@ -1,0 +1,127 @@
+---
+import Base from "../../layouts/Base.astro";
+import JourneyNav from "../../components/JourneyNav.astro";
+import RelatedRail from "../../components/RelatedRail.astro";
+import { sources } from "../../data/sources.json";
+import { principles } from "../../data/principles.json";
+import { cases } from "../../data/cases.json";
+import { claims } from "../../data/claims.json";
+import { relatedFor } from "../../lib/related.js";
+
+export async function getStaticPaths() {
+  return sources.map((s) => ({ params: { id: s.id }, props: { s } }));
+}
+const { s } = Astro.props;
+const typeNames = {
+  book: "Book", article: "Article", talk: "Talk", course: "Course",
+  documentation: "Documentation", paper: "Paper", community_discussion: "Community",
+  podcast: "Podcast", video: "Video", case_study: "Case study", other: "Other",
+};
+const tierNames = { A: "Firsthand operator / official", B: "Credible practitioner", C: "Community", E: "Pending verification" };
+
+const usedBy = principles.filter(
+  (p) =>
+    (p.evidence || []).some((e) => e.source_id === s.id) ||
+    (p.counterevidence || []).some((e) => e.source_id === s.id),
+);
+// Related principles + cases that cite this source (compact rail).
+const related = relatedFor({ kind: "source", source: s, url: `/sources/${s.id}/` });
+const sourceClaims = (claims.bySource || {})[s.id] || [];
+const idx = sources.findIndex((x) => x.id === s.id);
+const prevS = idx > 0 ? sources[idx - 1] : null;
+const nextS = idx < sources.length - 1 ? sources[idx + 1] : null;
+---
+<Base title={`${s.id} — ${s.title}`} active="sources">
+  <a href="/sources/" class="muted" style="font-size:14px">&larr; All sources</a>
+  <article class="doc-page">
+    <div class="flex-between mb-2">
+      <span class={`chip tier-${s.tier}`}>Tier {s.tier}</span>
+      <span class="chip">{typeNames[s.type] || s.type}</span>
+    </div>
+    <h1>{s.title}</h1>
+    <p class="card-sub">{s.author}{s.year ? ` · ${s.year}` : ""}{s.org ? ` · ${s.org}` : ""}</p>
+
+    {s.url && (
+      <p class="mt-1">
+        <a class="read-source" href={s.url} target="_blank" rel="noreferrer">
+          ↗ Read / watch the actual source
+        </a>
+      </p>
+    )}
+    {!s.url && (
+      <p class="mt-1 muted" style="font-size:13px">
+        No direct link available for this source. Use the title/author to find it.
+      </p>
+    )}
+
+    {s.exactLocation && (
+      <p class="mt-1 ev-src"><strong>Where to look:</strong> {s.exactLocation}</p>
+    )}
+
+    {sourceClaims.length > 0 && (
+      <>
+        <h2>What the Academy Extracted From This Source</h2>
+        <ul>
+          {sourceClaims.map((c) => (
+            <li>
+              <strong>[{c.level}]</strong> {c.statement}
+              {c.contested && <span class="chip tier-C">contested</span>}
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+
+    {s.reliability && (
+      <>
+        <h2>Reliability Notes</h2>
+        <p>{s.reliability}</p>
+      </>
+    )}
+
+    <h2>Cited In</h2>
+    {usedBy.length ? (
+      <div class="grid grid-3">
+        {usedBy.map((p) => (
+          <a class="card" href={`/principles/${p.id}/`}>
+            <span class="chip">{p.id}</span>
+            <h3 class="mt-1" style="font-size:0.9rem">{p.title}</h3>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <p class="muted">Not currently cited by a canonical principle.</p>
+    )}
+
+    {s.topics.length > 0 && (
+      <>
+        <h2>Key Topics</h2>
+        <div>{s.topics.map((t) => <span class="chip">{t.replace(/_/g, " ")}</span>)}</div>
+      </>
+    )}
+
+    <RelatedRail groups={related.groups} next={related.next} />
+
+    <JourneyNav
+      prev={prevS ? { url: `/sources/${prevS.id}/`, label: prevS.title.slice(0, 36) } : undefined}
+      next={nextS ? { url: `/sources/${nextS.id}/`, label: nextS.title.slice(0, 36) } : undefined}
+      stepKey={`read:${s.id}`}
+      stepLabel={s.title}
+    />
+  </article>
+</Base>
+
+<style>
+  .read-source {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .read-source:hover { filter: brightness(1.06); }
+  .ev-src { font-size: 13px; color: var(--ink-2); }
+</style>

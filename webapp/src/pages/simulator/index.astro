@@ -1,0 +1,106 @@
+---
+import Base from "../../layouts/Base.astro";
+import { scenarioModules, parseScenario, scenarioFileId } from "../../lib/simulator.js";
+
+const scenarios = Object.entries(scenarioModules)
+  .map(([file, raw]) => {
+    const meta = parseScenario(raw).meta;
+    return {
+      id: scenarioFileId(file),
+      file: file.split("/").pop(),
+      scenarioId: meta.scenario_id || "",
+      title: meta.title || "",
+      leadership: meta.leadership_level || "",
+      time: meta.estimated_time || "",
+      tension: meta.primary_tension || "",
+      capability: meta.key_capability || "",
+    };
+  })
+  .sort((a, b) => (a.scenarioId || "").localeCompare(b.scenarioId || ""));
+---
+<Base title="Simulator — Product Academy" description="Practice judgment under uncertainty with interactive leadership scenarios" active="simulator">
+  <section class="hero">
+    <span class="eyebrow">The Practice Simulator</span>
+    <h1>Test your judgment, not your frameworks.</h1>
+    <p class="lede">
+      Each scenario drops you into a constraint-rich product leadership dilemma.
+      Write a three-part response, then score yourself against the scenario's
+      rubric. There is no single right answer — only reasoning that is specific,
+      allocative, and honest about trade-offs.
+    </p>
+  </section>
+
+  <div class="sim-guide">
+    <div class="sim-guide-step"><strong>1.</strong> Read the brief</div>
+    <div class="sim-guide-step"><strong>2.</strong> Write your response</div>
+    <div class="sim-guide-step"><strong>3.</strong> Reveal &amp; self-score</div>
+  </div>
+
+  <div class="grid grid-2">
+    {scenarios.map((s) => (
+      <a class="card sim-card" href={`/simulator/${s.id}/`}>
+        <div class="jc-top">
+          <span class="chip">{s.scenarioId}</span>
+          <span class="chip">{s.time}</span>
+        </div>
+        <h3 class="mt-1">{s.title}</h3>
+        <p class="card-sub">Tests: {s.capability}</p>
+        <p class="card-excerpt">Tension: {s.tension}</p>
+        <div class="sim-card-foot">
+          <span class="chip chip-level">{s.leadership}</span>
+          <span class="jc-start">Practice →</span>
+        </div>
+      </a>
+    ))}
+  </div>
+
+  <p class="muted mt-3" style="max-width:70ch">
+    Responses and self-scores are saved privately in this browser
+    (<span class="mono">localStorage</span>) — nothing is uploaded. Re-do the
+    same scenario in two weeks and compare your scores.
+  </p>
+</Base>
+
+<style>
+  .sim-guide {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 4px 0 24px;
+  }
+  .sim-guide-step {
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .sim-guide-step strong {
+    color: var(--accent);
+    margin-right: 2px;
+  }
+  .sim-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 210px;
+  }
+  .sim-card h3 { line-height: 1.35; }
+  .sim-card .jc-top { display: flex; justify-content: space-between; align-items: center; }
+  .sim-card-foot {
+    margin-top: auto;
+    padding-top: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .sim-card-foot .jc-start { margin-top: 0; }
+  .sim-card-foot .jc-start {
+    color: var(--accent-ink);
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .chip-level { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .mono { font-family: var(--font-mono); font-size: 0.9em; }
+</style>

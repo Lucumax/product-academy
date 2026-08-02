@@ -1,0 +1,30 @@
+---
+import Base from "../../layouts/Base.astro";
+import { cases } from "../../data/cases.json";
+---
+<Base title="Cases — Product Academy" description="Product leadership case studies" active="cases">
+  <section class="hero">
+    <span class="eyebrow">Track 07 · Cases</span>
+    <h1>Decision Case Studies</h1>
+    <p class="lede">
+      {cases.length} cases, each rated for causal confidence — how much the
+      narrative actually explains the outcome.
+    </p>
+  </section>
+  <div class="grid grid-2">
+    {cases.map((c) => (
+      <a class="card" href={`/cases/${c.slug || c.id}/`}>
+        <div class="flex-between">
+          <span class="chip">{c.id}</span>
+          <span class={`chip ${c.type === "failure" ? "tier-E" : c.type === "reversal" ? "tier-C" : "tier-A"}`}>
+            {c.type || "—"}
+          </span>
+        </div>
+        <h3 class="mt-1">{c.title}</h3>
+        <p class="card-sub">
+          {[c.industry, c.decisionMaker, c.archetype].filter(Boolean).join(" · ")}
+        </p>
+      </a>
+    ))}
+  </div>
+</Base>

@@ -1,0 +1,27 @@
+---
+import Base from "../../layouts/Base.astro";
+import { principles } from "../../data/principles.json";
+---
+<Base title="Core Doctrine — Product Academy" description="Canonical product leadership principles" active="principles">
+  <section class="hero">
+    <span class="eyebrow">Track 01 · Core Doctrine</span>
+    <h1>Canonical Principles</h1>
+    <p class="lede">
+      {principles.length} principles, each with labeled evidence,
+      counterevidence, applicability conditions, failure modes, and reversal
+      conditions. Confidence is stated, never assumed.
+    </p>
+  </section>
+  <div class="grid">
+    {principles.map((p) => (
+      <a class="card" href={`/principles/${p.id}/`}>
+        <div class="flex-between">
+          <span class="chip">{p.id}</span>
+          <span class="chip">confidence: {p.confidence || "—"}</span>
+        </div>
+        <h3 class="mt-1">{p.title}</h3>
+        <p class="card-excerpt">{p.claim}</p>
+      </a>
+    ))}
+  </div>
+</Base>

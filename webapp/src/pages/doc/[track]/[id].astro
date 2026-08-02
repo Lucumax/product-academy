@@ -1,0 +1,103 @@
+---
+import Base from "../../../layouts/Base.astro";
+import Markdown from "../../../components/Markdown.astro";
+import JourneyNav from "../../../components/JourneyNav.astro";
+import RelatedRail from "../../../components/RelatedRail.astro";
+import { manifest } from "../../../data/manifest.json";
+import { tracks } from "../../../data/tracks.json";
+import { docSlug, docTrack, docTitle, DOC_SKIP } from "../../../lib/slugs.js";
+import { prevNextFor } from "../../../lib/journey.js";
+import { relatedFor } from "../../../lib/related.js";
+
+// Import all content as raw strings at build time.
+const contentModules = import.meta.glob("../../../content/**/*.md", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+});
+
+/** @returns {string} */
+function resolveContent(path) {
+  const rel = `../../../content/${path}`;
+  if (contentModules[rel]) return String(contentModules[rel]);
+  const key = Object.keys(contentModules).find((k) => k.endsWith(`/${path}`));
+  return key ? String(contentModules[key]) : "";
+}
+
+export async function getStaticPaths() {
+  const routes = manifest
+    .filter((p) => !DOC_SKIP.has(p))
+    .map((p) => ({
+      params: { track: docTrack(p), id: docSlug(p) },
+      props: { path: p },
+    }));
+  // Sort so prev/next is deterministic within a track.
+  routes.sort((a, b) => a.props.path.localeCompare(b.props.path));
+  return routes;
+}
+
+const { path } = Astro.props;
+const source = resolveContent(path);
+const track = tracks.find((t) => t.id === docTrack(path));
+const title = docTitle(path);
+
+// Path-aware prev/next for continuity; falls back to track order.
+let pn = { prev: null, next: null };
+try {
+  pn = prevNextFor(`/doc/${docTrack(path)}/${docSlug(path)}/`);
+} catch {
+  pn = { prev: null, next: null };
+}
+
+const allDocs = manifest.filter((p) => !DOC_SKIP.has(p)).sort((a, b) => a.localeCompare(b));
+const docIdx = allDocs.indexOf(path);
+const prevDoc = pn.prev
+  ? null
+  : docIdx > 0
+    ? allDocs[docIdx - 1]
+    : null;
+const nextDoc = pn.next
+  ? null
+  : docIdx >= 0 && docIdx < allDocs.length - 1
+    ? allDocs[docIdx + 1]
+    : null;
+const prevHref = pn.prev
+  ? pn.prev.url
+  : prevDoc
+    ? `/doc/${docTrack(prevDoc)}/${docSlug(prevDoc)}/`
+    : null;
+const prevLabel = pn.prev ? pn.prev.label : prevDoc ? docTitle(prevDoc) : null;
+const nextHref = pn.next
+  ? pn.next.url
+  : nextDoc
+    ? `/doc/${docTrack(nextDoc)}/${docSlug(nextDoc)}/`
+    : "/paths/";
+const nextLabel = pn.next ? pn.next.label : nextDoc ? docTitle(nextDoc) : "All journeys";
+
+// Related content: ids referenced in the doc body + next step in a journey.
+const related = relatedFor({
+  kind: "doc",
+  url: `/doc/${docTrack(path)}/${docSlug(path)}/`,
+  body: source,
+});
+---
+<Base title={`${title} — Product Academy`} active="">
+  <div class="flex-between mb-2">
+    <a href={`/tracks/${docTrack(path)}/`} class="muted" style="font-size:14px">
+      &larr; {track?.title ?? docTrack(path)}
+    </a>
+    <span class="chip">{path}</span>
+  </div>
+  <article class="doc-page">
+    {source ? <Markdown content={source} /> : <p class="muted">Content not found.</p>}
+
+    <RelatedRail groups={related.groups} next={related.next} />
+
+    <JourneyNav
+      prev={prevHref ? { url: prevHref, label: prevLabel } : undefined}
+      next={{ url: nextHref, label: nextLabel }}
+      stepKey={`read:${path}`}
+      stepLabel={title}
+    />
+  </article>
+</Base>

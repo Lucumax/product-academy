@@ -1,0 +1,399 @@
+---
+import Base from "../../layouts/Base.astro";
+import Markdown from "../../components/Markdown.astro";
+import { scenarioModules, parseScenario, scenarioFileId } from "../../lib/simulator.js";
+
+export async function getStaticPaths() {
+  return Object.entries(scenarioModules).map(([file, raw]) => ({
+    params: { id: scenarioFileId(file) },
+    props: { file, raw },
+  }));
+}
+
+const { file, raw } = Astro.props;
+const scenario = parseScenario(raw);
+const { meta, sections, rubric } = scenario;
+const scenarioId = meta.scenario_id || scenarioFileId(file);
+const pageTitle = meta.title || file.replace(/\.md$/, "").replace(/_/g, " ");
+
+const briefSections = ["Situation", "Characters", "Constraints", "Your Role"];
+const brief = briefSections
+  .filter((s) => sections[s])
+  .map((s) => `## ${s}\n\n${sections[s]}`)
+  .join("\n\n");
+const responseFormat = sections["Response Format"] || "";
+const rubricMarkdown = rubric.map((d) => `### ${d.name}\n\n${d.table}`).join("\n\n");
+
+const related = (meta.related_principles || "")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean)
+  .map((r) => {
+    const m = r.match(/^(PRN-\d{4})\s*(?:\((.*)\))?/);
+    return m ? { id: m[1], label: m[2] || m[1] } : { id: null, label: r };
+  });
+
+const parts = [
+  { id: "part1", label: "Part 1 · Assumptions", hint: "What you assume beyond the brief. Label confidence: High / Medium / Low. Connect assumptions to the decision." },
+  { id: "part2", label: "Part 2 · Decision", hint: "What you will do, what you will NOT do, the rationale, and how you communicate it." },
+  { id: "part3", label: "Part 3 · Pre-Mortem", hint: "It failed 12 months later. Name specific mechanisms, early warning signals, and at least 3 failure paths." },
+];
+---
+<Base title={`${pageTitle} — Product Academy`} description={`Interactive scenario: ${pageTitle}`} active="simulator">
+  <a href="/simulator/" class="muted" style="font-size:14px">&larr; All scenarios</a>
+
+  <article class="doc-page sim-page" id="sim-app" data-scenario-id={scenarioId}>
+    <div class="flex-between mb-2 sim-topline">
+      <span class="chip">{scenarioId}</span>
+      <span class="chip">{meta.estimated_time || ""}</span>
+    </div>
+    <h1>{pageTitle}</h1>
+
+    <div class="sim-meta">
+      <span class="chip">{meta.leadership_level || ""}</span>
+      <span class="chip">Tension: {meta.primary_tension || ""}</span>
+      <span class="chip">Capability: {meta.key_capability || ""}</span>
+    </div>
+
+        {related.length > 0 && (
+          <div class="sim-related">
+            <span class="sim-related-label">Related doctrine:</span>
+            {related.map((r) =>
+              r.id ? (
+                <a class="chip chip-link" href={`/principles/${r.id}/`}>{r.label}</a>
+              ) : (
+                <span class="chip">{r.label}</span>
+              ),
+            )}
+          </div>
+        )}
+
+    <div class="sim-layout">
+      <div class="sim-brief">
+        <div class="sim-brief-head">
+          <span class="eyebrow">The brief</span>
+          <p class="muted" style="margin:0; font-size:13px">
+            Read this closely before you write. Note the hard constraints — they are not negotiable.
+          </p>
+        </div>
+        <Markdown content={brief} className="sim-prose" />
+      </div>
+
+      <aside class="sim-responder">
+        <div class="sim-responder-head">
+          <span class="eyebrow">Your response</span>
+          <p class="muted" style="margin:0; font-size:13px">
+            Three parts, written in your own words. Saved automatically on this device.
+          </p>
+        </div>
+
+        {responseFormat && <Markdown content={responseFormat} className="sim-prose sim-format" />}
+
+        <div class="resp-parts">
+          {parts.map((p) => (
+            <div class="resp-part" data-part={p.id}>
+              <label class="resp-label" for={`resp-${p.id}`}>{p.label}</label>
+              <p class="resp-hint">{p.hint}</p>
+              <textarea id={`resp-${p.id}`} data-part={p.id} rows="6" placeholder="Write your response…" spellcheck="false"></textarea>
+            </div>
+          ))}
+        </div>
+
+        <button type="button" class="reveal-btn" id="reveal-rubric">Reveal scoring rubric</button>
+
+        <div class="rubric" id="rubric" hidden>
+          <span class="eyebrow">Scoring rubric</span>
+          <p class="muted" style="font-size:13px">
+            Score each dimension 1–5. A 1–2 is mechanical; a 5 shows contextual judgment and systems thinking.
+          </p>
+
+          {rubric.length > 0 ? (
+            <div class="rubric-dims">
+              {rubric.map((d) => (
+                <div class="score-dim" data-dim={d.name}>
+                  <h3 class="score-dim-name">{d.name}</h3>
+                  <Markdown content={d.table} className="score-table" />
+                  <div class="score-picker">
+                    {[1, 2, 3, 4, 5].map((v) => (
+                      <label class="score-opt" title={`Score ${v}`}>
+                        <input type="radio" name={d.name} data-dim={d.name} value={v} />
+                        <span>{v}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <Markdown content={rubricMarkdown} className="sim-prose" />
+          )}
+
+          <div class="score-summary" id="score-summary" hidden>
+            <div class="score-summary-bar">
+              <div class="score-summary-fill" id="score-summary-fill"></div>
+            </div>
+            <div class="score-summary-text" id="score-summary-text"></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="sim-footnote">
+      <p>
+        <strong>Tip:</strong> the rubric is a mirror, not a verdict. After scoring,
+        write a one-paragraph improvement plan for your lowest dimension, then
+        re-do this scenario in two weeks and compare.
+      </p>
+      <a class="jn-next-link" href="/simulator/">All scenarios →</a>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .sim-page { max-width: 1080px; }
+  .sim-topline { justify-content: space-between; }
+  .sim-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .sim-related { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin: 4px 0 20px; }
+  .sim-related-label { font-size: 12px; color: var(--ink-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+  .chip-link { text-decoration: none; }
+  .chip-link:hover { background: var(--accent-soft); color: var(--accent-ink); }
+
+  .sim-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 28px;
+    align-items: start;
+    margin-top: 8px;
+  }
+  .sim-brief-head, .sim-responder-head { margin-bottom: 10px; }
+  .sim-brief-head .eyebrow, .sim-responder-head .eyebrow { margin-bottom: 4px; display: block; }
+
+  .sim-prose { font-family: var(--font-serif); font-size: 1rem; line-height: 1.65; }
+  .sim-format {
+    background: var(--surface-2);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+  }
+  .sim-format h3 { margin-top: 14px; }
+
+  .sim-responder {
+    position: sticky;
+    top: 76px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    box-shadow: var(--shadow);
+    max-height: calc(100vh - 96px);
+    overflow-y: auto;
+  }
+  .resp-parts { display: flex; flex-direction: column; gap: 14px; }
+  .resp-part { display: flex; flex-direction: column; }
+  .resp-label { font-size: 13px; font-weight: 700; color: var(--ink); }
+  .resp-hint { margin: 2px 0 6px; font-size: 12px; color: var(--ink-3); }
+  .resp-part textarea {
+    font-family: var(--font-serif);
+    font-size: 0.98rem;
+    line-height: 1.6;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    background: var(--bg);
+    color: var(--ink);
+    resize: vertical;
+    min-height: 120px;
+  }
+  .resp-part textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+
+  .reveal-btn {
+    margin-top: 16px;
+    width: 100%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 11px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .reveal-btn:hover { filter: brightness(1.06); }
+
+  .rubric { margin-top: 18px; }
+  .rubric-dims { display: flex; flex-direction: column; gap: 18px; }
+  .score-dim { border-top: 1px solid var(--line); padding-top: 12px; }
+  .score-dim-name { margin: 0 0 6px; font-size: 1rem; }
+  .score-table { font-family: var(--font-sans); font-size: 0.82rem; margin: 6px 0 10px; }
+  .score-table table { margin: 0; }
+
+  .score-picker {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .score-opt { position: relative; }
+  .score-opt input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    cursor: pointer;
+  }
+  .score-opt span {
+    display: inline-grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 2px solid var(--line);
+    background: var(--surface);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink-3);
+    transition: all 0.12s;
+  }
+  .score-opt input:checked + span {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .score-opt:hover span { border-color: var(--accent); color: var(--accent-ink); }
+
+  .score-summary {
+    margin-top: 18px;
+    background: var(--accent-soft);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+  }
+  .score-summary-bar {
+    height: 8px;
+    background: rgb(180 83 9 / 0.15);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .score-summary-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    border-radius: 999px;
+    transition: width 0.3s;
+  }
+  .score-summary-text { font-size: 14px; color: var(--accent-ink); font-weight: 600; }
+
+  .sim-footnote {
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .sim-footnote p { margin: 0; max-width: 60ch; font-size: 14px; color: var(--ink-2); }
+
+  @media (max-width: 900px) {
+    .sim-layout { grid-template-columns: 1fr; }
+    .sim-responder { position: static; max-height: none; }
+  }
+</style>
+
+<script>
+  const root = document.getElementById("sim-app");
+  const scenarioId = root ? root.dataset.scenarioId : "";
+  const STORAGE_KEY = `pa-sim-${scenarioId}`;
+
+  function load() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch { return {}; }
+  }
+  function save(s) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } catch {}
+  }
+
+  // --- Response autosave ---------------------------------------------------
+  document.querySelectorAll("textarea[data-part]").forEach((ta) => {
+    const part = ta.dataset.part;
+    ta.value = (load().response && load().response[part]) || "";
+    ta.addEventListener("input", () => {
+      const s = load();
+      s.response = s.response || {};
+      s.response[part] = ta.value;
+      s.updatedAt = Date.now();
+      save(s);
+    });
+  });
+
+  // --- Reveal rubric -------------------------------------------------------
+  const revealBtn = document.getElementById("reveal-rubric");
+  const rubricEl = document.getElementById("rubric");
+  if (revealBtn && rubricEl) {
+    revealBtn.addEventListener("click", () => {
+      const open = !rubricEl.hidden;
+      rubricEl.hidden = open;
+      revealBtn.textContent = open ? "Reveal scoring rubric" : "Hide scoring rubric";
+      if (open) revealBtn.setAttribute("aria-expanded", "false");
+      else revealBtn.setAttribute("aria-expanded", "true");
+    });
+  }
+
+  // --- Self-score ----------------------------------------------------------
+  const dims = Array.from(document.querySelectorAll(".score-dim")).map((el) => el.dataset.dim);
+  const radios = Array.from(document.querySelectorAll('input[type="radio"][data-dim]'));
+
+  function levelFor(avg) {
+    if (avg >= 4.5) return "Executive";
+    if (avg >= 4) return "Director";
+    if (avg >= 3) return "Principal";
+    if (avg >= 2) return "Strong Senior PM";
+    return "Structured but shallow";
+  }
+
+  function refreshSummary() {
+    const summary = document.getElementById("score-summary");
+    const text = document.getElementById("score-summary-text");
+    const fill = document.getElementById("score-summary-fill");
+    if (!summary || !text || !fill) return;
+    const scores = load().scores || {};
+    const filled = dims.filter((d) => scores[d]);
+    const total = filled.reduce((n, d) => n + scores[d], 0);
+    const max = dims.length * 5;
+    if (!filled.length) { summary.hidden = true; return; }
+    summary.hidden = false;
+    if (filled.length === dims.length) {
+      const avg = total / dims.length;
+      text.textContent = `Score: ${total} / ${max} · Average ${avg.toFixed(1)} / 5 — ${levelFor(avg)}`;
+    } else {
+      text.textContent = `Scored ${filled.length} of ${dims.length} dimensions — ${total} / ${max} so far.`;
+    }
+    fill.style.width = max ? Math.round((total / max) * 100) + "%" : "0%";
+  }
+
+  function restoreScores() {
+    const scores = load().scores || {};
+    radios.forEach((r) => {
+      if (scores[r.dataset.dim] === Number(r.value)) r.checked = true;
+    });
+  }
+
+  radios.forEach((r) =>
+    r.addEventListener("change", () => {
+      if (!r.checked) return;
+      const s = load();
+      s.scores = s.scores || {};
+      s.scores[r.dataset.dim] = Number(r.value);
+      s.updatedAt = Date.now();
+      save(s);
+      refreshSummary();
+    }),
+  );
+
+  restoreScores();
+  refreshSummary();
+</script>

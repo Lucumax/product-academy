@@ -1,0 +1,34 @@
+---
+import Base from "../../layouts/Base.astro";
+import { contradictions } from "../../data/contradictions.json";
+---
+<Base title="Contradictions — Product Academy" active="contradictions">
+  <section class="hero">
+    <span class="eyebrow">Track 08 · Contradictions</span>
+    <h1>Unresolved Tensions</h1>
+    <p class="lede">
+      {contradictions.length} places where good practitioners genuinely
+      disagree. The Academy presents both sides with their evidence rather
+      than collapsing the tension.
+    </p>
+  </section>
+  <div class="grid">
+    {contradictions.map((c) => (
+      <a class="card" href={`/contradictions/${c.id}/`}>
+        <div class="flex-between">
+          <span class="chip">{c.id}</span>
+          <span class="chip">confidence: {c.confidence || "—"}</span>
+        </div>
+        <h3 class="mt-1">{c.title}</h3>
+        <div class="grid grid-2 mt-1" style="grid-template-columns: 1fr 1fr; gap:8px">
+          <div style="border-left:3px solid var(--e-practice-bg); padding-left:10px; font-size:13px; color:var(--ink-2)">
+            <strong>A:</strong> {c.doctrineA}
+          </div>
+          <div style="border-left:3px solid var(--e-inference-bg); padding-left:10px; font-size:13px; color:var(--ink-2)">
+            <strong>B:</strong> {c.doctrineB}
+          </div>
+        </div>
+      </a>
+    ))}
+  </div>
+</Base>

@@ -31,3 +31,10 @@ scratch/
 12_personal_lab/PRODUCT_FORGE_APPLICATION.md
 12_personal_lab/TIAA_APPLICATION.md
 12_personal_lab/walter_applications.md
+
+# Webapp build artifacts
+webapp/node_modules/
+webapp/dist/
+webapp/.astro/
+webapp/src/content/
+webapp/src/data/

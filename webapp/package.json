@@ -1,0 +1,30 @@
+{
+  "name": "product-academy",
+  "version": "0.1.0",
+  "description": "Web interface for the Product Leadership Academy",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "content:import": "node scripts/import-content.mjs",
+    "dev": "npm run content:import && astro dev",
+    "build": "npm run content:import && astro build && npx pagefind --site dist",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "astro": "^5.1.0",
+    "markdown-it": "^15.0.0",
+    "pagefind": "^1.2.0",
+    "yaml": "^2.6.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "typescript": "^5.7.0"
+  },
+  "allowScripts": {
+    "esbuild@0.27.7": true,
+    "esbuild@0.25.12": true,
+    "pagefind@1.5.2": true,
+    "sharp@0.34.5": true
+  }
+}

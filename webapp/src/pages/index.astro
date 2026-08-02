@@ -1,0 +1,130 @@
+---
+import Base from "../layouts/Base.astro";
+import { paths } from "../data/paths.json";
+import { principles } from "../data/principles.json";
+import { cases } from "../data/cases.json";
+import { contradictions } from "../data/contradictions.json";
+import { sources } from "../data/sources.json";
+---
+<Base title="Product Academy — Learn product leadership by doing" description="A guided, evidence-backed product leadership curriculum" active="home">
+  <section class="hero home-hero">
+    <span class="eyebrow">Evidence-backed product leadership</span>
+    <h1>Don't browse product leadership. <em>Practice it.</em></h1>
+    <p class="lede">
+      A guided curriculum from Senior PM to CPO — doctrine with its evidence,
+      cases with their causality rated, and practice built into every week.
+      Pick a journey, follow the sequence, mark progress as you go.
+    </p>
+    <div class="cta-row">
+      <a class="cta-primary" href="/paths/">Choose a journey</a>
+      <a class="cta-secondary" href="/principles/">Or start with doctrine</a>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <h2>Start here — choose your journey</h2>
+    <div class="grid grid-2">
+      {paths.map((p) => (
+        <a class="card journey-card" href={`/paths/${p.id}/`}>
+          <div class="jc-top">
+            <span class="chip">{p.phases.length} phases</span>
+            <span class="chip">{p.stepCount} steps</span>
+          </div>
+          <h3 class="mt-1">{p.title}</h3>
+          <p class="card-sub">Guided, week-by-week, with practice.</p>
+          <span class="jc-start">Start →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="home-section">
+    <h2>Explore the material</h2>
+    <div class="grid grid-2">
+      <a class="card" href="/principles/">
+        <span class="chip">{principles.length} principles</span>
+        <h3 class="mt-1">Core Doctrine</h3>
+        <p class="card-excerpt">Every claim with its evidence, counterevidence, applicability, and failure modes — linked to the sources behind it.</p>
+      </a>
+      <a class="card" href="/cases/">
+        <span class="chip">{cases.length} cases</span>
+        <h3 class="mt-1">Cases</h3>
+        <p class="card-excerpt">Real product decisions from Netflix to Theranos, each with causal confidence rated — what we know vs. what we assume.</p>
+      </a>
+      <a class="card" href="/contradictions/">
+        <span class="chip">{contradictions.length} tensions</span>
+        <h3 class="mt-1">Contradictions</h3>
+        <p class="card-excerpt">Where good practitioners genuinely disagree, presented with both sides and their evidence.</p>
+      </a>
+      <a class="card" href="/sources/">
+        <span class="chip">{sources.length} sources</span>
+        <h3 class="mt-1">Source Registry</h3>
+        <p class="card-excerpt">The evidence base, ranked by tier — and what the Academy actually extracted from each one.</p>
+      </a>
+    </div>
+  </section>
+
+  <section class="home-section how-it-works">
+    <h2>How this works</h2>
+    <div class="grid grid-3">
+      <div class="how-item">
+        <span class="how-num">1</span>
+        <h3>Pick a journey</h3>
+        <p>Match your role. Each journey is sequenced by an educator: phases, weeks, steps.</p>
+      </div>
+      <div class="how-item">
+        <span class="how-num">2</span>
+        <h3>Follow the sequence</h3>
+        <p>Read, then do the practice. Every page flows to the next — no dead ends, no menu hopping.</p>
+      </div>
+      <div class="how-item">
+        <span class="how-num">3</span>
+        <h3>Mark progress</h3>
+        <p>Check steps as you go. Progress is saved, so you always know what's next.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .home-hero { padding: 40px 0 20px; }
+  .home-hero h1 em { font-family: var(--font-serif); font-style: italic; color: var(--accent); }
+  .cta-row { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+  .cta-primary {
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 22px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .cta-primary:hover { filter: brightness(1.06); }
+  .cta-secondary {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    text-decoration: none;
+    padding: 12px 22px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .cta-secondary:hover { background: var(--surface-2); }
+  .home-section { margin-top: 36px; }
+  .home-section h2 { font-size: 1.2rem; }
+  .journey-card { display: flex; flex-direction: column; }
+  .jc-start { margin-top: 12px; color: var(--accent-ink); font-weight: 700; font-size: 14px; }
+  .how-item { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+  .how-num {
+    width: 30px; height: 30px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .how-item h3 { margin: 0 0 6px; font-size: 1rem; }
+  .how-item p { color: var(--ink-2); font-size: 14px; margin: 0; }
+</style>

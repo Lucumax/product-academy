@@ -1,17 +1,23 @@
 # Product Leadership Academy
 
-An evidence-backed education system for product leaders from Senior PM through CPO.
+An evidence-backed education system for product leaders from Senior PM through CPO — **with a web app** for guided learning.
 
-## What This Is
-
-The Academy provides doctrine, cases, frameworks, and tools for real product decisions. It is organized into 13 tracks across 4 developmental levels.
+This is a monorepo. The **content** (doctrine, cases, sources, curriculum) lives at the root. The **web app** — a guided learning journey with progress tracking, an interactive simulator, and full-text search — lives in [`webapp/`](webapp/).
 
 ## Quick Start
 
-1. Start with [00_orientation/](00_orientation/) for navigation guidance
-2. Review the [Curriculum Map](CURRICULUM_MAP.md) for the full structure
-3. Study [Core Doctrine](01_core_doctrine/PRINCIPLES.md) for foundational principles
-4. Explore [Cases](07_cases/case_catalog.md) for decision-making examples
+**Read the content** — start with [00_orientation/](00_orientation/), the [Curriculum Map](CURRICULUM_MAP.md), and [Core Doctrine](01_core_doctrine/PRINCIPLES.md).
+
+**Run the web app:**
+
+```bash
+cd webapp
+npm install
+npm run build      # imports content + builds static site + indexes search
+npm run preview    # serve locally, or deploy dist/ anywhere static
+```
+
+The webapp reads content directly from this repo (monorepo layout) — no separate source to wire up.
 
 ## Structure
 
@@ -31,13 +37,21 @@ The Academy provides doctrine, cases, frameworks, and tools for real product dec
 | `11_learning_paths/` | Role-based learning paths |
 | `12_personal_lab/` | Self-directed practice |
 | `13_career_transitions/` | Landing product roles, credibility building, emerging roles |
+| `webapp/` | The Astro web app (guided journey, simulator, search) |
+| `handbook/`, `docs/` | Generated handbooks and integration docs |
+| `sources/` | The evidence registry (180 sources, ranked by tier) |
+| `evidence/final/` | Processed evidence artifacts (claims ledger, corroboration matrix) |
 
 ## Validation
 
 ```bash
-python scripts/validate_academy.py
-python -m pytest -q
+python scripts/validate_academy.py   # 657 quality-gate checks
+python -m pytest -q                  # 57 tests
 ```
+
+## License
+
+The Academy's original content is licensed under [CC BY 4.0](LICENSE). See [COPYRIGHT_AND_ACCESS_POLICY.md](COPYRIGHT_AND_ACCESS_POLICY.md) for how third-party source material is handled.
 
 ## Scope
 

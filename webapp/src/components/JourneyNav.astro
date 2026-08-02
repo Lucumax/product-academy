@@ -1,0 +1,136 @@
+---
+// JourneyNav: prev/next stepper + progress that appears at the bottom of
+// every reading page. "Next" advances within the current learning path.
+interface Props {
+  prev?: { url: string; label: string };
+  next?: { url: string; label: string };
+  stepKey?: string;
+  stepLabel?: string;
+  pathId?: string;
+}
+const { prev, next, stepKey, stepLabel, pathId } = Astro.props;
+---
+<div class="journey-nav" data-step-key={stepKey} data-step-label={stepLabel || ""} data-path={pathId || ""}>
+  <div class="jn-progress"><span class="jn-fill"></span></div>
+  <div class="jn-row">
+    {prev ? (
+      <a class="jn-btn jn-prev" href={prev.url}>← {prev.label}</a>
+    ) : (
+      <span></span>
+    )}
+    {stepKey && (
+      <button class="jn-done" type="button">Mark complete</button>
+    )}
+    {next ? (
+      <a class="jn-btn jn-next" href={next.url}>{next.label} →</a>
+    ) : (
+      <a class="jn-btn jn-next" href="/paths/">All paths →</a>
+    )}
+  </div>
+</div>
+
+<style>
+  .journey-nav {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .jn-progress {
+    height: 4px;
+    background: var(--surface-2);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .jn-fill {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+  .jn-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .jn-btn {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 9px 16px;
+    border-radius: 999px;
+  }
+  .jn-prev { color: var(--ink-2); }
+  .jn-prev:hover { background: var(--surface-2); }
+  .jn-next { background: var(--accent); color: #fff; }
+  .jn-next:hover { filter: brightness(1.05); }
+  .jn-done {
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+  .jn-done.done {
+    background: #d1fae5;
+    border-color: #34d399;
+    color: #065f46;
+  }
+</style>
+
+<script>
+  const el = document.querySelector(".journey-nav");
+  if (el) {
+    const key = el.dataset.stepKey;
+    const label = el.dataset.stepLabel;
+    const pathId = el.dataset.path;
+    const doneBtn = el.querySelector(".jn-done");
+    const fill = el.querySelector(".jn-fill");
+
+    function load() {
+      try { return JSON.parse(localStorage.getItem("pa-progress-v1") || "{}"); } catch { return {}; }
+    }
+    function save(s) {
+      try { localStorage.setItem("pa-progress-v1", JSON.stringify(s)); } catch {}
+    }
+
+    function refresh() {
+      const s = load();
+      const isDone = key && s.done && s.done[key];
+      if (doneBtn) {
+        doneBtn.classList.toggle("done", !!isDone);
+        doneBtn.textContent = isDone ? "✓ Complete" : "Mark complete";
+      }
+      if (fill && pathId) {
+        const s2 = load();
+        const done = Object.keys(s2.done || {}).filter((k) => k.startsWith(`path:${pathId}`)).length;
+        // progress fill requires total; approximate with a fixed denominator set by data-attr
+        const total = parseInt(el.dataset.total || "0", 10);
+        fill.style.width = total ? Math.round((done / total) * 100) + "%" : "0%";
+      }
+    }
+
+    if (doneBtn && key) {
+      doneBtn.addEventListener("click", () => {
+        const s = load();
+        s.done = s.done || {};
+        if (s.done[key]) delete s.done[key];
+        else s.done[key] = true;
+        save(s);
+        refresh();
+      });
+    }
+
+    if (key) {
+      const s = load();
+      s.current = { key, title: label, url: location.pathname, at: Date.now() };
+      save(s);
+    }
+    refresh();
+  }
+</script>

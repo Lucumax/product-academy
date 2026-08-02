@@ -1,0 +1,215 @@
+---
+import Base from "../../layouts/Base.astro";
+import JourneyNav from "../../components/JourneyNav.astro";
+import RelatedRail from "../../components/RelatedRail.astro";
+import { principles } from "../../data/principles.json";
+import { sources } from "../../data/sources.json";
+import { contradictions } from "../../data/contradictions.json";
+import { cases } from "../../data/cases.json";
+import { relatedFor } from "../../lib/related.js";
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (const p of principles) {
+    const props = { p };
+    paths.push({ params: { id: p.slug || p.id }, props });
+    paths.push({ params: { id: p.id }, props });
+  }
+  return paths;
+}
+
+const { p } = Astro.props;
+const idx = principles.findIndex((x) => x.id === p.id);
+const prevP = idx > 0 ? principles[idx - 1] : null;
+const nextP = idx < principles.length - 1 ? principles[idx + 1] : null;
+
+const sourceIndex = Object.fromEntries(sources.map((s) => [s.id, s]));
+const conIndex = Object.fromEntries(contradictions.map((c) => [c.id, c]));
+
+// Principles that share sources with this one (cohesion).
+const thisSources = new Set([
+  ...(p.evidence || []).map((e) => e.source_id),
+  ...(p.counterevidence || []).map((e) => e.source_id),
+]);
+const relatedPrinciples = principles.filter(
+  (o) =>
+    o.id !== p.id &&
+    [...(o.evidence || []), ...(o.counterevidence || [])].some((e) =>
+      thisSources.has(e.source_id),
+    ),
+);
+
+// Cases that mention this principle.
+const relatedCases = cases.filter((c) => c.body.includes(p.id));
+
+// Related sources + "next in journey" hint (Connected Doctrine / Tensions /
+// Cases are already rendered above, so only the sources group is surfaced).
+const related = relatedFor({ kind: "principle", principle: p, url: `/principles/${p.id}/` });
+const relatedSources = related.groups.filter((g) => g.key === "sources");
+
+function strengthColor(s) {
+  return { strong: "tier-A", moderate: "tier-B", weak: "tier-C" }[s] || "tier-C";
+}
+---
+<Base title={`${p.id} — ${p.title}`} description={p.claim} active="principles">
+  <a href="/principles/" class="muted" style="font-size:14px">&larr; Doctrine index</a>
+  <article class="doc-page">
+    <div class="flex-between mb-2">
+      <span class="chip">{p.id}</span>
+      <span class="chip">confidence: {p.confidence || "—"}</span>
+    </div>
+    <h1>{p.title}</h1>
+    <div class="claim-block">{p.claim}</div>
+
+    <h2>Evidence</h2>
+    {p.evidence.length ? (
+      p.evidence.map((e) => {
+        const src = sourceIndex[e.source_id];
+        return (
+          <div class="ev-row">
+            <span class={`chip ${strengthColor(e.strength)}`}>{e.strength}</span>
+            {src ? (
+              <a href={`/sources/${src.id}/`}><span class="chip tier-A">{src.id}</span></a>
+            ) : (
+              <span class="chip">{e.source_id}</span>
+            )}
+            <div class="mt-1">{e.claim_summary}</div>
+            {src && (
+              <div class="muted mt-1 ev-src">
+                {src.title}{src.author ? ` — ${src.author}` : ""}
+                {src.url && <span class="src-link"><a href={src.url} target="_blank" rel="noreferrer">↗ read source</a></span>}
+              </div>
+            )}
+          </div>
+        );
+      })
+    ) : (
+      <p class="muted">No evidence recorded.</p>
+    )}
+
+    {p.counterevidence.length > 0 && (
+      <>
+        <h2>Counterevidence</h2>
+        {p.counterevidence.map((e) => {
+          const src = sourceIndex[e.source_id];
+          return (
+            <div class="ev-row ev-counter">
+              <span class={`chip ${strengthColor(e.strength)}`}>{e.strength}</span>
+              {src ? (
+                <a href={`/sources/${src.id}/`}><span class="chip tier-A">{src.id}</span></a>
+              ) : (
+                <span class="chip">{e.source_id}</span>
+              )}
+              <div class="mt-1">{e.claim_summary}</div>
+            </div>
+          );
+        })}
+      </>
+    )}
+
+    <div class="grid grid-2 mt-3">
+      {p.applicability.length > 0 && (
+        <div>
+          <h3>Applies when</h3>
+          <ul>{p.applicability.map((a) => <li>{a}</li>)}</ul>
+        </div>
+      )}
+      {p.nonApplicability.length > 0 && (
+        <div>
+          <h3>Does not apply when</h3>
+          <ul>{p.nonApplicability.map((a) => <li>{a}</li>)}</ul>
+        </div>
+      )}
+    </div>
+
+    {p.failureModes.length > 0 && (
+      <>
+        <h2>Failure Modes</h2>
+        <ul>{p.failureModes.map((a) => <li>{a}</li>)}</ul>
+      </>
+    )}
+
+    {p.reversalConditions.length > 0 && (
+      <>
+        <h2>Reversal Conditions</h2>
+        <ul>{p.reversalConditions.map((a) => <li>{a}</li>)}</ul>
+      </>
+    )}
+
+    {relatedPrinciples.length > 0 && (
+      <>
+        <h2>Connected Doctrine</h2>
+        <div class="grid grid-3">
+          {relatedPrinciples.slice(0, 6).map((o) => (
+            <a class="card" href={`/principles/${o.id}/`}>
+              <span class="chip">{o.id}</span>
+              <h3 class="mt-1" style="font-size:0.9rem">{o.title}</h3>
+            </a>
+          ))}
+        </div>
+      </>
+    )}
+
+    {p.relatedContradictions.length > 0 && (
+      <>
+        <h2>Tensions That Apply</h2>
+        <div class="grid grid-3">
+          {p.relatedContradictions.map((cid) => {
+            const con = conIndex[cid];
+            return (
+              <a class="card" href={`/contradictions/${cid}/`}>
+                <span class="chip">{cid}</span>
+                <h3 class="mt-1" style="font-size:0.9rem">{con?.title || cid}</h3>
+              </a>
+            );
+          })}
+        </div>
+      </>
+    )}
+
+    {relatedCases.length > 0 && (
+      <>
+        <h2>Seen In These Cases</h2>
+        <div class="grid grid-3">
+          {relatedCases.slice(0, 6).map((c) => (
+            <a class="card" href={`/cases/${c.slug || c.id}/`}>
+              <span class="chip">{c.id}</span>
+              <h3 class="mt-1" style="font-size:0.9rem">{c.title}</h3>
+            </a>
+          ))}
+        </div>
+      </>
+    )}
+
+    {p.practicalTool && (
+      <>
+        <h2>Practical Tool</h2>
+        <p>{p.practicalTool}</p>
+      </>
+    )}
+
+    <RelatedRail groups={relatedSources} next={related.next} />
+
+    <p class="muted mt-2" style="font-size:12px">Last reviewed: {p.lastReviewed || "—"}</p>
+
+    <JourneyNav
+      prev={prevP ? { url: `/principles/${prevP.id}/`, label: prevP.title.split(":")[0].slice(0, 40) } : undefined}
+      next={nextP ? { url: `/principles/${nextP.id}/`, label: nextP.title.split(":")[0].slice(0, 40) } : undefined}
+      stepKey={`read:${p.id}`}
+      stepLabel={p.title}
+    />
+  </article>
+</Base>
+
+<style>
+  .ev-row {
+    border-left: 3px solid var(--line);
+    padding: 8px 14px;
+    margin: 8px 0;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+  }
+  .ev-counter { border-left-color: var(--e-debate-bg); }
+  .ev-src { font-size: 12px; }
+  .src-link { margin-left: 8px; }
+</style>

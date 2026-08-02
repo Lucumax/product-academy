@@ -1,0 +1,39 @@
+---
+import Base from "../../layouts/Base.astro";
+import { contradictions } from "../../data/contradictions.json";
+import { principles } from "../../data/principles.json";
+
+export async function getStaticPaths() {
+  return contradictions.map((c) => ({ params: { id: c.id }, props: { c } }));
+}
+const { c } = Astro.props;
+const related = principles.filter((p) => (p.relatedContradictions || []).includes(c.id));
+---
+<Base title={`${c.id} — ${c.title}`} active="contradictions">
+  <a href="/contradictions/" class="muted" style="font-size:14px">&larr; All contradictions</a>
+  <article class="doc-page">
+    <div class="flex-between mb-2">
+      <span class="chip">{c.id}</span>
+      <span class="chip">confidence: {c.confidence || "—"}</span>
+    </div>
+    <h1>{c.title}</h1>
+    <h2>Doctrine A</h2>
+    <div class="claim-block" style="border-left-color: var(--e-practice)">{c.doctrineA}</div>
+    <h2>Doctrine B</h2>
+    <div class="claim-block" style="border-left-color: var(--e-inference)">{c.doctrineB}</div>
+
+    {related.length > 0 && (
+      <>
+        <h2>Principles Touching This Contradiction</h2>
+        <div class="grid grid-3">
+          {related.map((p) => (
+            <a class="card" href={`/principles/${p.id}/`}>
+              <span class="chip">{p.id}</span>
+              <h3 class="mt-1">{p.title}</h3>
+            </a>
+          ))}
+        </div>
+      </>
+    )}
+  </article>
+</Base>
