@@ -1,20 +1,24 @@
 {
   "name": "evidence-pack",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Evidence-backed product decision skills from the Product Academy",
   "author": "Lucumax",
   "license": "CC BY 4.0",
   "repository": "https://github.com/Lucumax/product-academy",
   "skills": [
+    "skills/frame-product-problem",
+    "skills/synthesize-customer-discovery",
+    "skills/prioritize-product-opportunities",
+    "skills/design-product-experiment",
+    "skills/align-stakeholders-on-decision",
+    "skills/assess-product-market-fit-health",
     "skills/audit-decision-evidence",
-    "skills/run-source-tier-check",
     "skills/scan-contradictions-assumptions",
     "skills/conduct-causal-confidence-review",
     "skills/make-go-no-go-call",
     "skills/classify-decision-reversibility",
     "skills/run-case-based-premortem",
     "skills/pressure-test-product-thesis",
-    "skills/check-ai-evaluation-contract",
-    "skills/assess-product-market-fit-health"
+    "skills/check-ai-evaluation-contract"
   ]
 }

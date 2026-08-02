@@ -1,0 +1,11 @@
+{
+  "name": "product-academy",
+  "description": "Evidence-backed product decision skills from the Product Academy",
+  "plugins": [
+    {
+      "name": "evidence-pack",
+      "source": "./",
+      "description": "Evidence-backed product decision skills (framing, discovery synthesis, prioritization, experiment design, GO/NO-GO, PMF health, AI evaluation contracts, and more)"
+    }
+  ]
+}

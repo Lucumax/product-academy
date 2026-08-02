@@ -37,8 +37,8 @@ jobs:
           body: |
             Evidence-backed product decision skills from the Product Academy.
 
-            - **product-academy-skills-all.zip** — all skills
-            - **product-academy-skills-core.zip** — the 10 P0 skills
+            - **product-academy-skills-all.zip** — all active skills + shared contract + workflows
+            - **product-academy-skills-core.zip** — the 8 highest-frequency PM skills (starter set)
             - **INSTALL.md** — per-platform install instructions
 
             See https://github.com/Lucumax/product-academy/tree/main/skills for the source of truth.
