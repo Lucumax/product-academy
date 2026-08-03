@@ -1,0 +1,49 @@
+name: Skill output failure
+description: Report a skill that produced a bad, misleading, or wrong output
+title: "[Skill output]: "
+labels: [skill-output-failure]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        The most useful feedback we get. A wrong output is better evidence than a star.
+        Be precise so we can reproduce it.
+  - type: input
+    id: skill
+    attributes:
+      label: Which skill
+      description: e.g. synthesize-customer-discovery, make-go-no-go-call
+    validations:
+      required: true
+  - type: textarea
+    id: prompt
+    attributes:
+      label: What you ran
+      description: The exact prompt or skill invocation you used.
+      render: bash
+    validations:
+      required: true
+  - type: textarea
+    id: input
+    attributes:
+      label: Input you provided
+      description: The scenario/evidence you gave the skill. Redact anything sensitive.
+  - type: textarea
+    id: output
+    attributes:
+      label: Output you got
+      description: The actual output, including any verdict, confidence, or next action.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What was wrong
+      description: Why is this bad? Wrong verdict, overconfident, missed a contradiction, ceremony overload, missing evidence?
+    validations:
+      required: true
+  - type: input
+    id: mode
+    attributes:
+      label: Fast or full mode
+      description: If you know, which mode did it run?

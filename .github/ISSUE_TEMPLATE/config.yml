@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Read the contributing guide
+    url: https://github.com/Lucumax/product-academy/blob/main/CONTRIBUTING.md
+    about: How to report bugs, suggest skills, and contribute worked examples.
+  - name: External evaluation package
+    url: https://github.com/Lucumax/product-academy/tree/main/skills/evals/external
+    about: Blinded PM evaluation — what we run, and how you can be a reviewer.

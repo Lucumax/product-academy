@@ -8,16 +8,24 @@ usefulness than add ten skills nobody runs weekly.
 
 ## Ways to contribute
 
-1. **Report a broken install or a skill that misbehaves.** Use the bug template — include the
-   platform, the exact command/prompt, and what you expected.
-2. **Suggest a missing PM job** (not a missing framework). Use the skill-request template and
-   describe the *job* and the *artifact* you need, not the methodology you want.
-3. **Improve a skill's worked example or failure modes.** The fastest high-value contribution:
-   a weak worked example or an unlisted failure mode.
-4. **Run the eval scenarios** (`skills/evals/scenarios/`) and report results honestly —
+1. **Report a broken install.** Use the *Installation problem* template (`.github/ISSUE_TEMPLATE/`)
+   — include the platform, agent version, exact command, and the error. Install failures are
+   the highest-value feedback there is.
+2. **Report a bad or misleading skill output.** Use the *Skill output failure* template — a
+   wrong verdict, overconfident claim, or a missed contradiction is better evidence than a star.
+3. **Report excessive-process feedback.** If a skill made a small decision feel heavy, say so —
+   that is a proportionality finding, and it is exactly the failure mode we track. Use the
+   *Skill output failure* template and mark it proportionality, or open a discussion.
+4. **Contribute a worked example** (a real situation or a clearly-labeled fictional one where
+   a skill produced a useful artifact — or failed). Use the *Worked example contribution*
+   template. This is the fastest high-value contribution.
+5. **Request a missing PM scenario or archetype** (not a framework). Use the *Scenario request*
+   template and describe the *situation* and the *artifact* you need. Scenario requests feed
+   the skill finder, the worked examples, and the external evaluation set.
+6. **Run the external evaluation** (`skills/evals/external/`) and report results honestly —
    including where a skill failed. Independent evaluation is our biggest open gap.
-5. **Fix documentation, install guides, or the `skills/` website section.**
-6. **Distribute** — share a demo, add the repo to a relevant directory, or teach with it.
+7. **Fix documentation, install guides, or the `skills/` website section.**
+8. **Distribute** — share a demo, add the repo to a relevant directory, or teach with it.
    Do not spam; lead with a demonstration.
 
 ## Authoring a skill
@@ -40,9 +48,10 @@ The bar:
 ## Quality gates
 
 ```bash
-python scripts/validate_academy.py   # 660 quality-gate checks
+python scripts/validate_academy.py   # quality-gate checks (660+, count grows with content)
 python scripts/validate_skills.py    # skill-pack contract checks
-python -m pytest -q                  # test suite (84+)
+python scripts/package_skills.py     # build the release ZIPs
+python -m pytest -q                  # test suite (95+)
 ```
 
 For the webapp:

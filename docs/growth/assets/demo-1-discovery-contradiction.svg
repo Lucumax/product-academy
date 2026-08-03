@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#141414"/>
+      <stop offset="1" stop-color="#2a1f12"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <text x="64" y="82" font-family="Inter,Arial,sans-serif" font-size="28" font-weight="700" fill="#d9a05b">Product Academy · Demo 1</text>
+  <text x="64" y="200" font-family="Inter,Arial,sans-serif" font-size="52" font-weight="800" fill="#ffffff">Interviews say "build it."</text>
+  <text x="64" y="268" font-family="Inter,Arial,sans-serif" font-size="52" font-weight="800" fill="#ffffff">Usage says 6% use it.</text>
+  <text x="64" y="330" font-family="Inter,Arial,sans-serif" font-size="26" fill="#d6cfc2">A fitness app: 22 of 25 users rave about streaks — only 6% of DAU touch the feature.</text>
+  <g font-family="JetBrainsMono,monospace" font-size="22">
+    <rect x="64" y="390" width="560" height="74" rx="12" fill="#3a2e1c"/>
+    <text x="90" y="421" fill="#f0e9dc">Generic AI: "users love streaks — invest."</text>
+    <text x="90" y="449" fill="#8f8678">listens to the loudest voices</text>
+    <rect x="652" y="390" width="572" height="74" rx="12" fill="#5c4a22"/>
+    <text x="678" y="421" fill="#ffffff">Skill: BEHAVIOR-CONTRADICTS</text>
+    <text x="678" y="449" fill="#e6dcc8">weights behavior over enthusiasm; names a cohort test</text>
+  </g>
+  <text x="64" y="530" font-family="Inter,Arial,sans-serif" font-size="26" font-weight="600" fill="#ffffff">The verdict decides the test — not the roadmap.</text>
+  <text x="64" y="588" font-family="JetBrainsMono,monospace" font-size="22" fill="#8f8678">npx skills add Lucumax/product-academy · https://lucumax.github.io/product-academy/skills/</text>
+</svg>

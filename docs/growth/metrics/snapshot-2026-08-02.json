@@ -2,9 +2,25 @@
   "snapshot_date": "2026-08-02",
   "repository": {
     "full_name": "Lucumax/product-academy",
-    "description": "Evidence-backed product leadership curriculum (Senior PM \u2192 CPO) with a guided web app. Doctrine, cases, contradictions, a 180-source evidence registry, an interactive simulator, and role-based learning journeys.",
-    "homepage": "https://lucumax.github.io/product-academy/",
-    "topics": [],
+    "description": "Evidence-backed product management skills for AI agents \u2014 discovery, prioritization, experiments, stakeholder alignment, and defensible product decisions.",
+    "homepage": "https://lucumax.github.io/product-academy/skills/",
+    "topics": [
+      "agent-skills",
+      "ai-agents",
+      "claude-code",
+      "codex",
+      "cursor",
+      "customer-discovery",
+      "decision-making",
+      "evidence-based",
+      "llm",
+      "opencode",
+      "product-experiments",
+      "product-leadership",
+      "product-management",
+      "product-manager",
+      "product-strategy"
+    ],
     "stars": 0,
     "forks": 0,
     "watchers": 0,
@@ -12,7 +28,28 @@
     "open_pulls": 0,
     "default_branch": "main"
   },
+  "external_contributors": [],
+  "discussions_enabled": false,
+  "open_discussions": null,
   "releases": [
+    {
+      "tag": "skills-v0.3.0",
+      "published_at": "2026-08-02T23:47:59Z",
+      "assets": [
+        {
+          "name": "INSTALL.md",
+          "download_count": 1
+        },
+        {
+          "name": "product-academy-skills-all.zip",
+          "download_count": 3
+        },
+        {
+          "name": "product-academy-skills-core.zip",
+          "download_count": 2
+        }
+      ]
+    },
     {
       "tag": "skills-v0.2.0",
       "published_at": "2026-08-02T22:14:51Z",
@@ -23,11 +60,11 @@
         },
         {
           "name": "product-academy-skills-all.zip",
-          "download_count": 1
+          "download_count": 2
         },
         {
           "name": "product-academy-skills-core.zip",
-          "download_count": 0
+          "download_count": 1
         }
       ]
     },
@@ -50,5 +87,5 @@
       ]
     }
   ],
-  "note": "Public metrics only. No fabricated values. stars/forks/open issues reflect the snapshot date."
+  "note": "Public metrics only. No fabricated values. stars/forks/open issues reflect the snapshot date. open_discussions is null when discussions are disabled (a disabled feature is not '0 discussions')."
 }

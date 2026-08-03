@@ -5,6 +5,12 @@ external use, and every post must lead with a demonstration or a learning — ne
 my repo." No adoption, star, install, or endorsement number may be claimed that has not
 actually occurred.
 
+> **Update (2026-08-02, `skills-launch-validation-v1`):** the launch sequence is now a
+> bounded four-channel plan with prepared drafts and response templates in
+> `docs/growth/launch/` (channel-1..4 + README). The plan below remains the strategy; the
+> `launch/` directory holds the executable drafts. Explicit exclusions: no Product Hunt or
+> Hacker News in the first wave (conditions documented in `launch/README.md`).
+
 ## Target user segments
 
 1. Working PMs (Senior → Principal → Group) who already use AI agents and want decision-grade

@@ -1,0 +1,47 @@
+name: Worked example contribution
+description: Contribute a worked example, scenario, or failure mode
+title: "[Worked example]: "
+labels: [worked-example]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        The fastest high-value contribution: a real (or clearly-labeled fictional) situation
+        where a skill produced a useful artifact — or failed. We publish the good and the bad.
+  - type: input
+    id: skill
+    attributes:
+      label: Skill
+      description: Which skill does this example exercise?
+    validations:
+      required: true
+  - type: textarea
+    id: scenario
+    attributes:
+      label: Scenario
+      description: The situation, inputs, and evidence. Mark clearly if fictional.
+    validations:
+      required: true
+  - type: textarea
+    id: invocation
+    attributes:
+      label: Invocation
+      description: The prompt you ran, if you ran it.
+      render: bash
+  - type: textarea
+    id: output
+    attributes:
+      label: Output
+      description: What the skill returned (verdict, artifact, next action).
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: What worked, what failed, what a reader should learn from this example.
+  - type: checkboxes
+    id: license
+    attributes:
+      label: Contribution
+      options:
+        - label: "I agree my contribution is licensed under the repository license (CC BY 4.0)"
+          required: true

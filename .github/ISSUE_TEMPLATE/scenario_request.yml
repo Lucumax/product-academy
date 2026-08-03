@@ -1,0 +1,42 @@
+name: Product-management scenario request
+description: Request a scenario or product archetype you want the skills (or evals) to cover
+title: "[Scenario]: "
+labels: [evaluation]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Request a realistic PM situation, product archetype, or evaluation scenario you want
+        covered. Scenarios feed the skill finder, the worked examples, and the eval set.
+  - type: textarea
+    id: situation
+    attributes:
+      label: The situation
+      description: What happens, who the stakeholders are, and the decision being made.
+    validations:
+      required: true
+  - type: textarea
+    id: archetype
+    attributes:
+      label: Product archetype or domain
+      description: e.g. enterprise B2B, PLG SaaS, marketplace, developer tool, AI feature, regulated.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence available
+      description: What data the team would realistically have (and not have) in this situation.
+  - type: checkboxes
+    id: purpose
+    attributes:
+      label: What do you need it for?
+      options:
+        - label: "A worked example / demo"
+        - label: "A skill-finder job card"
+        - label: "An eval scenario for the external evaluation"
+  - type: checkboxes
+    id: fiction
+    attributes:
+      label: Data
+      options:
+        - label: "This is fictional / anonymized fixture data (real-company data will not be used)"
+          required: true

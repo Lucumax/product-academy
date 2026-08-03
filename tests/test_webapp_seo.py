@@ -134,6 +134,10 @@ class TestImportPipeline:
         for w in wf["workflows"]:
             assert w["entryConditions"], f"workflow {w['id']} missing entry conditions"
             assert w["finalOutput"], f"workflow {w['id']} missing final output"
+            assert w["decision"], f"workflow {w['id']} missing decision"
+            assert not w["decision"].endswith(("a", "the", "to", "is")), (
+                f"workflow {w['id']} decision looks truncated: {w['decision']!r}"
+            )
 
     def test_skill_pages_cover_all_imported_skills(self, webapp_root):
         data = json.loads((webapp_root / "src" / "data" / "skills.json").read_text(encoding="utf-8"))

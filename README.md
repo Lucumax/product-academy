@@ -13,7 +13,7 @@ Irreversible decision → full mode → evidence audit + premortem + thresholds
 
 | I use… | Get this |
 |---|---|
-| **Any agent (native CLI)** | `npx skills add Lucumax/product-academy` — then pick skills (verified) |
+| **Any agent (native CLI)** | `npx skills add Lucumax/product-academy` — then pick skills (verified). One skill only: add `--skill <name>` |
 | **Claude Code** | `/plugin marketplace add Lucumax/product-academy` → `/plugin install evidence-pack` |
 | **Claude.ai / Desktop** | download [`product-academy-skills-all.zip`](https://github.com/Lucumax/product-academy/releases/latest) and upload it |
 | **Codex** | unzip [`product-academy-skills-all.zip`](https://github.com/Lucumax/product-academy/releases/latest) into `.agents/skills/` |
@@ -107,9 +107,9 @@ npm run preview    # serve locally, or deploy dist/ anywhere static
 ## Validation
 
 ```bash
-python scripts/validate_academy.py   # 660 quality-gate checks
+python scripts/validate_academy.py   # quality-gate checks (660+, count grows with content)
 python scripts/validate_skills.py    # skill-pack contract checks
-python -m pytest -q                  # 84 tests
+python -m pytest -q                  # 95 tests
 ```
 
 ## Contributing

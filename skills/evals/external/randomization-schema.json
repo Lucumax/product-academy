@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "conditions": {
+    "A": "model alone",
+    "B": "strong one-off prompt",
+    "C": "product academy skill",
+    "D": "unavailable in round one (competitor method) - no output label assigned"
+  },
+  "seeded": true,
+  "seed": 20260802,
+  "generator": "scripts/generate_eval_schema.py",
+  "note": "Output label -> condition. Outputs are the rows (Output A..C) shown to reviewers; the mapping is randomized per scenario and NOT shown until scoring is complete. Condition D is not assigned an output label in round one. Regenerate with the generator script to reproduce exactly.",
+  "per_scenario": {
+    "X01": {
+      "Output A": "B",
+      "Output B": "C",
+      "Output C": "A"
+    },
+    "X02": {
+      "Output A": "B",
+      "Output B": "C",
+      "Output C": "A"
+    },
+    "X03": {
+      "Output A": "A",
+      "Output B": "C",
+      "Output C": "B"
+    },
+    "X04": {
+      "Output A": "A",
+      "Output B": "C",
+      "Output C": "B"
+    },
+    "X05": {
+      "Output A": "C",
+      "Output B": "B",
+      "Output C": "A"
+    },
+    "X06": {
+      "Output A": "C",
+      "Output B": "B",
+      "Output C": "A"
+    },
+    "X07": {
+      "Output A": "B",
+      "Output B": "C",
+      "Output C": "A"
+    },
+    "X08": {
+      "Output A": "A",
+      "Output B": "B",
+      "Output C": "C"
+    },
+    "X09": {
+      "Output A": "B",
+      "Output B": "C",
+      "Output C": "A"
+    },
+    "X10": {
+      "Output A": "A",
+      "Output B": "C",
+      "Output C": "B"
+    },
+    "X11": {
+      "Output A": "C",
+      "Output B": "B",
+      "Output C": "A"
+    },
+    "X12": {
+      "Output A": "B",
+      "Output B": "C",
+      "Output C": "A"
+    },
+    "X13": {
+      "Output A": "C",
+      "Output B": "A",
+      "Output C": "B"
+    },
+    "X14": {
+      "Output A": "A",
+      "Output B": "B",
+      "Output C": "C"
+    },
+    "X15": {
+      "Output A": "B",
+      "Output B": "C",
+      "Output C": "A"
+    },
+    "X16": {
+      "Output A": "C",
+      "Output B": "B",
+      "Output C": "A"
+    }
+  }
+}

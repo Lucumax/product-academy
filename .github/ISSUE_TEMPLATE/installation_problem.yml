@@ -1,0 +1,47 @@
+name: Installation problem
+description: Report a failed or broken install on any supported agent
+title: "[Install]: "
+labels: [installation]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Installation failures are the highest-value feedback we get. Reproduce as exactly as
+        you can so we can fix the real path, not a guess.
+  - type: input
+    id: agent
+    attributes:
+      label: Agent or target
+      description: Claude Code / Codex / Cursor / OpenCode / Claude.ai / Desktop / ChatGPT / ZIP
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Agent version
+      description: e.g. Claude Code 1.x, Codex CLI 0.x
+  - type: textarea
+    id: command
+    attributes:
+      label: Exact command or steps
+      description: What you ran, in order.
+      render: bash
+    validations:
+      required: true
+  - type: textarea
+    id: error
+    attributes:
+      label: Error or unexpected behavior
+      description: The full error message or what happened instead of success.
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: OS
+      description: Windows / macOS / Linux, and any shell.
+  - type: input
+    id: release
+    attributes:
+      label: Release or branch used
+      description: e.g. skills-v0.3.0, main, a specific commit
